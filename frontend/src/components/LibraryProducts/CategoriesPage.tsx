@@ -42,10 +42,26 @@ function CategoriesPage(props: any) {
     useEffect(()=>{
         console.log(categoriesData)
         console.log(data)
+        // setSection((data.map((category) => <CategoryCard {...category} />)))
+        if(categoriesData.length>0){
+            setSection((categoriesData.map((category) => <CategoryCard {...category} />)))
+        }
         if(categoriesData.length>0){
             setSection((categoriesData.map((category) => <CategoryCard {...category} />)))
         }
     },[categoriesData])
+
+    async function getProducts() {
+        await fetch(`http://127.0.0.1:8000/api/products/`)
+        .then(response => response.json())
+        .then(response=>{
+            console.log(response)
+        })
+    }
+
+    useEffect(()=>{
+        getProducts()
+    },[])
 
     const isSticky = (e) => {
         const footer = document.querySelector('.buttonFooterCategoriesPage')
