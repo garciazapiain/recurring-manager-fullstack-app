@@ -12,7 +12,7 @@ function ProductList(props: any) {
     const [createProductForm, setCreateProductForm] = useState(false)
     const [dataFilter, setDataFilter] = useState([])
     const [rows, setRows] = useState([])
-    const [dataRows, setDataRows] = useState(data)
+    const [dataRows, setDataRows] = useState([])
     let productDataSelection = props.productDataSelection.toLowerCase()
     let categoryTitle = props.productDataSelection.charAt(0).toUpperCase() + props.productDataSelection.slice(1)
     function productAdded() {
@@ -27,17 +27,36 @@ function ProductList(props: any) {
         setCreateProductForm(!createProductForm)
     }
 
+    function findCategoryName(id){
+        const object =  props.categoriesData.find(obj => obj.id === id)
+        const value = object ? object.name : null;
+        console.log(id, object, productDataSelection ,value)
+        return value
+    }
+
     const ProductRow = ({ title, price, category }: { title: string, price: number, category: string }) => (
         <tr className='text-center'>
             <th>{title}</th>
             <th>$ {price}</th>
-            <th>{category}</th>
+            <th>{findCategoryName(1)}</th>
             <th className='text-center font-bold text-emerald-700'><button onClick={productAdded}>+</button></th>
         </tr>
     );
 
+    async function getProducts() {
+        await fetch(`http://127.0.0.1:8000/api/products/`)
+        .then(response => response.json())
+        .then(response=>{
+            setDataRows(response)
+        })
+    }
+
+    React.useEffect(()=>{
+        getProducts()
+    },[]) 
+
     React.useEffect(() => {
-        productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => item.category == productDataSelection))
+        productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() == productDataSelection))
     }, [dataRows])
 
     React.useEffect(() => {

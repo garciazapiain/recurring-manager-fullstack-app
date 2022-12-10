@@ -10,14 +10,14 @@ function CategoriesPage(props: any) {
     console.log(props)
     const CategoryCard = ({ name }: { name: string}) => (
         <>
-            <Link to="/all-products">
+            <Link to={`/${name.toLocaleLowerCase()}`}>
                 <div className='category-banner' onClick={() => props.cardClicked(name)}>
                     <h2 className="p-5 text-5xl">{name}</h2>
                 </div>
             </Link>
         </>
     );
-    const [categoriesData, setCategoriesData] = React.useState([])
+    // const [categoriesData, setCategoriesData] = React.useState([])
     const [section, setSection] = React.useState([])
     // const sections = data.map((category) => <CategoryCard {...category} />);
     React.useEffect(() => {
@@ -27,41 +27,28 @@ function CategoriesPage(props: any) {
         };
     });
 
-    async function getCategoriesData() {
-        await fetch(`http://127.0.0.1:8000/api/productcategories/`)
-        .then(response => response.json())
-        .then(response=>{
-            setCategoriesData(response)
-        })
-    }
+    // async function getCategoriesData() {
+    //     await fetch(`http://127.0.0.1:8000/api/productcategories/`)
+    //     .then(response => response.json())
+    //     .then(response=>{
+    //         setCategoriesData(response)
+    //     })
+    // }
+
+    // useEffect(()=>{
+    //     getCategoriesData()
+    // },[])
 
     useEffect(()=>{
-        getCategoriesData()
-    },[])
-
-    useEffect(()=>{
-        console.log(categoriesData)
         console.log(data)
         // setSection((data.map((category) => <CategoryCard {...category} />)))
-        if(categoriesData.length>0){
-            setSection((categoriesData.map((category) => <CategoryCard {...category} />)))
+        if(props.categoriesData.length>0){
+            setSection((props.categoriesData.map((category) => <CategoryCard {...category} />)))
         }
-        if(categoriesData.length>0){
-            setSection((categoriesData.map((category) => <CategoryCard {...category} />)))
+        if(props.categoriesData.length>0){
+            setSection((props.categoriesData.map((category) => <CategoryCard {...category} />)))
         }
-    },[categoriesData])
-
-    async function getProducts() {
-        await fetch(`http://127.0.0.1:8000/api/products/`)
-        .then(response => response.json())
-        .then(response=>{
-            console.log(response)
-        })
-    }
-
-    useEffect(()=>{
-        getProducts()
-    },[])
+    },[props.categoriesData])
 
     const isSticky = (e) => {
         const footer = document.querySelector('.buttonFooterCategoriesPage')
@@ -78,7 +65,7 @@ function CategoriesPage(props: any) {
             <Link to="/all-products">
                 <div className="buttonFooterGeneric">
                     <Button
-                        onClick={props.cardClicked("all-products")}
+                        onClick={()=>props.cardClicked("all-products")}
                         text="Select All"
                     />
                 </div>

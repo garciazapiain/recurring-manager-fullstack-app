@@ -7,9 +7,21 @@ import { Routes, Route } from "react-router-dom";
 
 const LibraryProducts = () => {
     const [productDataSelection, setProductDataSelection] = useState('all-products')
-    function cardClicked(title:string){
-        setProductDataSelection(title)
+    function cardClicked(name:string, event){
+        setProductDataSelection(name)
     }
+    console.log(productDataSelection)
+    const [categoriesData, setCategoriesData] = React.useState([])
+    async function getCategoriesData() {
+        await fetch(`http://127.0.0.1:8000/api/productcategories/`)
+        .then(response => response.json())
+        .then(response=>{
+            setCategoriesData(response)
+        })
+    }
+    React.useEffect(()=>{
+        getCategoriesData()
+    },[])
     return(
         <>
         <Routes>
@@ -17,13 +29,15 @@ const LibraryProducts = () => {
                 element={
                     <CategoriesPage
                         cardClicked={cardClicked}
+                        categoriesData={categoriesData}
                     />
                 }>
             </Route>
-            <Route path="/all-products" 
+            <Route path={`/${productDataSelection}`} 
                 element={
                     <ProductList
                         productDataSelection = {productDataSelection}
+                        categoriesData={categoriesData}
                     />
                 }>
             </Route>
