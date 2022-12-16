@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Button from '../Elements/Button.tsx'
 
 function CategoriesPage(props: any) {
-    console.log(props)
     const CategoryCard = ({ name }: { name: string}) => (
         <>
             <Link to={`/${name.toLocaleLowerCase()}`}>
@@ -17,9 +16,7 @@ function CategoriesPage(props: any) {
             </Link>
         </>
     );
-    // const [categoriesData, setCategoriesData] = React.useState([])
     const [section, setSection] = React.useState([])
-    // const sections = data.map((category) => <CategoryCard {...category} />);
     React.useEffect(() => {
         window.addEventListener('scroll', isSticky);
         return () => {
@@ -27,21 +24,7 @@ function CategoriesPage(props: any) {
         };
     });
 
-    // async function getCategoriesData() {
-    //     await fetch(`http://127.0.0.1:8000/api/productcategories/`)
-    //     .then(response => response.json())
-    //     .then(response=>{
-    //         setCategoriesData(response)
-    //     })
-    // }
-
-    // useEffect(()=>{
-    //     getCategoriesData()
-    // },[])
-
     useEffect(()=>{
-        console.log(data)
-        // setSection((data.map((category) => <CategoryCard {...category} />)))
         if(props.categoriesData.length>0){
             setSection((props.categoriesData.map((category) => <CategoryCard {...category} />)))
         }

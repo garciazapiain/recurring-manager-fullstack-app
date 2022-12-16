@@ -10,7 +10,6 @@ const LibraryProducts = () => {
     function cardClicked(name:string, event){
         setProductDataSelection(name)
     }
-    console.log(productDataSelection)
     const [categoriesData, setCategoriesData] = React.useState([])
     async function getCategoriesData() {
         await fetch(`http://127.0.0.1:8000/api/productcategories/`)

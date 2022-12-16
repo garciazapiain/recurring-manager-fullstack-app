@@ -19,41 +19,49 @@ function ProductList(props: any) {
         alert('product added')
     }
     function createProductToggle() {
-        console.log(createProductForm)
         setCreateProductForm(!createProductForm)
     }
     const createProductSubmit = (newProductData: any) => {
-        setDataRows(prev => [...prev, newProductData])
+        const title = newProductData.title
+        const description = newProductData.description
+        const category = findCategoryNumber(newProductData.category)
+        addNewProduct(title,description,category)
         setCreateProductForm(!createProductForm)
+        getProducts()
     }
 
-    function findCategoryName(id){
-        const object =  props.categoriesData.find(obj => obj.id === id)
+    function findCategoryName(id) {
+        const object = props.categoriesData.find(obj => obj.id === id)
         const value = object ? object.name : null;
-        console.log(id, object, productDataSelection ,value)
         return value
     }
 
-    const ProductRow = ({ title, price, category }: { title: string, price: number, category: string }) => (
+    function findCategoryNumber(category){
+        const object = props.categoriesData.find(obj => obj.name === category)
+        const value = object ? object.id : null;
+        return value
+    }
+
+    const ProductRow = ({ title, price, category }: { title: string, price: number, category: number }) => (
         <tr className='text-center'>
             <th>{title}</th>
             <th>$ {price}</th>
-            <th>{findCategoryName(1)}</th>
+            <th>{findCategoryName(category)}</th>
             <th className='text-center font-bold text-emerald-700'><button onClick={productAdded}>+</button></th>
         </tr>
     );
 
     async function getProducts() {
         await fetch(`http://127.0.0.1:8000/api/products/`)
-        .then(response => response.json())
-        .then(response=>{
-            setDataRows(response)
-        })
+            .then(response => response.json())
+            .then(response => {
+                setDataRows(response)
+            })
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         getProducts()
-    },[]) 
+    }, [createProductForm])
 
     React.useEffect(() => {
         productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() == productDataSelection))
@@ -62,6 +70,16 @@ function ProductList(props: any) {
     React.useEffect(() => {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
     }, [dataFilter])
+
+    function addNewProduct(title, description, category) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: title, description: description, category:category, author:"1"})
+        };
+        fetch(`http://127.0.0.1:8000/api/products/`, requestOptions)
+            .then(response => response.json())
+    }
 
     return (
         <div>
@@ -73,6 +91,7 @@ function ProductList(props: any) {
                     <NewProductForm
                         createProductSubmit={createProductSubmit}
                         createProductToggle={createProductToggle}
+                        productDataSelection={productDataSelection}
                     />
                 </div>
             }
