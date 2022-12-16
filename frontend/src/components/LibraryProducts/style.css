@@ -121,3 +121,19 @@
   height: 36.92px;
   border-radius: 50%;
 }
+
+.homePageButtonsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.homePageButtonsContainer > button{
+  background-color: #D9D9D9;
+  color: black;
+  width: 20rem;
+  height: 5rem;
+  border-radius: 30px;
+  margin: 10px;
+  font-size: 1.5rem;
+}

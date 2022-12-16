@@ -3,10 +3,14 @@ import React, { useState } from 'react';
 import CategoriesPage from "./CategoriesPage.tsx";
 // @ts-ignore
 import ProductList from "./ProductList.tsx"
+// @ts-ignore
+import Home from "./Home.tsx"
+// @ts-ignore
+import UserProductsPage from "./UserProductsPage.tsx"
 import { Routes, Route } from "react-router-dom";
 
 const LibraryProducts = () => {
-    const [productDataSelection, setProductDataSelection] = useState('all-products')
+    const [productDataSelection, setProductDataSelection] = useState(window.location.pathname.substring(1))
     function cardClicked(name:string, event){
         setProductDataSelection(name)
     }
@@ -26,6 +30,11 @@ const LibraryProducts = () => {
         <Routes>
             <Route path="" 
                 element={
+                    <Home/>
+                }>
+            </Route>
+            <Route path="/productcategories" 
+                element={
                     <CategoriesPage
                         cardClicked={cardClicked}
                         categoriesData={categoriesData}
@@ -40,6 +49,52 @@ const LibraryProducts = () => {
                     />
                 }>
             </Route>
+            <Route path={`/userproducts`} 
+                element={
+                    <UserProductsPage
+                    />
+                }>
+            </Route>
+            {/* <Route path={'/beauty'} 
+                element={
+                    <ProductList
+                        productDataSelection = {productDataSelection}
+                        categoriesData={categoriesData}
+                    />
+                }>
+            </Route>
+            <Route path={'/cooking'} 
+                element={
+                    <ProductList
+                        productDataSelection = {productDataSelection}
+                        categoriesData={categoriesData}
+                    />
+                }>
+            </Route>
+            <Route path={'/health'} 
+                element={
+                    <ProductList
+                        productDataSelection = {productDataSelection}
+                        categoriesData={categoriesData}
+                    />
+                }>
+            </Route>
+            <Route path={'/cleaning'} 
+                element={
+                    <ProductList
+                        productDataSelection = {productDataSelection}
+                        categoriesData={categoriesData}
+                    />
+                }>
+            </Route>
+            <Route path={'/electronics'} 
+                element={
+                    <ProductList
+                        productDataSelection = {productDataSelection}
+                        categoriesData={categoriesData}
+                    />
+                }>
+            </Route> */}
         </Routes>
         </>
     )

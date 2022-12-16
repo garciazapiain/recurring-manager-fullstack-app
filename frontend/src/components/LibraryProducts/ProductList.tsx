@@ -31,14 +31,19 @@ function ProductList(props: any) {
     }
 
     function findCategoryName(id) {
+        console.log(props.categoriesData)
         const object = props.categoriesData.find(obj => obj.id === id)
         const value = object ? object.name : null;
+        console.log(value)
         return value
     }
+
+    findCategoryName(2)
 
     function findCategoryNumber(category){
         const object = props.categoriesData.find(obj => obj.name === category)
         const value = object ? object.id : null;
+        // console.log(value)
         return value
     }
 
@@ -64,8 +69,10 @@ function ProductList(props: any) {
     }, [createProductForm])
 
     React.useEffect(() => {
-        productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() == productDataSelection))
-    }, [dataRows])
+        if (props.categoriesData.length > 0){
+            productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() == productDataSelection))
+        }
+    }, [dataRows,productDataSelection])
 
     React.useEffect(() => {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));

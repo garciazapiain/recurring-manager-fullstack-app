@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 function NewProductForm(props: any) {
     const { register, handleSubmit } = useForm();
-    console.log(props.productDataSelection)
     return (
         <div className="newProductFormContainerBackground">
             <div className="newProductFormContainer">
