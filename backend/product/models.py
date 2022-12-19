@@ -15,6 +15,7 @@ class Product(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
+    added=  models.BooleanField(default=False)
 
     def publish(self):
         self.published_date = timezone.now()

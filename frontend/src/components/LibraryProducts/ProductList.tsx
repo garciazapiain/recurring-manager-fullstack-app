@@ -15,7 +15,11 @@ function ProductList(props: any) {
     const [dataRows, setDataRows] = useState([])
     let productDataSelection = props.productDataSelection.toLowerCase()
     let categoryTitle = props.productDataSelection.charAt(0).toUpperCase() + props.productDataSelection.slice(1)
-    function productAdded() {
+    function productAdded(idAdded) {
+        const productObject = dataRows.find(obj => obj.id === idAdded) 
+        const {id, author, category, description, title} = productObject
+        const added = true
+        editProduct(id, author, category, description, title, added)
         alert('product added')
     }
     function createProductToggle() {
@@ -31,28 +35,23 @@ function ProductList(props: any) {
     }
 
     function findCategoryName(id) {
-        console.log(props.categoriesData)
         const object = props.categoriesData.find(obj => obj.id === id)
         const value = object ? object.name : null;
-        console.log(value)
         return value
     }
-
-    findCategoryName(2)
 
     function findCategoryNumber(category){
         const object = props.categoriesData.find(obj => obj.name === category)
         const value = object ? object.id : null;
-        // console.log(value)
         return value
     }
 
-    const ProductRow = ({ title, price, category }: { title: string, price: number, category: number }) => (
+    const ProductRow = ({ title, price, category, id, added }: { title: string, price: number, category: number, id:string, added:boolean }) => (
         <tr className='text-center'>
             <th>{title}</th>
             <th>$ {price}</th>
             <th>{findCategoryName(category)}</th>
-            <th className='text-center font-bold text-emerald-700'><button onClick={productAdded}>+</button></th>
+            <th className='text-center font-bold text-emerald-700'>{added?"Added":<button onClick={()=>productAdded(id)}>+</button>}</th>
         </tr>
     );
 
@@ -85,6 +84,16 @@ function ProductList(props: any) {
             body: JSON.stringify({ title: title, description: description, category:category, author:"1"})
         };
         fetch(`http://127.0.0.1:8000/api/products/`, requestOptions)
+            .then(response => response.json())
+    }
+
+    function editProduct(id, author, category, description, title, added){
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: title, description:description, category:category, author:author, id:id, added:added })
+        };
+        fetch(`http://127.0.0.1:8000/api/products/${id}/`, requestOptions)
             .then(response => response.json())
     }
 
