@@ -46,10 +46,9 @@ function ProductList(props: any) {
         return value
     }
 
-    const ProductRow = ({ title, price, category, id, added }: { title: string, price: number, category: number, id:string, added:boolean }) => (
+    const ProductRow = ({ title, category, id, added }: { title: string, category: number, id:string, added:boolean }) => (
         <tr className='text-center'>
             <th>{title}</th>
-            <th>$ {price}</th>
             <th>{findCategoryName(category)}</th>
             <th className='text-center font-bold text-emerald-700'>{added?"Added":<button onClick={()=>productAdded(id)}>+</button>}</th>
         </tr>
@@ -115,9 +114,8 @@ function ProductList(props: any) {
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Average $</th>
                         <th>Category</th>
-                        <th>Add</th>
+                        <th>Add/remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,7 +125,7 @@ function ProductList(props: any) {
             <div className="buttonFooterGeneric">
                 <Button
                     onClick={() => createProductToggle()}
-                    text="Add new product"
+                    text="Create new product"
                 />
             </div>
             {productModal &&

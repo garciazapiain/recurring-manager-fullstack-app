@@ -8,6 +8,8 @@ import Home from "./Home.tsx"
 // @ts-ignore
 import UserProductsPage from "./UserProductsPage.tsx"
 import { Routes, Route } from "react-router-dom";
+// @ts-ignore
+import NavBar from '../NavBar/NavBar.tsx';
 
 const LibraryProducts = () => {
     const [productDataSelection, setProductDataSelection] = useState(window.location.pathname.substring(1))
@@ -27,6 +29,7 @@ const LibraryProducts = () => {
     }, [])
     return (
         <>
+            <NavBar/>
             <Routes>
                 <Route path=""
                     element={
@@ -57,46 +60,6 @@ const LibraryProducts = () => {
                         />
                     }>
                 </Route>
-                {/* <Route path={'/beauty'} 
-                element={
-                    <ProductList
-                        productDataSelection = {productDataSelection}
-                        categoriesData={categoriesData}
-                    />
-                }>
-            </Route>
-            <Route path={'/cooking'} 
-                element={
-                    <ProductList
-                        productDataSelection = {productDataSelection}
-                        categoriesData={categoriesData}
-                    />
-                }>
-            </Route>
-            <Route path={'/health'} 
-                element={
-                    <ProductList
-                        productDataSelection = {productDataSelection}
-                        categoriesData={categoriesData}
-                    />
-                }>
-            </Route>
-            <Route path={'/cleaning'} 
-                element={
-                    <ProductList
-                        productDataSelection = {productDataSelection}
-                        categoriesData={categoriesData}
-                    />
-                }>
-            </Route>
-            <Route path={'/electronics'} 
-                element={
-                    <ProductList
-                        productDataSelection = {productDataSelection}
-                        categoriesData={categoriesData}
-                    />
-                }>
-            </Route> */}
             </Routes>
         </>
     )

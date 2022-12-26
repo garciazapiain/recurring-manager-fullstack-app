@@ -10,7 +10,7 @@ function NewProductForm(props: any) {
                     <button onClick={props.createProductToggle}>X</button>
                 </div>
                 <div>
-                    <h1 className="m-5 text-3xl">Add new product</h1>
+                    <h1 className="m-5 text-3xl">Create new product</h1>
                 </div>
                 <div>
                     <h2 className="m-5 text-lg">Please fill out form</h2>

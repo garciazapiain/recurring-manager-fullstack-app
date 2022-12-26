@@ -49,12 +49,11 @@ const UserProductsPage = (props) => {
             .then(response => response.json())
             getProducts()
     }
-    const ProductRow = ({ title, price, category, id }: { title: string, price: number, category: number, id: string }) => (
+    const ProductRow = ({ title, category, id }: { title: string, category: number, id: string }) => (
         <tr className='text-center'>
             <th>{title}</th>
-            <th>$ {price}</th>
             <th>{findCategoryName(category)}</th>
-            <th className='text-center font-bold text-emerald-700'><button onClick={()=>deleteProduct(id)}>-</button></th>
+            <th className='text-center font-bold text-red-700'><button onClick={()=>deleteProduct(id)}>-</button></th>
         </tr>
     );
     return (
@@ -64,7 +63,6 @@ const UserProductsPage = (props) => {
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Average $</th>
                         <th>Category</th>
                         <th>Delete</th>
                     </tr>
