@@ -13,7 +13,7 @@ class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
+    inventory_updated_date = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
     added=  models.BooleanField(default=False)
     unit = models.CharField(max_length=10)

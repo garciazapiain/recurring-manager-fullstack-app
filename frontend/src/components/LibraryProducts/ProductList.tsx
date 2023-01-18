@@ -37,12 +37,15 @@ function ProductList(props: any) {
         // @ts-ignore
         const productObject = dataRows.find(obj => obj.id === productObjectToAddForUser.id)
         const { id, author, category, description, title} = productObject
+        const currentInventoryOriginal = productObject.current_inventory
+        const inventoryUpdatedDateOriginal = productObject.inventory_updated_date
         const added = true
         const unit = productData.unit
         const use_days = productData.recurrance
         const standard_size = productData.standard_size
         const current_inventory = productData.current_inventory
-        editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory)
+        const inventory_updated_date = current_inventory != currentInventoryOriginal ? new Date() : inventoryUpdatedDateOriginal
+        editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
     }
     function productRemove(idRemove) {
         const productObject = dataRows.find(obj => obj.id === idRemove)
@@ -119,17 +122,17 @@ function ProductList(props: any) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:0 })
+            body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:0,inventory_updated_date: Date.now()})
         };
         fetch(`http://127.0.0.1:8000/api/products/`, requestOptions)
             .then(response => response.json())
     }
 
-    function editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory) {
+    function editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description: description, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory:current_inventory })
+            body: JSON.stringify({ title: title, description: description, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory:current_inventory, inventory_updated_date:inventory_updated_date })
         };
         setAddProductToUserForm(false)
         // setProductAddedMessage(true)

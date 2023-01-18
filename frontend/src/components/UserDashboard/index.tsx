@@ -17,6 +17,7 @@ const UserDashboard = (props) => {
     const [recurranceViewShow, setRecurranceViewShow] = useState(true)
     const [allProductsViewShow, setAllProductsShow] = useState(false)
     const [settingsShow, setSettingsShow] = useState(false)
+    const [daysUntilNextBuy, setDaysUntilNextBuy] = useState(15)
     async function getProducts() {
         await fetch(`http://127.0.0.1:8000/api/products/`)
             .then(response => response.json())
@@ -34,14 +35,12 @@ const UserDashboard = (props) => {
         getProducts()
     }, [])
 
-    console.log(userProductsList)
-
     useEffect(() => {
         if (Object.keys(userProductsList).length > 0) {
             setAllProductsRows(userProductsList.map((row) => <AllProductRow {...row} />))
-            setRecurranceRows(userProductsList.map((row) => ((row.use_days/row.unit) * row.current_inventory) < 15 ? <RecurranceRow {...row} /> : null))
+            setRecurranceRows(userProductsList.map((row) => ((row.use_days / row.standard_size) * currentInventoryFunction(row.current_inventory,row.inventory_updated_date,row.use_days,row.standard_size)) < daysUntilNextBuy ? <RecurranceRow {...row} /> : null))
         }
-    }, [userProductsList])
+    }, [userProductsList, daysUntilNextBuy])
 
     function findCategoryName(id) {
         const object = props.categoriesData.find(obj => obj.id === id)
@@ -73,15 +72,14 @@ const UserDashboard = (props) => {
         </tr>
     );
     // fix the mixup of unit and standard size is wrong
-    const RecurranceRow = ({ title, current_inventory, unit, use_days }: { title: string, current_inventory: number, unit:number, use_days:number }) => (
+    const RecurranceRow = ({ title, current_inventory, unit, use_days, standard_size, inventory_updated_date }: { title: string, current_inventory: number, unit: number, use_days: number, standard_size: number, inventory_updated_date: string }) => (
         <tr className='text-center'>
             <th>{title}</th>
-            <th>{current_inventory}</th>
-            <th>{((use_days/unit) * current_inventory).toFixed(0)}</th>
+            <th>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
+            <th>{use_days/standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)}</th>
         </tr>
     );
     function toggleButtons(button) {
-        console.log(button)
         if (button === "recurranceView") {
             setRecurranceViewShow(true)
             setAllProductsShow(false)
@@ -99,6 +97,37 @@ const UserDashboard = (props) => {
         }
     }
 
+    function daysUntilNextBuyModified(newValue) {
+        setDaysUntilNextBuy(newValue)
+    }
+
+    function currentInventoryFunction(original_inventory, inventory_updated_date, use_days, standard_size) {
+        console.log(original_inventory, inventory_updated_date)
+        const unitsPerDay = (standard_size/use_days)
+        const dateNow = new Date();
+        const dateSplit = inventory_updated_date.split("")
+        const dateYear = dateSplit.slice(0, 4).join("")
+        const dateDay = dateSplit.slice(8, 10).join("")
+        const dateMonth = dateSplit.slice(5, 7).join("")
+        const dateFormatted = new Date(`${dateMonth}/${dateDay}/${dateYear}`)
+        // @ts-ignore
+        const diffTime = Math.abs(dateFormatted - dateNow);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+        console.log(diffDays)
+        const adjustedInventory = original_inventory - (diffDays * unitsPerDay)
+        return adjustedInventory >0 ? adjustedInventory : 0;
+    }
+
+    // const date1 = new Date();
+    // const dateSplit = userProductsList[0].inventory_updated_date.split("")
+    // const dateYear = dateSplit.slice(0,4).join("")
+    // const dateDay = dateSplit.slice(8,10).join("")
+    // const dateMonth = dateSplit.slice(5,7).join("")
+    // const dateFormatted = new Date(`${dateMonth}/${dateDay}/${dateYear}`)
+    //     // @ts-ignore
+    // const diffTime = Math.abs(dateFormatted - date1);
+    // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
     return (
         <div>
             <h1 className="m-5 text-4xl">User Products Page</h1>
@@ -113,25 +142,27 @@ const UserDashboard = (props) => {
                     text="All products"
                     class="button-generic-small"
                 />
-                <Button
+                {/* <Button
                     onClick={() => toggleButtons("settings")}
                     text="Settings"
                     class="button-generic-small"
-                />
+                /> */}
             </div>
             <div>
                 {recurranceViewShow ?
-                    <RecurranceView 
+                    <RecurranceView
                         rows={recurranceRows}
+                        daysUntilNextBuy={daysUntilNextBuy}
+                        daysUntilNextBuyModified={daysUntilNextBuyModified}
                     />
                     :
                     allProductsViewShow ?
                         <AllProducts rows={allProductsRows} />
                         :
-                        settingsShow ?
-                            <Settings />
-                            :
-                            null
+                        //     settingsShow ?
+                        //         <Settings />
+                        //         :
+                        null
                 }
             </div>
         </div>
