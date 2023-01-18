@@ -26,6 +26,10 @@ function NewProductForm(props: any) {
                             <option selected={props.productDataSelection === 'cleaning' ? true : false} value="Cleaning">Cleaning</option>
                             <option selected={props.productDataSelection === 'electronics' ? true : false} value="Electronics">Electronics</option>
                         </select>
+                        <input className="newProductFormInput" placeholder="Unit" {...register("unit")} />
+                        <input className="newProductFormInput" placeholder="Standard size" {...register("standard_size")} />
+                        <input className="newProductFormInput" placeholder="Use days" {...register("use_days")} />
+                        <input className="newProductFormInput" placeholder="Current inventory" {...register("current_inventory")} />
                         <input className="newProductFormFormSubmit" type="submit" />
                     </form>
                 </div>

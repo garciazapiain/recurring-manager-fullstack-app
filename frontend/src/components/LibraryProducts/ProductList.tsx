@@ -1,35 +1,74 @@
 import React, { useState } from 'react';
-import data from './data/products'
 // @ts-ignore
 import Product from './Product.tsx'
 // @ts-ignore
 import Button from '../Elements/Button.tsx'
 // @ts-ignore
 import NewProductForm from './NewProductForm.tsx';
+// @ts-ignore
+import AddProductToUserForm from './AddProductToUserForm.tsx';
+// @ts-ignore
+import { ReactComponent as AddProduct } from '../../Svgs/add-product.svg'
+// @ts-ignore
+import { ReactComponent as AddedProduct } from '../../Svgs/check-product-added.svg'
+// @ts-ignore
+import ProductAddedMessage from './ProductAddedMessage.tsx';
 
 function ProductList(props: any) {
     const [productModal, setProductModal] = useState(false)
     const [createProductForm, setCreateProductForm] = useState(false)
+    const [addProductToUserForm, setAddProductToUserForm] = useState(false)
     const [dataFilter, setDataFilter] = useState([])
     const [rows, setRows] = useState([])
     const [dataRows, setDataRows] = useState([])
+    const [productAddedMessage, setProductAddedMessage] = useState(false)
+    let [productObjectToAddForUser, setProductObjectToAddForUser] = useState({})
+    let [productTitleToAddForUser, setProductTitleToAddForUser] = useState("")
     let productDataSelection = props.productDataSelection.toLowerCase()
     let categoryTitle = props.productDataSelection.charAt(0).toUpperCase() + props.productDataSelection.slice(1)
     function productAdded(idAdded) {
-        const productObject = dataRows.find(obj => obj.id === idAdded) 
-        const {id, author, category, description, title} = productObject
+        setAddProductToUserForm(true)
+        const productObject = dataRows.find(obj => obj.id === idAdded)
+        const { id, author, category, description, title, standard_size, unit, use_days, current_inventory } = productObject
+        setProductObjectToAddForUser(productObject)
+        setProductTitleToAddForUser(title)
+    }
+    const addProductSubmit = (productData: any) => {
+        // @ts-ignore
+        const productObject = dataRows.find(obj => obj.id === productObjectToAddForUser.id)
+        const { id, author, category, description, title} = productObject
         const added = true
-        editProduct(id, author, category, description, title, added)
-        alert('product added')
+        const unit = productData.unit
+        const use_days = productData.recurrance
+        const standard_size = productData.standard_size
+        const current_inventory = productData.current_inventory
+        editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory)
+    }
+    function productRemove(idRemove) {
+        const productObject = dataRows.find(obj => obj.id === idRemove)
+        const { id, author, category, description, title, standard_size, unit, use_days, current_inventory } = productObject
+        const added = false
+        editProduct(id, author, category, description, title, added, standard_size, unit, use_days, current_inventory)
+        getProducts()
     }
     function createProductToggle() {
         setCreateProductForm(!createProductForm)
     }
+    function addProductToUserToggle() {
+        setAddProductToUserForm(!addProductToUserForm)
+    }
+    // function productAddedMessageToggle(){
+    //     setProductAddedMessage(!productAddedMessage)
+    // }
     const createProductSubmit = (newProductData: any) => {
         const title = newProductData.title
         const description = newProductData.description
         const category = findCategoryNumber(newProductData.category)
-        addNewProduct(title,description,category)
+        const unit = newProductData.unit
+        const use_days = newProductData.use_days
+        const standard_size = newProductData.standard_size
+        const current_inventory = 0;
+        addNewProduct(title, description, category, unit, standard_size, use_days, current_inventory)
         setCreateProductForm(!createProductForm)
         getProducts()
     }
@@ -40,17 +79,17 @@ function ProductList(props: any) {
         return value
     }
 
-    function findCategoryNumber(category){
+    function findCategoryNumber(category) {
         const object = props.categoriesData.find(obj => obj.name === category)
         const value = object ? object.id : null;
         return value
     }
 
-    const ProductRow = ({ title, category, id, added }: { title: string, category: number, id:string, added:boolean }) => (
+    const ProductRow = ({ title, category, id, added }: { title: string, category: number, id: string, added: boolean }) => (
         <tr className='text-center'>
             <th>{title}</th>
             <th>{findCategoryName(category)}</th>
-            <th className='text-center font-bold text-emerald-700'>{added?"Added":<button onClick={()=>productAdded(id)}>+</button>}</th>
+            <th className='text-center font-bold text-emerald-700'>{added ? <button onClick={() => productRemove(id)}><AddedProduct /></button> : <button onClick={() => productAdded(id)}><AddProduct /></button>}</th>
         </tr>
     );
 
@@ -67,33 +106,36 @@ function ProductList(props: any) {
     }, [createProductForm])
 
     React.useEffect(() => {
-        if (props.categoriesData.length > 0){
+        if (props.categoriesData.length > 0) {
             productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() == productDataSelection))
         }
-    }, [dataRows,productDataSelection])
+    }, [dataRows, productDataSelection])
 
     React.useEffect(() => {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
-    }, [dataFilter])
+    }, [dataFilter, dataRows])
 
-    function addNewProduct(title, description, category) {
+    function addNewProduct(title, description, category, unit, standard_size, use_days, current_inventory) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description: description, category:category, author:"1"})
+            body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:0 })
         };
         fetch(`http://127.0.0.1:8000/api/products/`, requestOptions)
             .then(response => response.json())
     }
 
-    function editProduct(id, author, category, description, title, added){
+    function editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory) {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description:description, category:category, author:author, id:id, added:added })
+            body: JSON.stringify({ title: title, description: description, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory:current_inventory })
         };
+        setAddProductToUserForm(false)
+        // setProductAddedMessage(true)
         fetch(`http://127.0.0.1:8000/api/products/${id}/`, requestOptions)
             .then(response => response.json())
+            .then(getProducts)
     }
 
     return (
@@ -110,6 +152,22 @@ function ProductList(props: any) {
                     />
                 </div>
             }
+            {addProductToUserForm &&
+                <div className='flex justify-center'>
+                    <AddProductToUserForm
+                        addProductToUserToggle={addProductToUserToggle}
+                        productInformation={productObjectToAddForUser}
+                        productTitleToAddForUser={productTitleToAddForUser}
+                        addProductSubmit={addProductSubmit}
+                    />
+                </div>
+            }
+            {/* {productAddedMessage &&
+                <div className='flex justify-center'>
+                    <ProductAddedMessage       
+                    />
+                </div>
+            } */}
             <table className='m-5 min-w-[90%]'>
                 <thead>
                     <tr>
@@ -126,6 +184,7 @@ function ProductList(props: any) {
                 <Button
                     onClick={() => createProductToggle()}
                     text="Create new product"
+                    class="button-generic"
                 />
             </div>
             {productModal &&

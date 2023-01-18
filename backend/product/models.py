@@ -16,6 +16,10 @@ class Product(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
     added=  models.BooleanField(default=False)
+    unit = models.CharField(max_length=10)
+    standard_size = models.CharField(max_length=10)
+    use_days = models.CharField(max_length=10)
+    current_inventory = models.CharField(max_length=10)
 
     def publish(self):
         self.published_date = timezone.now()

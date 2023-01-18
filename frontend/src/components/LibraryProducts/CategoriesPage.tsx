@@ -50,6 +50,7 @@ function CategoriesPage(props: any) {
                     <Button
                         onClick={()=>props.cardClicked("all-products")}
                         text="Select All"
+                        class="button-generic"
                     />
                 </div>
             </Link>

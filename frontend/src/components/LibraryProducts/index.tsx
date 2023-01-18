@@ -6,7 +6,7 @@ import ProductList from "./ProductList.tsx"
 // @ts-ignore
 import Home from "./Home.tsx"
 // @ts-ignore
-import UserProductsPage from "./UserProductsPage.tsx"
+import UserDashboard from "../UserDashboard/index.tsx"
 import { Routes, Route } from "react-router-dom";
 // @ts-ignore
 import NavBar from '../NavBar/NavBar.tsx';
@@ -47,7 +47,7 @@ const LibraryProducts = () => {
                 </Route>
                 <Route path={`/userproducts`}
                     element={
-                        <UserProductsPage
+                        <UserDashboard
                             categoriesData={categoriesData}
                         />
                     }>
