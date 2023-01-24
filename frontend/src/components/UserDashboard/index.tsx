@@ -76,7 +76,7 @@ const UserDashboard = (props) => {
         <tr className='text-center'>
             <th>{title}</th>
             <th>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
-            <th>{use_days/standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)}</th>
+            <th>{(use_days/standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
         </tr>
     );
     function toggleButtons(button) {
@@ -102,7 +102,7 @@ const UserDashboard = (props) => {
     }
 
     function currentInventoryFunction(original_inventory, inventory_updated_date, use_days, standard_size) {
-        console.log(original_inventory, inventory_updated_date)
+        //refactor date formattted
         const unitsPerDay = (standard_size/use_days)
         const dateNow = new Date();
         const dateSplit = inventory_updated_date.split("")
@@ -113,7 +113,6 @@ const UserDashboard = (props) => {
         // @ts-ignore
         const diffTime = Math.abs(dateFormatted - dateNow);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-        console.log(diffDays)
         const adjustedInventory = original_inventory - (diffDays * unitsPerDay)
         return adjustedInventory >0 ? adjustedInventory : 0;
     }

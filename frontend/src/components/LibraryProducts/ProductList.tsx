@@ -44,7 +44,8 @@ function ProductList(props: any) {
         const use_days = productData.recurrance
         const standard_size = productData.standard_size
         const current_inventory = productData.current_inventory
-        const inventory_updated_date = current_inventory != currentInventoryOriginal ? new Date() : inventoryUpdatedDateOriginal
+        const inventory_updated_date = new Date() 
+        // const inventory_updated_date = current_inventory != currentInventoryOriginal ? new Date() : inventoryUpdatedDateOriginal
         editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
     }
     function productRemove(idRemove) {
@@ -122,7 +123,7 @@ function ProductList(props: any) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:0,inventory_updated_date: Date.now()})
+            body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:current_inventory,inventory_updated_date: null})
         };
         fetch(`http://127.0.0.1:8000/api/products/`, requestOptions)
             .then(response => response.json())
