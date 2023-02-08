@@ -1,0 +1,1 @@
+web: gunicorn <recurring-manager-app>.wsgi
