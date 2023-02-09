@@ -1,1 +1,0 @@
-web: gunicorn recurring-manager-app:app
