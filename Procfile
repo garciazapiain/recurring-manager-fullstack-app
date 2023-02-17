@@ -1,1 +1,1 @@
-web: gunicorn recurring-manager-app.wsgi
+web: gunicorn product.wsgi

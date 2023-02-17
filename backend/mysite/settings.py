@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'product',
     'corsheaders',
     'rest_framework',
-    'recurring_manager-app'
 ]
 
 MIDDLEWARE = [
