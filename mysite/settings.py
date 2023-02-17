@@ -32,8 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','recurring-manager-app.herokuapp.com']
 
-USE_X_FORWARDED_HOST = True
-
 # Application definition
 
 INSTALLED_APPS = [
