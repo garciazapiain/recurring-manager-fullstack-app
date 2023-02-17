@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-x$53m^zm*)t4mskm301o$yezxz@#eoh-j)(qg=inpkulv153xw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','recurring-manager-app.herokuapp.com']
 
 
 # Application definition
@@ -83,16 +83,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-import dj_database_url
+# import dj_database_url
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# DATABASE_URL = os.getenv("DATABASE_URL")
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -143,10 +143,9 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
-# DATABASES = {
-#     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
-#     "ENGINE": "django.db.backends.sqlite3",
-# }
+import dj_database_url
+
+DATABASES = {"default": dj_database_url.config()}
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
