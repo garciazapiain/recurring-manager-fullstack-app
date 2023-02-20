@@ -24,3 +24,8 @@ def add_product(request):
             form = ProductForm()
 
         return render(request, 'add_product.html', {'form': form}) 
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Welcome to my recurring manager app!")
