@@ -20,11 +20,11 @@ from product import views
 from product.views import add_product
 
 router = routers.DefaultRouter()                   
-router.register(r'products', views.ProductView, 'product')  
+router.register(r'products', views.ProductViewSet, 'product')  
 router.register(r'productcategories', views.ProductCategoryView, 'product')  
 
 urlpatterns = [
-    path('', views.ProductView.as_view(), name='product'),
+    path('', views.ProductViewSet.as_view(), name='product'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
