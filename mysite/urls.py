@@ -24,7 +24,7 @@ router.register(r'products', views.ProductView, 'product')
 router.register(r'productcategories', views.ProductCategoryView, 'product')  
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
