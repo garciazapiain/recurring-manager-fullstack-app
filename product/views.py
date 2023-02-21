@@ -44,7 +44,7 @@ class ProductViewSet(ModelViewSet):
             'patch': 'partial_update',
             'delete': 'destroy',
         }
-        return super().as_view(actions=actions, **kwargs)
+        return super(ProductViewSet, self).as_view(actions=actions, **kwargs)
 
 class ProductCategoryView(viewsets.ModelViewSet):  
     serializer_class = ProductCategorySerializer   
