@@ -18,7 +18,6 @@ from django.urls import path,include
 from rest_framework import routers                 
 from product import views    
 from product.views import add_product
-from . import views
 
 router = routers.DefaultRouter()                   
 router.register(r'products', views.ProductView, 'product')  
