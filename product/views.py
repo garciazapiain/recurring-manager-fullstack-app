@@ -6,6 +6,7 @@ from .models import Product
 from .models import ProductCategory    
 from .forms import ProductForm
 from django.conf import settings
+import os
 
 class ProductView(viewsets.ModelViewSet):  
     serializer_class = ProductSerializer   
