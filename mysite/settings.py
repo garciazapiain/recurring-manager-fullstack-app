@@ -63,7 +63,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'frontend/public'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,7 +148,7 @@ DATABASES = {"default": dj_database_url.config()}
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "frontend/build/static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
