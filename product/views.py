@@ -31,4 +31,4 @@ def index(request):
     return HttpResponse("Welcome to my recurring manager app!")
 
 def home(request):
-    return render(request, 'frontend/public/index.html')
+    return render(request, settings.BASE_DIR + '/frontend/public/index.html')
