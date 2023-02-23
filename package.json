@@ -2,5 +2,9 @@
     "scripts": {
       "start": "node server.js"
     },
-    "homepage": "."
+    "homepage": ".",
+    "engines": {
+      "node": ">= 19.6.0",
+      "npm": ">= 9.4.0"
+    }
   }
