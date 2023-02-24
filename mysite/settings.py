@@ -94,6 +94,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #     }
 # }
 
+DATABASES = {"default": dj_database_url.config()}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -142,10 +144,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
-
-import dj_database_url
-
-DATABASES = {"default": dj_database_url.config()}
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
