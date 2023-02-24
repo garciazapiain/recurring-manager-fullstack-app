@@ -52,14 +52,14 @@ const LibraryProducts = () => {
                         />
                     }>
                 </Route>
-                <Route path={`/${productDataSelection}`}
+                {/* <Route path={`/${productDataSelection}`}
                     element={
                         <ProductList
                             productDataSelection={productDataSelection}
                             categoriesData={categoriesData}
                         />
                     }>
-                </Route>
+                </Route> */}
             </Routes>
         </>
     )
