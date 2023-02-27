@@ -29,5 +29,5 @@ def add_product(request):
 
 from django.http import HttpResponse
 
-# def home(request):
-#     return render(request, os.path.join(settings.BASE_DIR, 'frontend', 'public', 'index.html'))
+def home(request):
+    return render(request, os.path.join(settings.BASE_DIR, 'frontend', 'public', 'index.html'))
