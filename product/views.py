@@ -29,8 +29,5 @@ def add_product(request):
 
 from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse("Welcome to my recurring manager app!")
-
 # def home(request):
 #     return render(request, os.path.join(settings.BASE_DIR, 'frontend', 'public', 'index.html'))
