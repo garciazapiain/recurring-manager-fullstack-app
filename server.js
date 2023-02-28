@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+// app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 // An API endpoint that returns a greeting
 app.get('/api/greeting', (req, res) => {
@@ -20,4 +20,10 @@ app.listen(port);
 
 console.log(`Server listening on ${port}`);
 
-app.use(express.static(path.join(__dirname, 'frontend/build'), { 'Content-Type': 'text/javascript' }));
+app.use(express.static(path.join(__dirname, 'frontend/build'), {
+  setHeaders: function (res, path) {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'text/javascript');
+    }
+  }
+}));
