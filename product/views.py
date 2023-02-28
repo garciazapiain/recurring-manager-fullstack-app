@@ -30,4 +30,5 @@ def add_product(request):
 from django.http import HttpResponse
 
 def home(request):
-    return render(request, os.path.join(settings.BASE_DIR, 'frontend', 'build', 'index.html'))
+    template_path = os.path.join(settings.BASE_DIR, 'frontend', 'build', 'index.html')
+    return render(request, template_path)
