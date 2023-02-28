@@ -3,7 +3,15 @@ const path = require('path');
 const app = express();
 
 // Serve static files from the React app
-// app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, 'frontend/build'), {
+  setHeaders: function (res, path) {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    } else if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
+  }
+}));
 
 // An API endpoint that returns a greeting
 app.get('/api/greeting', (req, res) => {
@@ -18,12 +26,4 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Server listening on ${port}`);
-
-app.use(express.static(path.join(__dirname, 'frontend/build'), {
-  setHeaders: function (res, path) {
-    if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'text/javascript');
-    }
-  }
-}));
+console.log(`Server listening on ${port}`) 
