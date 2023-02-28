@@ -158,7 +158,7 @@ CORS_ORIGIN_WHITELIST = [
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "frontend/build/static",
+    os.path.join(BASE_DIR, 'frontend', 'build'),
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
