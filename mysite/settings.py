@@ -181,7 +181,7 @@ MIME_TYPES = {
     '.ttf': 'application/font-sfnt',
 }
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 WHITENOISE_MIMETYPES = {
     **whitenoise.storage.CompressedManifestStaticFilesStorage.default_mimetypes,
