@@ -165,3 +165,24 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+MIME_TYPES = {
+    '.js': 'text/javascript',
+    '.css': 'text/css',
+    '.json': 'application/json',
+    '.png': 'image/png',
+    '.jpg': 'image/jpg',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml',
+    '.woff': 'application/font-woff',
+    '.woff2': 'application/font-woff2',
+    '.eot': 'application/vnd.ms-fontobject',
+    '.ttf': 'application/font-sfnt',
+}
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+WHITENOISE_MIMETYPES = {
+    **whitenoise.storage.CompressedManifestStaticFilesStorage.default_mimetypes,
+    **MIME_TYPES,
+}
