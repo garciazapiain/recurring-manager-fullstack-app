@@ -3,7 +3,7 @@
         "start": "node server.js",
         "heroku-postbuild": "cd frontend && npm install && npm run build"
     },
-    "homepage": ".",
+    "homepage": "https://recurring-manager-app.herokuapp.com/",
     "engines": {
         "node": ">= 19.6.0",
         "npm": ">= 9.4.0"
