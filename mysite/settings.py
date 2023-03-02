@@ -95,18 +95,18 @@ import dj_database_url
 #     }
 # }
 
-# DATABASES = {"default": dj_database_url.config()}
+DATABASES = {"default": dj_database_url.config()}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dc3sl1s1csansq',
-        'USER': 'zftljhjqalnclk',
-        'PASSWORD': '4307a730fc5560583b5e9bbb383961042543fd4e2d2ad97a0bb4c85433e7e1da',
-        'HOST': 'ec2-52-86-56-90.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dc3sl1s1csansq',
+#         'USER': 'zftljhjqalnclk',
+#         'PASSWORD': '4307a730fc5560583b5e9bbb383961042543fd4e2d2ad97a0bb4c85433e7e1da',
+#         'HOST': 'ec2-52-86-56-90.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -156,7 +156,7 @@ CORS_ORIGIN_WHITELIST = [
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'frontend', 'build'), ]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
@@ -178,7 +178,7 @@ MIME_TYPES = {
     '.ttf': 'application/font-sfnt',
 }
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # WHITENOISE_MIMETYPES = {
 #     **whitenoise.storage.CompressedManifestStaticFilesStorage.default_mimetypes,
