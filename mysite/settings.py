@@ -183,7 +183,7 @@ MIME_TYPES = {
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-WHITENOISE_MIMETYPES = {
-    **whitenoise.storage.CompressedManifestStaticFilesStorage.default_mimetypes,
-    **MIME_TYPES,
-}
+# WHITENOISE_MIMETYPES = {
+#     **whitenoise.storage.CompressedManifestStaticFilesStorage.default_mimetypes,
+#     **MIME_TYPES,
+# }
