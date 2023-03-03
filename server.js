@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'frontend/build'), {
+app.use(express.static(path.join(__dirname, 'staticfiles'), {
   setHeaders: function (res, path) {
     if (path.endsWith('.js')) {
       res.setHeader('Content-Type', 'application/javascript');
