@@ -1,1 +1,1 @@
-web: sh -c 'cd frontend && npm install && npm run build && serve -s build && cd .. && gunicorn mysite.wsgi --log-file -'
+web: sh -c 'cd frontend && npm install && npm start && cd .. && gunicorn mysite.wsgi --log-file -'
