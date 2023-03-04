@@ -125,7 +125,7 @@ function ProductList(props: any) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:current_inventory,inventory_updated_date: null})
         };
-        fetch(`http://127.0.0.1:8000/api/products/`, requestOptions)
+        fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
             .then(response => response.json())
     }
 
@@ -137,7 +137,7 @@ function ProductList(props: any) {
         };
         setAddProductToUserForm(false)
         // setProductAddedMessage(true)
-        fetch(`http://127.0.0.1:8000/api/products/${id}/`, requestOptions)
+        fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
             .then(response => response.json())
             .then(getProducts)
     }
@@ -153,6 +153,7 @@ function ProductList(props: any) {
                         createProductSubmit={createProductSubmit}
                         createProductToggle={createProductToggle}
                         productDataSelection={productDataSelection}
+                        categoriesData={props.categoriesData}
                     />
                 </div>
             }

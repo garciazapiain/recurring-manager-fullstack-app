@@ -60,7 +60,7 @@ const UserDashboard = (props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: title, description: description, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory })
         };
-        fetch(`http://127.0.0.1:8000/api/products/${id}/`, requestOptions)
+        fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
             .then(response => response.json())
         getProducts()
     }
