@@ -27,45 +27,42 @@ const LibraryProducts = () => {
     React.useEffect(() => {
         getCategoriesData()
     }, [])
-    return(
-        <h1>hey</h1>
+    return (
+        <>
+            <NavBar/>
+            <Routes>
+                <Route path=""
+                    element={
+                        <Home
+                        />
+                    }>
+                </Route>
+                <Route path="/productcategories"
+                    element={
+                        <CategoriesPage
+                            cardClicked={cardClicked}
+                            categoriesData={categoriesData}
+                        />
+                    }>
+                </Route>
+                <Route path={`/userproducts`}
+                    element={
+                        <UserDashboard
+                            categoriesData={categoriesData}
+                        />
+                    }>
+                </Route>
+                <Route path={`/${productDataSelection}`}
+                    element={
+                        <ProductList
+                            productDataSelection={productDataSelection}
+                            categoriesData={categoriesData}
+                        />
+                    }>
+                </Route>
+            </Routes>
+        </>
     )
-    // return (
-    //     <>
-    //         <NavBar/>
-    //         <Routes>
-    //             <Route path=""
-    //                 element={
-    //                     <Home
-    //                     />
-    //                 }>
-    //             </Route>
-    //             <Route path="/productcategories"
-    //                 element={
-    //                     <CategoriesPage
-    //                         cardClicked={cardClicked}
-    //                         categoriesData={categoriesData}
-    //                     />
-    //                 }>
-    //             </Route>
-    //             <Route path={`/userproducts`}
-    //                 element={
-    //                     <UserDashboard
-    //                         categoriesData={categoriesData}
-    //                     />
-    //                 }>
-    //             </Route>
-    //             {/* <Route path={`/${productDataSelection}`}
-    //                 element={
-    //                     <ProductList
-    //                         productDataSelection={productDataSelection}
-    //                         categoriesData={categoriesData}
-    //                     />
-    //                 }>
-    //             </Route> */}
-    //         </Routes>
-    //     </>
-    // )
 }
 
 export default LibraryProducts
