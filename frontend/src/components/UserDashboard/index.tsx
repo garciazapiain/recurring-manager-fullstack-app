@@ -19,7 +19,7 @@ const UserDashboard = (props) => {
     const [settingsShow, setSettingsShow] = useState(false)
     const [daysUntilNextBuy, setDaysUntilNextBuy] = useState(15)
     async function getProducts() {
-        await fetch(`http://127.0.0.1:8000/api/products/`)
+        await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
             .then(response => response.json())
             .then(response => {
                 const arrayCreated = []

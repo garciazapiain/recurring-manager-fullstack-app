@@ -98,7 +98,7 @@ function ProductList(props: any) {
     );
 
     async function getProducts() {
-        await fetch(`http://127.0.0.1:8000/api/products/`)
+        await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
             .then(response => response.json())
             .then(response => {
                 setDataRows(response)

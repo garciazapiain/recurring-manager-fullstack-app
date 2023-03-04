@@ -18,7 +18,7 @@ const LibraryProducts = () => {
     }
     const [categoriesData, setCategoriesData] = React.useState([])
     async function getCategoriesData() {
-        await fetch(`http://127.0.0.1:8000/api/productcategories/`)
+        await fetch(`https://recurring-manager-app.herokuapp.com/api/productcategories/`)
             .then(response => response.json())
             .then(response => {
                 setCategoriesData(response)

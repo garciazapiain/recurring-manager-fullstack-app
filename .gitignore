@@ -1,3 +1,18 @@
-```gitignore .env/ .venv/ env/ venv/ *.env
+# Ignore environment and virtual environment files
+.env
+.venv
+env
+venv
+*.env
 
-*.pyc db.sqlite3 staticfiles/ ```
+# Ignore compiled Python files and database files
+*.pyc
+db.sqlite3
+
+# Ignore static files directory
+staticfiles/
+
+
+# Ignore Node.js modules
+node_modules/
+frontend/node_modules/
