@@ -49,16 +49,16 @@ const UserDashboard = (props) => {
     }
     function deleteProduct(idDeleted) {
         const productObject = userProductsList.find(obj => obj.id === idDeleted)
-        const { id, author, category, description, title, standard_size, use_days, unit, current_inventory } = productObject
+        const { id, author, category, title, standard_size, use_days, unit, current_inventory } = productObject
         const added = false
-        editProduct(id, author, category, description, title, added, standard_size, use_days, unit, current_inventory)
+        editProduct(id, author, category, title, added, standard_size, use_days, unit, current_inventory)
         alert('product deleted')
     }
-    function editProduct(id, author, category, description, title, added, standard_size, use_days, unit, current_inventory) {
+    function editProduct(id, author, category, title, added, standard_size, use_days, unit, current_inventory) {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description: description, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory })
+            body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory })
         };
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
             .then(response => response.json())

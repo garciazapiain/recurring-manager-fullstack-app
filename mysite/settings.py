@@ -86,16 +86,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 import dj_database_url
 
-# DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
-DATABASES = {"default": dj_database_url.config()}
+# DATABASES = {"default": dj_database_url.config()}
 
 # DATABASES = {
 #     'default': {
@@ -147,7 +147,6 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000','http://recurring-manager-app.herokuapp.com'
 ]

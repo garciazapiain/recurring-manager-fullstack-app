@@ -21,7 +21,6 @@ function NewProductForm(props: any) {
                 <div>
                     <form className="newProductFormForm" onSubmit={handleSubmit(props.createProductSubmit)}>
                         <input className="newProductFormInput" placeholder="Product name" {...register("title")} />
-                        <input className="newProductFormInput" placeholder="Description" {...register("description")} />
                         <select className="newProductFormInput" placeholder="Category" {...register("category")}>
                             {optionsList}
                         </select>

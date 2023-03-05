@@ -29,14 +29,14 @@ function ProductList(props: any) {
     function productAdded(idAdded) {
         setAddProductToUserForm(true)
         const productObject = dataRows.find(obj => obj.id === idAdded)
-        const { id, author, category, description, title, standard_size, unit, use_days, current_inventory } = productObject
+        const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
         setProductObjectToAddForUser(productObject)
         setProductTitleToAddForUser(title)
     }
     const addProductSubmit = (productData: any) => {
         // @ts-ignore
         const productObject = dataRows.find(obj => obj.id === productObjectToAddForUser.id)
-        const { id, author, category, description, title} = productObject
+        const { id, author, category, title} = productObject
         const currentInventoryOriginal = productObject.current_inventory
         const inventoryUpdatedDateOriginal = productObject.inventory_updated_date
         const added = true
@@ -46,13 +46,13 @@ function ProductList(props: any) {
         const current_inventory = productData.current_inventory
         const inventory_updated_date = new Date() 
         // const inventory_updated_date = current_inventory != currentInventoryOriginal ? new Date() : inventoryUpdatedDateOriginal
-        editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
+        editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
     }
     function productRemove(idRemove) {
         const productObject = dataRows.find(obj => obj.id === idRemove)
-        const { id, author, category, description, title, standard_size, unit, use_days, current_inventory } = productObject
+        const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
         const added = false
-        editProduct(id, author, category, description, title, added, standard_size, unit, use_days, current_inventory)
+        editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory)
         getProducts()
     }
     function createProductToggle() {
@@ -66,13 +66,12 @@ function ProductList(props: any) {
     // }
     const createProductSubmit = (newProductData: any) => {
         const title = newProductData.title
-        const description = newProductData.description
         const category = findCategoryNumber(newProductData.category)
         const unit = newProductData.unit
         const use_days = newProductData.use_days
         const standard_size = newProductData.standard_size
         const current_inventory = 0;
-        addNewProduct(title, description, category, unit, standard_size, use_days, current_inventory)
+        addNewProduct(title, category, unit, standard_size, use_days, current_inventory)
         setCreateProductForm(!createProductForm)
         getProducts()
     }
@@ -119,7 +118,7 @@ function ProductList(props: any) {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
     }, [dataFilter, dataRows])
 
-    function addNewProduct(title, description, category, unit, standard_size, use_days, current_inventory) {
+    function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
         // Make a separate request to retrieve the CSRF token
         fetch('/api/csrf_token/')
           .then(response => response.json())
@@ -134,7 +133,6 @@ function ProductList(props: any) {
               },
               body: JSON.stringify({ 
                 title: title, 
-                description: description, 
                 category: category, 
                 author: "1", 
                 unit:unit, 
@@ -149,11 +147,11 @@ function ProductList(props: any) {
           });
       }
           
-    function editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
+    function editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, description: description, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory:current_inventory, inventory_updated_date:inventory_updated_date })
+            body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory:current_inventory, inventory_updated_date:inventory_updated_date })
         };
         setAddProductToUserForm(false)
         // setProductAddedMessage(true)
