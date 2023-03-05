@@ -18,6 +18,7 @@ from django.urls import path,include
 from rest_framework import routers                 
 from product import views    
 from product.views import add_product
+from product.views import csrf_token
 
 router = routers.DefaultRouter()                   
 router.register(r'products', views.ProductView, 'product')  
@@ -27,5 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
+    path('api/csrf_token/', csrf_token, name='csrf_token'),
     path('', views.home, name='home'),
 ]

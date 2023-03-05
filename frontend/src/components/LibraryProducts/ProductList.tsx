@@ -119,19 +119,36 @@ function ProductList(props: any) {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
     }, [dataFilter, dataRows])
 
-    const csrfToken = document?.querySelector('[name=csrfmiddlewaretoken]').value;
-
     function addNewProduct(title, description, category, unit, standard_size, use_days, current_inventory) {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            'X-CSRFToken': csrfToken,
-            body: JSON.stringify({ title: title, description: description, category: category, author: "1", unit:unit, standard_size:standard_size, use_days:use_days, current_inventory:current_inventory,inventory_updated_date: null})
-        };
-        fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
-            .then(response => response.json())
-    }
-
+        // Make a separate request to retrieve the CSRF token
+        fetch('/api/csrf_token/')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            // Use the retrieved token in the headers of the main request
+            const requestOptions = {
+              method: 'POST',
+              headers: { 
+                'Content-Type': 'application/json',
+                'X-CSRFToken': data.csrfToken
+              },
+              body: JSON.stringify({ 
+                title: title, 
+                description: description, 
+                category: category, 
+                author: "1", 
+                unit:unit, 
+                standard_size:standard_size,
+                use_days:use_days, 
+                current_inventory:current_inventory,
+                inventory_updated_date: null
+              })
+            };
+            fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
+              .then(response => response.json());
+          });
+      }
+          
     function editProduct(id, author, category, description, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
         const requestOptions = {
             method: 'PUT',

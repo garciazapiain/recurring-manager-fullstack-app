@@ -6,6 +6,8 @@ from .models import Product
 from .models import ProductCategory    
 from .forms import ProductForm
 from django.conf import settings
+from django.views.decorators.csrf import get_token
+from django.http import JsonResponse
 import os
 
 class ProductView(viewsets.ModelViewSet):  
@@ -32,3 +34,6 @@ from django.http import HttpResponse
 def home(request):
     template_path = os.path.join(settings.BASE_DIR, 'frontend', 'build', 'index.html')
     return render(request, template_path)
+
+def csrf_token(request):
+    return JsonResponse({'csrfToken': request.COOKIES['csrftoken']})
