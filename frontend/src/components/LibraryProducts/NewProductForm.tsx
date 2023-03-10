@@ -26,7 +26,6 @@ function NewProductForm(props: any) {
                     <input className="newProductFormInput" placeholder="Unit" {...register("unit")} />
                     <input className="newProductFormInput" placeholder="Standard size" {...register("standard_size")} />
                     <input className="newProductFormInput" placeholder="Use days" {...register("use_days")} />
-                    <input className="newProductFormFormSubmit" type="submit" />
                     <form onSubmit={handleSubmit(props.createProductSubmit)}>
                         <div className="flex justify-center">
                             <button type="submit" className='button-generic'>Create</button>
