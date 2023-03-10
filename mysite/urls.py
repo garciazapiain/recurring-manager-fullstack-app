@@ -19,6 +19,7 @@ from rest_framework import routers
 from product import views    
 from product.views import add_product
 from product.views import csrf_token
+from django.views.generic import TemplateView
 
 router = routers.DefaultRouter()                   
 router.register(r'products', views.ProductView, 'product')  
