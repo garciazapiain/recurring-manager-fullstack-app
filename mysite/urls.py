@@ -30,6 +30,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
-    path('', views.home, name='home')
+    path('', views.home, name='home'),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 ]
