@@ -120,16 +120,16 @@ function ProductList(props: any) {
 
     function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
         // Make a separate request to retrieve the CSRF token
-        fetch('/api/csrf_token/')
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
+        // fetch('/api/csrf_token/')
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     console.log(data)
             // Use the retrieved token in the headers of the main request
             const requestOptions = {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
-                'X-CSRFToken': data.csrfToken
+                'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
               },
               body: JSON.stringify({ 
                 title: title, 
@@ -144,21 +144,21 @@ function ProductList(props: any) {
             };
             fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
               .then(response => response.json());
-          });
+        //   });
       }
           
     function editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
         setAddProductToUserForm(false)
         // setProductAddedMessage(true)
-        fetch('/api/csrf_token/')
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
+        // fetch('/api/csrf_token/')
+        //   .then(response => response.json())
+        //   .then(data => {
+            // console.log(data)
             const requestOptions = {
                 method: 'PUT',
                 headers: { 
                   'Content-Type': 'application/json',
-                  'X-CSRFToken': data.csrfToken
+                  'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
                 },
                 body: JSON.stringify({ 
                   title: title, 
@@ -175,7 +175,7 @@ function ProductList(props: any) {
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
             .then(response => response.json())
             .then(getProducts)
-        })
+        // })
     }
 
     return (
