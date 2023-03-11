@@ -155,7 +155,7 @@ function ProductList(props: any) {
           .then(data => {
             console.log(data)
             const requestOptions = {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 
                   'Content-Type': 'application/json',
                   'X-CSRFToken': data.csrfToken
