@@ -148,16 +148,34 @@ function ProductList(props: any) {
       }
           
     function editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory:current_inventory, inventory_updated_date:inventory_updated_date })
-        };
         setAddProductToUserForm(false)
         // setProductAddedMessage(true)
+        fetch('/api/csrf_token/')
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+            const requestOptions = {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': data.csrfToken
+                },
+                body: JSON.stringify({ 
+                  title: title, 
+                  category: category, 
+                  author: author, 
+                  unit:unit, 
+                  standard_size:standard_size,
+                  use_days:use_days, 
+                  current_inventory:current_inventory,
+                  inventory_updated_date: inventory_updated_date,
+                  added:added
+                })
+              };
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
             .then(response => response.json())
             .then(getProducts)
+        })
     }
 
     return (
