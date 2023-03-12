@@ -49,12 +49,12 @@ function NewProductForm(props: any) {
                         }
                     </div>
                     <div className="flex items-center">
-                        <h2 className="m-5 text-md">Recurrance:</h2>
+                        <h2 className="m-5 text-md">Use days:</h2>
                         {
                             editToggleRecurrance ? (
-                                <input {...register("recurrance")} className='w-10 mr-5'></input>
+                                <input {...register("use_days")} className='w-10 mr-5'></input>
                             )
-                                : <h2 {...setValue('recurrance', props.productInformation.use_days)} className='w-10 mr-5'>{props.productInformation.use_days}</h2>
+                                : <h2 {...setValue('use_days', props.productInformation.use_days)} className='w-10 mr-5'>{props.productInformation.use_days}</h2>
                         }
                         {
                             !editToggleRecurrance ? (
@@ -80,7 +80,6 @@ function NewProductForm(props: any) {
                                 :
                                 <button onClick={() => setEditToggleCurrentInventory(false)} className='button-generic-small'>X</button>
                         }
-                        <h2 className="m-5 text-md"></h2>
                     </div>
                     <form onSubmit={handleSubmit(props.addProductSubmit)}>
                         <div className="flex justify-center">

@@ -12,48 +12,31 @@ import { ReactComponent as AddProduct } from '../../Svgs/add-product.svg'
 // @ts-ignore
 import { ReactComponent as AddedProduct } from '../../Svgs/check-product-added.svg'
 // @ts-ignore
-import ProductAddedMessage from './ProductAddedMessage.tsx';
+import productObjectType from '.././LibraryProducts/ts/types'
 
 function ProductList(props: any) {
-    const [productModal, setProductModal] = useState(false)
+    const [productModal] = useState(false)
     const [createProductForm, setCreateProductForm] = useState(false)
     const [addProductToUserForm, setAddProductToUserForm] = useState(false)
     const [dataFilter, setDataFilter] = useState([])
     const [rows, setRows] = useState([])
-    const [dataRows, setDataRows] = useState([])
-    const [productAddedMessage, setProductAddedMessage] = useState(false)
-    let [productObjectToAddForUser, setProductObjectToAddForUser] = useState({})
-    let [productTitleToAddForUser, setProductTitleToAddForUser] = useState("")
+    const [dataRows, setDataRows] = useState<Array<productObjectType>>([])
+    let [productObjectToAddForUser,setProductObjectToAddForUser] = useState({})
+    let [productTitleToAddForUser, setProductTitleToAddForUser] = useState<{} | productObjectType>({});
     let productDataSelection = props.productDataSelection.toLowerCase()
     let categoryTitle = props.productDataSelection.charAt(0).toUpperCase() + props.productDataSelection.slice(1)
-    function productAdded(idAdded) {
-        setAddProductToUserForm(true)
-        const productObject = dataRows.find(obj => obj.id === idAdded)
-        const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
-        setProductObjectToAddForUser(productObject)
-        setProductTitleToAddForUser(title)
-    }
     const addProductSubmit = (productData: any) => {
-        // @ts-ignore
         const productObject = dataRows.find(obj => obj.id === productObjectToAddForUser.id)
-        const { id, author, category, title} = productObject
-        const currentInventoryOriginal = productObject.current_inventory
-        const inventoryUpdatedDateOriginal = productObject.inventory_updated_date
-        const added = true
-        const unit = productData.unit
-        const use_days = productData.recurrance
-        const standard_size = productData.standard_size
-        const current_inventory = productData.current_inventory
-        const inventory_updated_date = new Date() 
-        // const inventory_updated_date = current_inventory != currentInventoryOriginal ? new Date() : inventoryUpdatedDateOriginal
-        editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
-    }
-    function productRemove(idRemove) {
-        const productObject = dataRows.find(obj => obj.id === idRemove)
-        const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
-        const added = false
-        editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory)
-        getProducts()
+        if (productObject) {
+            let { id, author, category, title  } = productObject;
+            const added = true
+            const unit = productData.unit
+            const use_days = productData.use_days
+            const standard_size = productData.standard_size
+            const current_inventory = productData.current_inventory
+            const inventory_updated_date = new Date()
+            editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
+        }
     }
     function createProductToggle() {
         setCreateProductForm(!createProductForm)
@@ -61,9 +44,6 @@ function ProductList(props: any) {
     function addProductToUserToggle() {
         setAddProductToUserForm(!addProductToUserForm)
     }
-    // function productAddedMessageToggle(){
-    //     setProductAddedMessage(!productAddedMessage)
-    // }
     const createProductSubmit = (newProductData: any) => {
         const title = newProductData.title
         const category = findCategoryNumber(newProductData.category)
@@ -76,11 +56,53 @@ function ProductList(props: any) {
         getProducts()
     }
 
-    function findCategoryName(id) {
+    const editProduct = React.useCallback((id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) => {
+        setAddProductToUserForm(false)
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
+            },
+            body: JSON.stringify({
+                title: title,
+                category: category,
+                author: author,
+                unit: unit,
+                standard_size: standard_size,
+                use_days: use_days,
+                current_inventory: current_inventory,
+                inventory_updated_date: inventory_updated_date,
+                added: added
+            })
+        };
+        fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
+            .then(response => response.json())
+            .then(getProducts)
+    },[])
+
+    const productAdded = React.useCallback((idAdded) => {
+        setAddProductToUserForm(true)
+        const productObject = dataRows.find(obj => obj.id === idAdded)
+        const { title } = productObject
+        setProductObjectToAddForUser(productObject)
+        setProductTitleToAddForUser(title)
+    },[dataRows])
+
+    const productRemove = React.useCallback((idRemove) => {
+        const productObject = dataRows.find(obj => obj.id === idRemove)
+        const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
+        const added = false
+        editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory)
+        getProducts()
+    },[dataRows, editProduct])
+
+    const findCategoryName = React.useCallback((id) => {
         const object = props.categoriesData.find(obj => obj.id === id)
         const value = object ? object.name : null;
         return value
-    }
+      }, [props.categoriesData]);
+      
 
     function findCategoryNumber(category) {
         const object = props.categoriesData.find(obj => obj.name === category)
@@ -88,13 +110,13 @@ function ProductList(props: any) {
         return value
     }
 
-    const ProductRow = ({ title, category, id, added }: { title: string, category: number, id: string, added: boolean }) => (
-        <tr className='text-center'>
+    const ProductRow = React.useCallback(({ title, category, id, added }: { title: string, category: number, id: string, added: boolean }) => (
+        <tr key={id} className='text-center'>
             <th>{title}</th>
             <th>{findCategoryName(category)}</th>
             <th className='text-center font-bold text-emerald-700'>{added ? <button onClick={() => productRemove(id)}><AddedProduct /></button> : <button onClick={() => productAdded(id)}><AddProduct /></button>}</th>
         </tr>
-    );
+    ),[findCategoryName, productAdded, productRemove]);
 
     async function getProducts() {
         await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
@@ -110,72 +132,35 @@ function ProductList(props: any) {
 
     React.useEffect(() => {
         if (props.categoriesData.length > 0) {
-            productDataSelection == 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() == productDataSelection))
+            productDataSelection === 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() === productDataSelection))
         }
-    }, [dataRows, productDataSelection])
+    }, [dataRows, productDataSelection, findCategoryName, props.categoriesData.length])
+    
 
     React.useEffect(() => {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
-    }, [dataFilter, dataRows])
+    }, [dataFilter, dataRows, ProductRow])
 
     function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
-        // Make a separate request to retrieve the CSRF token
-        // fetch('/api/csrf_token/')
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     console.log(data)
-            // Use the retrieved token in the headers of the main request
-            const requestOptions = {
-              method: 'POST',
-              headers: { 
+        const requestOptions = {
+            method: 'POST',
+            headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
-              },
-              body: JSON.stringify({ 
-                title: title, 
-                category: category, 
-                author: "1", 
-                unit:unit, 
-                standard_size:standard_size,
-                use_days:use_days, 
-                current_inventory:current_inventory,
+            },
+            body: JSON.stringify({
+                title: title,
+                category: category,
+                author: "1",
+                unit: unit,
+                standard_size: standard_size,
+                use_days: use_days,
+                current_inventory: current_inventory,
                 inventory_updated_date: null
-              })
-            };
-            fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
-              .then(response => response.json());
-        //   });
-      }
-          
-    function editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) {
-        setAddProductToUserForm(false)
-        // setProductAddedMessage(true)
-        // fetch('/api/csrf_token/')
-        //   .then(response => response.json())
-        //   .then(data => {
-            // console.log(data)
-            const requestOptions = {
-                method: 'PUT',
-                headers: { 
-                  'Content-Type': 'application/json',
-                  'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
-                },
-                body: JSON.stringify({ 
-                  title: title, 
-                  category: category, 
-                  author: author, 
-                  unit:unit, 
-                  standard_size:standard_size,
-                  use_days:use_days, 
-                  current_inventory:current_inventory,
-                  inventory_updated_date: inventory_updated_date,
-                  added:added
-                })
-              };
-        fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
-            .then(response => response.json())
-            .then(getProducts)
-        // })
+            })
+        };
+        fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
+            .then(response => response.json());
     }
 
     return (
@@ -203,12 +188,6 @@ function ProductList(props: any) {
                     />
                 </div>
             }
-            {/* {productAddedMessage &&
-                <div className='flex justify-center'>
-                    <ProductAddedMessage       
-                    />
-                </div>
-            } */}
             <table className='m-5 min-w-[90%]'>
                 <thead>
                     <tr>

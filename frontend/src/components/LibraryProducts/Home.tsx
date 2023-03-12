@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './style.css'
 
-const Home = () => {
+function Home () {
     let navigate = useNavigate();
     function categoriesPage() {
         navigate("/productcategories");
