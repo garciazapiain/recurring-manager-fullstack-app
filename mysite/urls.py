@@ -31,11 +31,9 @@ urlpatterns = [
     path('api/products/add/', add_product, name='add_product'), 
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
     path('', views.home, name='home'),
+    path('admin/', admin.site.urls),
 ]
 
 # Only add the re_path for non-admin URLs
 if not settings.DEBUG:  # Exclude in debug mode
     urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html')),]
-
-# Add admin URLs
-urlpatterns += [path('admin/', admin.site.urls)]
