@@ -35,7 +35,7 @@ function ProductList(props: any) {
             const standard_size = productData.standard_size
             const current_inventory = productData.current_inventory
             const inventory_updated_date = new Date()
-            editProduct(id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date)
+            editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory, inventory_updated_date)
         }
     }
     function createProductToggle() {
