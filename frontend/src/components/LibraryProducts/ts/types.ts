@@ -13,5 +13,5 @@ export type Dashboard = {
     standard_size: number;
     title: string;
     unit: string;
-    use_days: string;
+    use_days: number;
   };
