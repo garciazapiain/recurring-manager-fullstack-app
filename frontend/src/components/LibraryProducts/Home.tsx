@@ -13,8 +13,8 @@ function Home () {
         <>
             <h1 className='m-5 text-4xl'>Home Page</h1>
             <div className='homePageButtonsContainer'>
-                <button onClick={categoriesPage}>Product categories</button>
-                <button onClick={userDashboard}>User products</button>
+                <button data-cy="product-categories" onClick={categoriesPage}>Product categories</button>
+                <button data-cy="user-products" onClick={userDashboard}>User products</button>
             </div>
         </>
     )

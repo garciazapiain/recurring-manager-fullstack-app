@@ -1,0 +1,28 @@
+[
+    {
+      "id": 1,
+      "title": "Toilet paper",
+      "created_date": "2023-03-13T08:11:52.737115Z",
+      "inventory_updated_date": "2023-03-13T08:13:27.903000Z",
+      "added": true,
+      "unit": "piece",
+      "standard_size": "1",
+      "use_days": "3",
+      "current_inventory": "2",
+      "author": 1,
+      "category": 7
+    },
+    {
+      "id": 2,
+      "title": "CBD oil",
+      "created_date": "2023-03-12T13:46:14Z",
+      "inventory_updated_date": "2023-03-13T08:10:57Z",
+      "added": true,
+      "unit": "mL",
+      "standard_size": "10",
+      "use_days": "50",
+      "current_inventory": "6",
+      "author": 1,
+      "category": 6
+    }
+  ]
