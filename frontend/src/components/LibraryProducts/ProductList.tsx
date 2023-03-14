@@ -56,7 +56,7 @@ function ProductList(props: any) {
         getProducts()
     }
 
-    const editProduct = React.useCallback((id, author, category, title, added, unit, standard_size, use_days, current_inventory, inventory_updated_date?) => {
+    const editProduct = React.useCallback((id, author, category, title, added, standard_size, unit, use_days, current_inventory, inventory_updated_date?) => {
         setAddProductToUserForm(false)
         const requestOptions = {
             method: 'PUT',
@@ -93,6 +93,7 @@ function ProductList(props: any) {
         const productObject = dataRows.find(obj => obj.id === idRemove)
         const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
         const added = false
+        console.log(standard_size, unit)
         editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory)
         getProducts()
     },[dataRows, editProduct])
