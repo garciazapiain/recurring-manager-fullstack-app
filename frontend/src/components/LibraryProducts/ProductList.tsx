@@ -21,14 +21,14 @@ function ProductList(props: any) {
     const [dataFilter, setDataFilter] = useState([])
     const [rows, setRows] = useState([])
     const [dataRows, setDataRows] = useState<Array<productObjectType>>([])
-    let [productObjectToAddForUser,setProductObjectToAddForUser] = useState({})
+    let [productObjectToAddForUser, setProductObjectToAddForUser] = useState({})
     let [productTitleToAddForUser, setProductTitleToAddForUser] = useState<{} | productObjectType>({});
     let productDataSelection = props.productDataSelection.toLowerCase()
     let categoryTitle = props.productDataSelection.charAt(0).toUpperCase() + props.productDataSelection.slice(1)
     const addProductSubmit = (productData: any) => {
         const productObject = dataRows.find(obj => obj.id === productObjectToAddForUser.id)
         if (productObject) {
-            let { id, author, category, title  } = productObject;
+            let { id, author, category, title } = productObject;
             const added = true
             const unit = productData.unit
             const use_days = productData.use_days
@@ -79,7 +79,7 @@ function ProductList(props: any) {
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
             .then(response => response.json())
             .then(getProducts)
-    },[])
+    }, [])
 
     const productAdded = React.useCallback((idAdded) => {
         setAddProductToUserForm(true)
@@ -87,7 +87,7 @@ function ProductList(props: any) {
         const { title } = productObject
         setProductObjectToAddForUser(productObject)
         setProductTitleToAddForUser(title)
-    },[dataRows])
+    }, [dataRows])
 
     const productRemove = React.useCallback((idRemove) => {
         const productObject = dataRows.find(obj => obj.id === idRemove)
@@ -96,14 +96,14 @@ function ProductList(props: any) {
         console.log(standard_size, unit)
         editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory)
         getProducts()
-    },[dataRows, editProduct])
+    }, [dataRows, editProduct])
 
     const findCategoryName = React.useCallback((id) => {
         const object = props.categoriesData.find(obj => obj.id === id)
         const value = object ? object.name : null;
         return value
-      }, [props.categoriesData]);
-      
+    }, [props.categoriesData]);
+
 
     function findCategoryNumber(category) {
         const object = props.categoriesData.find(obj => obj.name === category)
@@ -115,9 +115,9 @@ function ProductList(props: any) {
         <tr key={id} className='text-center'>
             <th>{title}</th>
             <th>{findCategoryName(category)}</th>
-            <th className='text-center font-bold text-emerald-700'>{added ? <button onClick={() => productRemove(id)}><AddedProduct /></button> : <button onClick={() => productAdded(id)}><AddProduct /></button>}</th>
+            <th className='text-center font-bold text-emerald-700'>{added ? <button data-cy="button-added" onClick={() => productRemove(id)}><AddedProduct /></button> : <button data-cy="button-not-added" onClick={() => productAdded(id)}><AddProduct /></button>}</th>
         </tr>
-    ),[findCategoryName, productAdded, productRemove]);
+    ), [findCategoryName, productAdded, productRemove]);
 
     async function getProducts() {
         await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
@@ -133,10 +133,12 @@ function ProductList(props: any) {
 
     React.useEffect(() => {
         if (props.categoriesData.length > 0) {
-            productDataSelection === 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => findCategoryName(item.category).toLowerCase() === productDataSelection))
+            productDataSelection === 'all-products' ? setDataFilter(dataRows) : setDataFilter(dataRows.filter(item => {
+                const categoryName = findCategoryName(item.category);
+                return categoryName ? categoryName.toLowerCase() === productDataSelection : false;
+            }))
         }
     }, [dataRows, productDataSelection, findCategoryName, props.categoriesData.length])
-    
 
     React.useEffect(() => {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));

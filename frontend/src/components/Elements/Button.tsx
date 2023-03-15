@@ -5,7 +5,7 @@ import './style.css'
 const Button = (props:any) => {
     return (
         <div>
-        <button onClick={props.onClick? props.onClick: ""} className={props.class}>
+        <button data-cy={props.datacy} onClick={props.onClick? props.onClick: ""} className={props.class}>
             {props.text}
         </button>
         </div>

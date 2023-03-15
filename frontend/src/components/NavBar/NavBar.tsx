@@ -11,13 +11,13 @@ const NavBar = (props: any) => {
         <div id="navBar" className="navBar">
             {navBarClosed ?
                 <div>
-                    <img className="burger" src="https://cdn-icons-png.flaticon.com/512/5358/5358649.png" alt="burger icon" onClick={navBarToggle} />
+                    <img data-cy="nav-bar-burger" className="burger" src="https://cdn-icons-png.flaticon.com/512/5358/5358649.png" alt="burger icon" onClick={navBarToggle} />
                 </div>
                 : 
-                <div className="navBarOpenedContainer">
-                    <a href="/" className="navBarOpenedContainerLinks">Home</a>
-                    <a href="/productcategories" className="navBarOpenedContainerLinks"> Product Categories</a>
-                    <a href="/userproducts" className="navBarOpenedContainerLinks">User Dashboard</a>
+                <div data-cy="nav-bar" className="navBarOpenedContainer">
+                    <a data-cy="nav-bar-home" href="/" className="navBarOpenedContainerLinks">Home</a>
+                    <a data-cy="nav-bar-product-categories" href="/productcategories" className="navBarOpenedContainerLinks"> Product Categories</a>
+                    <a data-cy="nav-bar-user" href="/userproducts" className="navBarOpenedContainerLinks">User Dashboard</a>
                     <img className="burger" src="https://cdn-icons-png.flaticon.com/512/5358/5358649.png" alt="burger icon" onClick={navBarToggle} />
                 </div>
             }

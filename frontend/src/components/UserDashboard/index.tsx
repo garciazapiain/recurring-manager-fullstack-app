@@ -140,6 +140,7 @@ const UserDashboard = (props) => {
                     onClick={() => toggleButtons("allProducts")}
                     text="All products"
                     class="button-generic-small"
+                    datacy="user-page-all-products-button"
                 />
                 <Button
                     onClick={() => toggleButtons("settings")}
