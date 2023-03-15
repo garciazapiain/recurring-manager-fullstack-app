@@ -1,0 +1,40 @@
+name: Build branch based on Cypress tests
+
+on:
+  push:
+    branches:
+      - main # you can replace this with your desired branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run cypress:run
+
+    - name: Build branch
+      if: success()
+      run: |
+        # Replace this with your build command
+        # This example assumes you're using a static site generator like Hugo
+        hugo --buildFuture --minify -b https://your-website.com
+
+    - name: Deploy branch
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public # replace this with your build directory
+        publish_branch: your-branch-name # replace this with the branch you want to deploy to
