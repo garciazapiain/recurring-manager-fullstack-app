@@ -2,7 +2,8 @@
     "scripts": {
         "start": "node server.js",
         "heroku-postbuild": "cd frontend && npm install && npm run build",
-        "serve-static": "serve -s build"
+        "serve-static": "serve -s build",
+        "cypress:run": "cd frontend && npx cypress run"
     },
     "homepage": "https://recurring-manager-app.herokuapp.com/",
     "engines": {
