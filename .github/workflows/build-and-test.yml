@@ -23,7 +23,6 @@ jobs:
 
     - name: Run Cypress tests
       working-directory: ./frontend
-      uses: cypress-io/github-action@v2
       run:  npm run cypress:run
 
     - name: Build branch
