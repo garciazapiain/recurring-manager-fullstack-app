@@ -7,7 +7,7 @@
     },
     "homepage": "https://recurring-manager-app.herokuapp.com/",
     "engines": {
-        "node": ">= 19.6.0",
+        "node": ">= 14.x",
         "npm": ">= 9.4.0"
     },
     "dependencies": {
