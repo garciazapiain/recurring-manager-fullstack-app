@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 // @ts-ignore
 import Button from '../Elements/Button.tsx'
@@ -34,13 +35,6 @@ const UserDashboard = (props) => {
     useEffect(() => {
         getProducts()
     }, [])
-
-    useEffect(() => {
-        if (Object.keys(userProductsList).length > 0) {
-            setAllProductsRows(userProductsList.map((row) => <AllProductRow {...row} />))
-            setRecurranceRows(userProductsList.map((row) => ((row.use_days / row.standard_size) * currentInventoryFunction(row.current_inventory, row.inventory_updated_date, row.use_days, row.standard_size)) < daysUntilNextBuy ? <RecurranceRow {...row} /> : null))
-        }
-    }, [userProductsList, daysUntilNextBuy])
 
     function findCategoryName(id) {
         const object = props.categoriesData.find(obj => obj.id === id)
@@ -79,6 +73,13 @@ const UserDashboard = (props) => {
             <th>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
         </tr>
     );
+
+    useEffect(() => {
+        if (Object.keys(userProductsList).length > 0) {
+            setAllProductsRows(userProductsList.map((row) => <AllProductRow {...row} />))
+            setRecurranceRows(userProductsList.map((row) => ((row.use_days / row.standard_size) * currentInventoryFunction(row.current_inventory, row.inventory_updated_date, row.use_days, row.standard_size)) < daysUntilNextBuy ? <RecurranceRow {...row} /> : null))
+        }
+    }, [userProductsList, daysUntilNextBuy])
     function toggleButtons(button) {
         if (button === "recurranceView") {
             setRecurranceViewShow(true)
