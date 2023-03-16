@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import '../../index.css'
 import './style.css'
-import data from './data/categories'
 import { Link } from "react-router-dom";
 // @ts-ignore
 import Button from '../Elements/Button.tsx'
