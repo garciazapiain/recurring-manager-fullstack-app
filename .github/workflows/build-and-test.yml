@@ -25,6 +25,10 @@ jobs:
       working-directory: ./frontend
       run: npm install
 
+    - name: Start server
+      working-directory: ./frontend
+      run: npm start &
+
     - name: Run Cypress tests
       working-directory: ./frontend
       run:  npx cypress run
