@@ -1,6 +1,6 @@
 describe('Navigation Tests', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
   });
 
   it('Navigates to product categories and asserts product table columns exist', () => {
