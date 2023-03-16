@@ -32,18 +32,3 @@ jobs:
     - name: Run Cypress tests
       working-directory: ./frontend
       run:  npx cypress run
-
-    - name: Build branch
-      if: success()
-      run: |
-        # Replace this with your build command
-        # This example assumes you're using a static site generator like Hugo
-        hugo --buildFuture --minify -b https://your-website.com
-
-    - name: Deploy branch
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public # replace this with your build directory
-        publish_branch: your-branch-name # replace this with the branch you want to deploy to
