@@ -1,26 +1,21 @@
 import React, { useEffect } from 'react';
 import '../../index.css'
 import './style.css'
+import data from './data/categories'
 import { Link } from "react-router-dom";
 // @ts-ignore
 import Button from '../Elements/Button.tsx'
 
 function CategoriesPage(props: any) {
-    const CategoryCard = ({ name, cardClicked }: { name: string, cardClicked: (name: string) => void }) => {
-        const handleClick = React.useCallback((name) => {
-          cardClicked(name);
-        }, [cardClicked]);
-      
-        return (
-          <>
+    const CategoryCard = ({ name }: { name: string}) => (
+        <>
             <Link to={`/${name.toLocaleLowerCase()}`}>
-              <div className='category-banner' onClick={handleClick}>
-                <h2 className="p-5 text-5xl">{name}</h2>
-              </div>
+                <div className='category-banner' onClick={() => props.cardClicked(name)}>
+                    <h2 className="p-5 text-5xl">{name}</h2>
+                </div>
             </Link>
-          </>
-        );
-      };
+        </>
+    );
     const [section, setSection] = React.useState([])
     React.useEffect(() => {
         window.addEventListener('scroll', isSticky);
