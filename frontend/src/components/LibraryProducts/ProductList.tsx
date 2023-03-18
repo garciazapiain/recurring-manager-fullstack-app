@@ -8,11 +8,9 @@ import NewProductForm from './NewProductForm.tsx';
 // @ts-ignore
 import AddProductToUserForm from './AddProductToUserForm.tsx';
 // @ts-ignore
-import { ReactComponent as AddProduct } from '../../Svgs/add-product.svg'
-// @ts-ignore
-import { ReactComponent as AddedProduct } from '../../Svgs/check-product-added.svg'
-// @ts-ignore
 import productObjectType from '.././LibraryProducts/ts/types'
+// @ts-ignore
+import AddOrRemove from '../Elements/AddOrRemove.tsx';
 
 function ProductList(props: any) {
     const [productModal] = useState(false)
@@ -37,6 +35,8 @@ function ProductList(props: any) {
             const inventory_updated_date = new Date()
             editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory, inventory_updated_date)
         }
+        setAddProductToUserForm(false)
+        getProducts()
     }
     function createProductToggle() {
         setCreateProductForm(!createProductForm)
@@ -87,14 +87,15 @@ function ProductList(props: any) {
         const { title } = productObject
         setProductObjectToAddForUser(productObject)
         setProductTitleToAddForUser(title)
+        getProducts()
     }, [dataRows])
 
     const productRemove = React.useCallback((idRemove) => {
         const productObject = dataRows.find(obj => obj.id === idRemove)
         const { id, author, category, title, standard_size, unit, use_days, current_inventory } = productObject
         const added = false
-        console.log(standard_size, unit)
         editProduct(id, author, category, title, added, standard_size, unit, use_days, current_inventory)
+        setAddProductToUserForm(false)
         getProducts()
     }, [dataRows, editProduct])
 
@@ -115,7 +116,7 @@ function ProductList(props: any) {
         <tr key={id} className='text-center'>
             <th>{title}</th>
             <th>{findCategoryName(category)}</th>
-            <th className='text-center font-bold text-emerald-700'>{added ? <button data-cy="button-added" onClick={() => productRemove(id)}><AddedProduct /></button> : <button data-cy="button-not-added" onClick={() => productAdded(id)}><AddProduct /></button>}</th>
+            <th><AddOrRemove added={added} id={id} productRemove={productRemove} productAdded={productAdded} /></th>
         </tr>
     ), [findCategoryName, productAdded, productRemove]);
 
@@ -129,7 +130,7 @@ function ProductList(props: any) {
 
     React.useEffect(() => {
         getProducts()
-    }, [createProductForm])
+    }, [])
 
     React.useEffect(() => {
         if (props.categoriesData.length > 0) {
@@ -142,7 +143,7 @@ function ProductList(props: any) {
 
     React.useEffect(() => {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
-    }, [dataFilter, dataRows, ProductRow])
+    }, [dataFilter, ProductRow])
 
     function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
         const requestOptions = {
@@ -163,7 +164,8 @@ function ProductList(props: any) {
             })
         };
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(getProducts)
     }
 
     return (
@@ -184,7 +186,7 @@ function ProductList(props: any) {
             {addProductToUserForm &&
                 <div className='flex justify-center'>
                     <AddProductToUserForm
-                        addProductToUserToggle={addProductToUserToggle}
+                        formToggle={addProductToUserToggle}
                         productInformation={productObjectToAddForUser}
                         productTitleToAddForUser={productTitleToAddForUser}
                         addProductSubmit={addProductSubmit}

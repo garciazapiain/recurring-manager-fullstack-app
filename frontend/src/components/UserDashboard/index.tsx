@@ -9,6 +9,8 @@ import RecurranceView from './ReccuranceView.tsx';
 // @ts-ignore
 import Settings from './Settings.tsx';
 // @ts-ignore
+import { ReactComponent as EditProduct } from '../../Svgs/edit-product.svg'
+// @ts-ignore
 import './style.css'
 
 const UserDashboard = (props) => {
@@ -19,6 +21,8 @@ const UserDashboard = (props) => {
     const [allProductsViewShow, setAllProductsShow] = useState(false)
     const [settingsShow, setSettingsShow] = useState(false)
     const [daysUntilNextBuy, setDaysUntilNextBuy] = useState(15)
+    const [editProductTriggered, setEditProductTriggered] = useState(undefined)
+    
     async function getProducts() {
         await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
             .then(response => response.json())
@@ -65,10 +69,13 @@ const UserDashboard = (props) => {
             .then(response => response.json())
         getProducts()
     }
-    const AllProductRow = ({ title, category, id }: { title: string, category: number, id: string }) => (
+    const AllProductRow = ({ title, category, id, current_inventory, unit, use_days, standard_size, inventory_updated_date  }: { title: string, category: number, id: string, current_inventory: number, unit: number, use_days: number, standard_size: number, inventory_updated_date: string }) => (
         <tr className='text-center'>
             <th>{title}</th>
             <th>{findCategoryName(category)}</th>
+            <th>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
+            <th>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
+            <th className='text-center font-bold text-blue-700'><button onClick={() => setEditProductTriggered(id)}><EditProduct/></button></th>
             <th className='text-center font-bold text-red-700'><button onClick={() => deleteProduct(id)}>-</button></th>
         </tr>
     );
@@ -158,7 +165,7 @@ const UserDashboard = (props) => {
                     />
                     :
                     allProductsViewShow ?
-                        <AllProducts rows={allProductsRows} />
+                        <AllProducts setEditProductTriggered={setEditProductTriggered} editProductTriggered={editProductTriggered} editProduct={editProduct} getProducts={getProducts} rows={allProductsRows} />
                         :
                         settingsShow ?
                             <Settings />

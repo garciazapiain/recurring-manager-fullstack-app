@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import './style.css'
 
-function NewProductForm(props: any) {
+function AddProductToUserForm(props: any) {
     const { register, handleSubmit, setValue } = useForm();
     const [editToggleUnit, setEditToggleUnit] = React.useState(false)
     const [editToggleStandardSize, setEditToggleStandardSize] = React.useState(false)
@@ -12,7 +12,7 @@ function NewProductForm(props: any) {
         <div className="newProductFormContainerBackground">
             <div className="newProductFormContainer">
                 <div className="dismissButtonWrapper">
-                    <button onClick={props.addProductToUserToggle}>X</button>
+                    <button onClick={props.formToggle}>X</button>
                 </div>
                 <div>
                     <h1 className="m-5 text-3xl">{props.productTitleToAddForUser}</h1>
@@ -92,4 +92,4 @@ function NewProductForm(props: any) {
     )
 }
 
-export default NewProductForm
+export default AddProductToUserForm
