@@ -40,8 +40,8 @@ function CategoriesPage(props: any) {
     }
     return (
         <>
-            <h1 className="m-5 text-4xl">Categories</h1>
-            <h2 className='m-5 text-lg'>See products by categories</h2>
+            <h1 className="m-5 text-4xl">Search new products</h1>
+            <h2 className='m-5 text-lg'>Browse by categories</h2>
             <div className='category-section'>
                 {section}
             </div>
