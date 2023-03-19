@@ -4,8 +4,6 @@ import CategoriesPage from "./CategoriesPage.tsx";
 // @ts-ignore
 import ProductList from "./ProductList.tsx"
 // @ts-ignore
-import Home from "./Home.tsx"
-// @ts-ignore
 import UserDashboard from "../UserDashboard/index.tsx"
 import { Routes, Route } from "react-router-dom";
 // @ts-ignore
@@ -33,7 +31,8 @@ const LibraryProducts = () => {
             <Routes>
                 <Route path=""
                     element={
-                        <Home
+                        <UserDashboard
+                        categoriesData={categoriesData}
                         />
                     }>
                 </Route>
@@ -41,13 +40,6 @@ const LibraryProducts = () => {
                     element={
                         <CategoriesPage
                             cardClicked={cardClicked}
-                            categoriesData={categoriesData}
-                        />
-                    }>
-                </Route>
-                <Route path={`/userproducts`}
-                    element={
-                        <UserDashboard
                             categoriesData={categoriesData}
                         />
                     }>

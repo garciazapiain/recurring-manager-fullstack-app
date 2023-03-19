@@ -115,19 +115,9 @@ const UserDashboard = (props) => {
         return adjustedInventory > 0 ? adjustedInventory : 0;
     }
 
-    // const date1 = new Date();
-    // const dateSplit = userProductsList[0].inventory_updated_date.split("")
-    // const dateYear = dateSplit.slice(0,4).join("")
-    // const dateDay = dateSplit.slice(8,10).join("")
-    // const dateMonth = dateSplit.slice(5,7).join("")
-    // const dateFormatted = new Date(`${dateMonth}/${dateDay}/${dateYear}`)
-    //     // @ts-ignore
-    // const diffTime = Math.abs(dateFormatted - date1);
-    // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
     return (
         <div>
-            <h1 className="m-5 text-4xl">User Products Page</h1>
+            <h1 className="m-5 text-4xl">My products</h1>
             <div className="buttonsUserDashboard">
                 <Button
                     onClick={() => toggleButtons("recurranceView")}
