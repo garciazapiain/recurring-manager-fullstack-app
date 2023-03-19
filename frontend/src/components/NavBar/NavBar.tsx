@@ -17,7 +17,7 @@ const NavBar = (props: any) => {
                 <div data-cy="nav-bar" className="navBarOpenedContainer">
                     {/* <a data-cy="nav-bar-home" href="/" className="navBarOpenedContainerLinks">Home</a> */}
                     <a data-cy="nav-bar-user" href="/" className="navBarOpenedContainerLinks">My products</a>
-                    <a data-cy="nav-bar-product-categories" href="/productcategories" className="navBarOpenedContainerLinks">Search new products</a>
+                    <a data-cy="nav-bar-product-categories" href="/productcategories" className="navBarOpenedContainerLinks">Explore products</a>
                     <img className="burger" src="https://cdn-icons-png.flaticon.com/512/5358/5358649.png" alt="burger icon" onClick={navBarToggle} />
                 </div>
             }

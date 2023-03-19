@@ -28,6 +28,7 @@ describe('Navigation Tests', () => {
   it('Navigates to product categories and asserts product table columns exist', () => {
     cy.get('[data-cy="nav-bar-burger"]').click();
     cy.get('[data-cy="nav-bar-product-categories"]').click();
+    cy.get('h1').contains('Explore products').should('exist');
     cy.intercept('https://recurring-manager-app.herokuapp.com/api/productcategories/', { fixture: 'categories.json' }).as('getCategories');
     cy.wait('@getCategories');
     cy.get('.category-section').should('exist', { timeout: 10000 });

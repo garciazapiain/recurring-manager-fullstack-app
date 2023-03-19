@@ -170,7 +170,7 @@ function ProductList(props: any) {
 
     return (
         <div>
-            <h2 className="m-5 text-4xl">Products</h2>
+            <h2 className="m-5 text-4xl">Explore products</h2>
             <h4 className="m-5">Filtered by:</h4>
             <h2 className='m-5 text-lg'> {categoryTitle} category</h2>
             {createProductForm &&
