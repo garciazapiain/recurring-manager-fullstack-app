@@ -4,8 +4,13 @@ import React, { useState } from 'react';
 import AddProductToUserForm from '../LibraryProducts/AddProductToUserForm.tsx';
 // @ts-ignore
 import { productObjectType } from '../LibraryProducts/ts/types';
+import './style.css'
+// @ts-ignore
+import Button from '../Elements/Button.tsx'
+import { useNavigate } from 'react-router-dom'
 
 const AllProducts = (props) => {
+    let navigate = useNavigate();
     const [editProductUserDashboardForm, setEditProductUserDashboardForm] = useState(false)
     let [productObjectToAddForUser, setProductObjectToAddForUser] = useState({})
     let [productTitleToAddForUser, setProductTitleToAddForUser] = useState<{} | productObjectType>({});
@@ -37,6 +42,9 @@ const AllProducts = (props) => {
         setEditProductUserDashboardForm(!editProductUserDashboardForm)
         props.setEditProductTriggered(undefined)
     }
+    function categoriesPage() {
+        navigate("/productcategories");
+    }
     return (
         <>
         {editProductUserDashboardForm &&
@@ -66,6 +74,13 @@ const AllProducts = (props) => {
                 {props.rows}
             </tbody>
         </table>
+        <div className="buttonsUserDashboard">
+                <Button
+                    onClick={categoriesPage}
+                    text="Add new product"
+                    class="button-generic"
+                />
+        </div>
         </>
     )
 }
