@@ -3,45 +3,49 @@ import React, { useState } from 'react';
 
 const RecurranceView = (props) => {
     const [toggleDaysUntilNextBuyEditMode, setToggleDaysUntilNextBuyEditMode] = useState(false)
-    const [inputValue, setInputValue] = useState()
+    const [inputValue, setInputValue] = useState(0)
     const inputRef = React.useRef(null);
 
-    function daysRemainingCurrentValueClicked(e){
-        if(e.target.id==='change-days-recurrance-current-value'){
+    function daysRemainingCurrentValueClicked(e) {
+        if (e.target.id === 'change-days-recurrance-current-value') {
             setToggleDaysUntilNextBuyEditMode(true)
         }
     }
 
-    function manageToggleDaysUntilNextBuy() {
+    console.log(props.daysUntilNextBuyModified)
+
+    function manageToggleDaysUntilNextBuy(e) {
         if (!inputValue) {
-            return null
+            setToggleDaysUntilNextBuyEditMode(false)
+            return
         }
         props.daysUntilNextBuyModified(inputValue)
         setToggleDaysUntilNextBuyEditMode(false)
-        setInputValue(0)
     }
+
     function handleChange(e) {
         setInputValue(Number(e.target.value))
     }
+
     React.useEffect(() => {
         // add event listener when toggleDaysUntilNextBuyEditMode is true
         if (toggleDaysUntilNextBuyEditMode) {
-          const handleClickOutside = (e) => {
-            // check if the target is not inside the input element
-            if(e.target.id === 'change-days-recurrance-input' || e.target.id==='change-days-recurrance-input'){
-                return
-            }
-            else{
-                manageToggleDaysUntilNextBuy(e.target.value)
-            }
-          };
-          document.addEventListener('click', handleClickOutside);
-          return () => {
-            // remove event listener when component unmounts or toggleDaysUntilNextBuyEditMode changes
-            document.removeEventListener('click', handleClickOutside);
-          };
+            const handleClickOutside = (e) => {
+                // check if the target is not inside the input element
+                if (e.target.id === 'change-days-recurrance-input' || e.target.id === 'change-days-recurrance-current-value') {
+                    return
+                }
+                else {
+                    manageToggleDaysUntilNextBuy(e)
+                }
+            };
+            document.addEventListener('click', handleClickOutside);
+            return () => {
+                // remove event listener when component unmounts or toggleDaysUntilNextBuyEditMode changes
+                document.removeEventListener('click', handleClickOutside);
+            };
         }
-      }, [toggleDaysUntilNextBuyEditMode, inputValue]);
+    }, [toggleDaysUntilNextBuyEditMode, inputValue]);
     return (
         <div>
             <div className="m-5 flex-column 100vw">
