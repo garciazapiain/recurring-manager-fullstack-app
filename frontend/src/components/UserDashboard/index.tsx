@@ -96,7 +96,6 @@ const UserDashboard = (props) => {
     }
 
     function daysUntilNextBuyModified(newValue) {
-        console.log('hey ', newValue)
         setDaysUntilNextBuy(newValue)
     }
 

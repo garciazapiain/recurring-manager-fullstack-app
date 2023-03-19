@@ -12,9 +12,7 @@ const RecurranceView = (props) => {
         }
     }
 
-    console.log(props.daysUntilNextBuyModified)
-
-    function manageToggleDaysUntilNextBuy(e) {
+    function manageToggleDaysUntilNextBuy() {
         if (!inputValue) {
             setToggleDaysUntilNextBuyEditMode(false)
             return
@@ -36,7 +34,7 @@ const RecurranceView = (props) => {
                     return
                 }
                 else {
-                    manageToggleDaysUntilNextBuy(e)
+                    manageToggleDaysUntilNextBuy()
                 }
             };
             document.addEventListener('click', handleClickOutside);
