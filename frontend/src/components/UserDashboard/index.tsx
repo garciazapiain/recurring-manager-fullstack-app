@@ -7,8 +7,6 @@ import AllProducts from './AllProducts.tsx';
 // @ts-ignore
 import RecurranceView from './ReccuranceView.tsx';
 // @ts-ignore
-import Settings from './Settings.tsx';
-// @ts-ignore
 import { ReactComponent as EditProduct } from '../../Svgs/edit-product.svg'
 // @ts-ignore
 import './style.css'
@@ -19,7 +17,6 @@ const UserDashboard = (props) => {
     const [recurranceRows, setRecurranceRows] = useState([])
     const [recurranceViewShow, setRecurranceViewShow] = useState(true)
     const [allProductsViewShow, setAllProductsShow] = useState(false)
-    const [settingsShow, setSettingsShow] = useState(false)
     const [daysUntilNextBuy, setDaysUntilNextBuy] = useState(15)
     const [editProductTriggered, setEditProductTriggered] = useState(undefined)
     
@@ -150,11 +147,6 @@ const UserDashboard = (props) => {
                     class="button-generic-small"
                     datacy="user-page-all-products-button"
                 />
-                <Button
-                    onClick={() => toggleButtons("settings")}
-                    text="Settings"
-                    class="button-generic-small"
-                />
             </div>
             <div>
                 {recurranceViewShow ?
@@ -167,9 +159,6 @@ const UserDashboard = (props) => {
                     allProductsViewShow ?
                         <AllProducts setEditProductTriggered={setEditProductTriggered} editProductTriggered={editProductTriggered} editProduct={editProduct} getProducts={getProducts} rows={allProductsRows} />
                         :
-                        settingsShow ?
-                            <Settings />
-                            :
                             null
                 }
             </div>
