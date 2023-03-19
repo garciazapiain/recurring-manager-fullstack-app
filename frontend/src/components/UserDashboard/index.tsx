@@ -88,17 +88,10 @@ const UserDashboard = (props) => {
         if (button === "recurranceView") {
             setRecurranceViewShow(true)
             setAllProductsShow(false)
-            setSettingsShow(false)
         }
         else if (button === "allProducts") {
             setRecurranceViewShow(false)
             setAllProductsShow(true)
-            setSettingsShow(false)
-        }
-        else if (button === "settings") {
-            setRecurranceViewShow(false)
-            setAllProductsShow(false)
-            setSettingsShow(true)
         }
     }
 
