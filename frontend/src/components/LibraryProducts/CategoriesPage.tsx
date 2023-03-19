@@ -11,7 +11,7 @@ function CategoriesPage(props: any) {
         <>
             <Link to={`/${name.toLocaleLowerCase()}`}>
                 <div className='category-banner' onClick={() => props.cardClicked(name)}>
-                    <h2 className="p-5 text-5xl">{name}</h2>
+                    <h2 className="p-1 text-3xl">{name}</h2>
                 </div>
             </Link>
         </>
