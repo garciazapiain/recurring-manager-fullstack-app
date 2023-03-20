@@ -7,8 +7,6 @@ import AllProducts from './AllProducts.tsx';
 // @ts-ignore
 import RecurranceView from './ReccuranceView.tsx';
 // @ts-ignore
-import { ReactComponent as EditProduct } from '../../Svgs/edit-product.svg'
-// @ts-ignore
 import './style.css'
 
 const UserDashboard = (props) => {
@@ -72,7 +70,6 @@ const UserDashboard = (props) => {
             <th onClick={() => setEditProductTriggered(id)}>{findCategoryName(category)}</th>
             <th onClick={() => setEditProductTriggered(id)}>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
             <th onClick={() => setEditProductTriggered(id)}>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
-            <th className='text-center font-bold text-blue-700'><button onClick={() => setEditProductTriggered(id)}><EditProduct/></button></th>
             <th className='text-center font-bold text-red-700'><button onClick={() => deleteProduct(id)}>-</button></th>
         </tr>
     );

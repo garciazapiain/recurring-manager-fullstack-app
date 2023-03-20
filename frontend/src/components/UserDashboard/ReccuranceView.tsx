@@ -82,7 +82,7 @@ const RecurranceView = (props) => {
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Current inventory</th>
+                        <th>Inventory</th>
                         <th>Remaining days</th>
                     </tr>
                 </thead>

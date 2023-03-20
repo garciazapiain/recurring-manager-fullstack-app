@@ -62,9 +62,8 @@ const AllProducts = (props) => {
                 <tr>
                     <th>Product</th>
                     <th>Category</th>
-                    <th>Current inventory</th>
-                    <th>Remaining days</th>
-                    <th>Edit</th>
+                    <th>Inventory</th>
+                    <th className='w-1'>Remaining Days</th>
                     <th>Delete</th>
                     <>
                 </>
