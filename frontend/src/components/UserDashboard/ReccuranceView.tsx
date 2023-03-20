@@ -1,10 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
+// @ts-ignore
+import Button from '../Elements/Button.tsx';
+import './style.css'
+// @ts-ignore
+import UpdateInventoryRecurranceForm from './UpdateInventoryRecurranceForm.tsx'
 
 const RecurranceView = (props) => {
     const [toggleDaysUntilNextBuyEditMode, setToggleDaysUntilNextBuyEditMode] = useState(false)
     const [inputValue, setInputValue] = useState(0)
     const inputRef = React.useRef(null);
+    const [showUpdateInventoryForm, setShowUpdateInventoryForm] = useState(false)
 
     function daysRemainingCurrentValueClicked(e) {
         if (e.target.id === 'change-days-recurrance-current-value') {
@@ -44,6 +50,11 @@ const RecurranceView = (props) => {
             };
         }
     }, [toggleDaysUntilNextBuyEditMode, inputValue]);
+
+    function toggleUpdateInventoryForm() {
+        setShowUpdateInventoryForm(!showUpdateInventoryForm)
+    }
+
     return (
         <div>
             <div className="m-5 flex-column 100vw">
@@ -58,6 +69,15 @@ const RecurranceView = (props) => {
                     }
                 </div>
             </div>
+            {showUpdateInventoryForm ?
+                <div>
+                    <UpdateInventoryRecurranceForm
+                        rows={props.rows}
+                        toggleUpdateInventoryForm={toggleUpdateInventoryForm}
+                    />
+                </div>
+                : null
+            }
             <table className='m-5 min-w-[90%]'>
                 <thead>
                     <tr>
@@ -70,6 +90,9 @@ const RecurranceView = (props) => {
                     {props.rows}
                 </tbody>
             </table>
+            <div className='flex justify-center'>
+                <Button onClick={toggleUpdateInventoryForm} text="Update inventory" class="button-generic"></Button>
+            </div>
         </div>
     )
 }

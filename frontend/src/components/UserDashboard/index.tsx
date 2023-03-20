@@ -68,15 +68,14 @@ const UserDashboard = (props) => {
     }
     const AllProductRow = ({ title, category, id, current_inventory, unit, use_days, standard_size, inventory_updated_date  }: { title: string, category: number, id: string, current_inventory: number, unit: number, use_days: number, standard_size: number, inventory_updated_date: string }) => (
         <tr className='text-center'>
-            <th>{title}</th>
-            <th>{findCategoryName(category)}</th>
-            <th>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
-            <th>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
+            <th onClick={() => setEditProductTriggered(id)}>{title}</th>
+            <th onClick={() => setEditProductTriggered(id)}>{findCategoryName(category)}</th>
+            <th onClick={() => setEditProductTriggered(id)}>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
+            <th onClick={() => setEditProductTriggered(id)}>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
             <th className='text-center font-bold text-blue-700'><button onClick={() => setEditProductTriggered(id)}><EditProduct/></button></th>
             <th className='text-center font-bold text-red-700'><button onClick={() => deleteProduct(id)}>-</button></th>
         </tr>
     );
-    // fix the mixup of unit and standard size is wrong
     const RecurranceRow = ({ title, current_inventory, unit, use_days, standard_size, inventory_updated_date }: { title: string, current_inventory: number, unit: number, use_days: number, standard_size: number, inventory_updated_date: string }) => (
         <tr className='text-center'>
             <th>{title}</th>
