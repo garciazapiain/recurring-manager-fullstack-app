@@ -80,12 +80,6 @@
   width: 95%;
 }
 
-.newProductFormContainer>h1{
-  font-family: 'Inter';
-  font-style: normal;
-  color: red;
-}
-
 .newProductForm {
   display: flex;
   flex-direction: column;

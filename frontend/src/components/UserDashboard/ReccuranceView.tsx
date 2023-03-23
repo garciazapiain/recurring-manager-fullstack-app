@@ -55,6 +55,12 @@ const RecurranceView = (props) => {
         setShowUpdateInventoryForm(!showUpdateInventoryForm)
     }
 
+    React.useEffect(()=>{
+        if(!showUpdateInventoryForm){
+            props.getProducts()
+        }
+    },[showUpdateInventoryForm])
+
     return (
         <div>
             <div className="m-5 flex-column 100vw">

@@ -7,6 +7,8 @@ import AllProducts from './AllProducts.tsx';
 // @ts-ignore
 import RecurranceView from './ReccuranceView.tsx';
 // @ts-ignore
+import estimatedCurrentInventory from '../utils/EstimatedCurrentInventory.tsx'
+// @ts-ignore
 import './style.css'
 
 const UserDashboard = (props) => {
@@ -38,7 +40,7 @@ const UserDashboard = (props) => {
     useEffect(() => {
         if (Object.keys(userProductsList).length > 0) {
             setAllProductsRows(userProductsList.map((row) => <AllProductRow {...row} />))
-            setRecurranceRows(userProductsList.map((row) => ((row.use_days / row.standard_size) * currentInventoryFunction(row.current_inventory, row.inventory_updated_date, row.use_days, row.standard_size)) < daysUntilNextBuy ? <RecurranceRow {...row} /> : null))
+            setRecurranceRows(userProductsList.map((row) => ((row.use_days / row.standard_size) * estimatedCurrentInventory(row.current_inventory, row.inventory_updated_date, row.use_days, row.standard_size)) <= daysUntilNextBuy ? <RecurranceRow {...row} /> : null))
         }
     }, [userProductsList, daysUntilNextBuy])
 
@@ -68,16 +70,16 @@ const UserDashboard = (props) => {
         <tr className='text-center'>
             <th onClick={() => setEditProductTriggered(id)}>{title}</th>
             <th onClick={() => setEditProductTriggered(id)}>{findCategoryName(category)}</th>
-            <th onClick={() => setEditProductTriggered(id)}>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
-            <th onClick={() => setEditProductTriggered(id)}>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
+            <th onClick={() => setEditProductTriggered(id)}>{Math.ceil(estimatedCurrentInventory(current_inventory, inventory_updated_date, use_days, standard_size))} ({unit})</th>
+            <th onClick={() => setEditProductTriggered(id)}>{Math.ceil((use_days / standard_size * estimatedCurrentInventory(current_inventory, inventory_updated_date, use_days, standard_size)))}</th>
             <th className='text-center font-bold text-red-700'><button onClick={() => deleteProduct(id)}>-</button></th>
         </tr>
     );
     const RecurranceRow = ({ title, current_inventory, unit, use_days, standard_size, inventory_updated_date }: { title: string, current_inventory: number, unit: number, use_days: number, standard_size: number, inventory_updated_date: string }) => (
         <tr className='text-center'>
             <th>{title}</th>
-            <th>{currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size).toFixed(0)} ({unit})</th>
-            <th>{(use_days / standard_size * currentInventoryFunction(current_inventory, inventory_updated_date, use_days, standard_size)).toFixed(0)}</th>
+            <th>{Math.ceil(estimatedCurrentInventory(current_inventory, inventory_updated_date, use_days, standard_size))} ({unit})</th>
+            <th>{Math.ceil((use_days / standard_size * estimatedCurrentInventory(current_inventory, inventory_updated_date, use_days, standard_size)))}</th>
         </tr>
     );
     function toggleButtons(button) {
@@ -93,22 +95,6 @@ const UserDashboard = (props) => {
 
     function daysUntilNextBuyModified(newValue) {
         setDaysUntilNextBuy(newValue)
-    }
-
-    function currentInventoryFunction(original_inventory, inventory_updated_date, use_days, standard_size) {
-        //refactor date formattted
-        const unitsPerDay = (standard_size / use_days)
-        const dateNow = new Date();
-        const dateSplit = inventory_updated_date.split("")
-        const dateYear = dateSplit.slice(0, 4).join("")
-        const dateDay = dateSplit.slice(8, 10).join("")
-        const dateMonth = dateSplit.slice(5, 7).join("")
-        const dateFormatted = new Date(`${dateMonth}/${dateDay}/${dateYear}`)
-        // @ts-ignore
-        const diffTime = Math.abs(dateFormatted - dateNow);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-        const adjustedInventory = original_inventory - (diffDays * unitsPerDay)
-        return adjustedInventory > 0 ? adjustedInventory : 0;
     }
 
     return (
@@ -133,6 +119,7 @@ const UserDashboard = (props) => {
                         rows={recurranceRows}
                         daysUntilNextBuy={daysUntilNextBuy}
                         daysUntilNextBuyModified={daysUntilNextBuyModified}
+                        getProducts={getProducts}
                     />
                     :
                     allProductsViewShow ?
