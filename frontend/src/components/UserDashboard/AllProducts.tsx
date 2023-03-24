@@ -35,10 +35,12 @@ const AllProducts = (props) => {
             const inventory_updated_date = new Date()
             props.editProduct(id, author, category, title, added, standard_size, use_days, unit, current_inventory, inventory_updated_date)
         }
-        setEditProductUserDashboardForm(false)
-        props.getProducts()
+        formToggle()
     }
     function formToggle() {
+        if(editProductUserDashboardForm){
+            props.getProducts()
+        }
         setEditProductUserDashboardForm(!editProductUserDashboardForm)
         props.setEditProductTriggered(undefined)
     }

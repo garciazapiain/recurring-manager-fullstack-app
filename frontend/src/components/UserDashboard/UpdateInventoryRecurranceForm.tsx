@@ -33,10 +33,8 @@ function UpdateInventoryRecurranceForm(props: any) {
   function updateInventory() {
     productListFormModifications.map(obj => {
       console.log('estimation is ', obj.title, ' ', estimatedCurrentInventory(obj.current_inventory, obj.inventory_updated_date, obj.use_days, obj.standard_size))
-      const oneDayBuffer = obj.standard_size/obj.use_days
-      const newInventory = Math.ceil(estimatedCurrentInventory(obj.current_inventory, obj.inventory_updated_date, obj.use_days, obj.standard_size)+oneDayBuffer)
-      console.log(newInventory, obj.title, ' 1 day buffer was ', oneDayBuffer)
-      editProduct(obj.id, obj.author, obj.category, obj.title, obj.added, obj.standard_size, obj.use_days, obj.unit, newInventory)
+      const newInventory = Math.ceil(estimatedCurrentInventory(obj.current_inventory, obj.inventory_updated_date, obj.use_days, obj.standard_size))
+      return editProduct(obj.id, obj.author, obj.category, obj.title, obj.added, obj.standard_size, obj.use_days, obj.unit, newInventory)
     })
     props.toggleUpdateInventoryForm()
   }

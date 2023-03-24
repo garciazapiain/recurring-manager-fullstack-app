@@ -10,7 +10,8 @@ function estimatedCurrentInventory(original_inventory, inventory_updated_date, u
     // @ts-ignore
     const diffTime = Math.abs(dateFormatted - dateNow);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    const adjustedInventory = original_inventory - (diffDays * unitsPerDay)
+    const twoDayBuffer = 2*(standard_size/use_days)
+    const adjustedInventory = original_inventory - (diffDays * unitsPerDay) + twoDayBuffer
     return adjustedInventory > 0 ? adjustedInventory : 0;
 }
 
