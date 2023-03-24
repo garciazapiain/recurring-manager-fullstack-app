@@ -3,11 +3,11 @@ import './style.css'
 
 function Home () {
     let navigate = useNavigate();
+    function userDashboard() {
+        navigate("");
+    }
     function categoriesPage() {
         navigate("/productcategories");
-    }
-    function userDashboard() {
-        navigate("/userproducts");
     }
     return (
         <>
