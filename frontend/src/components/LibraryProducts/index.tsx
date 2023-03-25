@@ -8,6 +8,8 @@ import UserDashboard from "../UserDashboard/index.tsx"
 import { Routes, Route } from "react-router-dom";
 // @ts-ignore
 import NavBar from '../NavBar/NavBar.tsx';
+// @ts-ignore
+import Django from './Django.tsx';
 
 const LibraryProducts = () => {
     const [productDataSelection, setProductDataSelection] = useState(window.location.pathname.substring(1))
@@ -52,6 +54,7 @@ const LibraryProducts = () => {
                         />
                     }>
                 </Route>
+                <Route path="*" element={<Django />} />
             </Routes>
         </>
     )
