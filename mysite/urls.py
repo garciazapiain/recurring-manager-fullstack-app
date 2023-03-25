@@ -27,12 +27,9 @@ router.register(r'products', views.ProductView, 'product')
 router.register(r'productcategories', views.ProductCategoryView, 'product')  
 
 urlpatterns = [
+    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
-    # path('', views.home, name='home'),
     path('admin/', admin.site.urls),
 ]
-
-# Only add the re_path for non-admin URLs
-urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html')),]
