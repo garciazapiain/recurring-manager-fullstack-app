@@ -44,6 +44,14 @@ const LibraryProducts = () => {
                         />
                     }>
                 </Route>
+                <Route path={`/${productDataSelection}`}
+                    element={
+                        <ProductList
+                            productDataSelection={productDataSelection}
+                            categoriesData={categoriesData}
+                        />
+                    }>
+                </Route>
             </Routes>
         </>
     )
