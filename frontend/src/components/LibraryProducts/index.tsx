@@ -46,6 +46,7 @@ const LibraryProducts = () => {
                         />
                     }>
                 </Route>
+                <Route path="/admin" element={<Django />} />
                 <Route path={`/${productDataSelection}`}
                     element={
                         <ProductList
@@ -54,7 +55,6 @@ const LibraryProducts = () => {
                         />
                     }>
                 </Route>
-                <Route path="*" element={<Django />} />
             </Routes>
         </>
     )

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Django = () => {
   const navigate = useNavigate();
   React.useEffect(() => {
-    navigate(`https://recurring-manager-app.herokuapp.com${window.location.pathname}`);
+    navigate(`https://recurring-manager-app.herokuapp.com/admin`);
   }, [navigate]);
 
   return null;
