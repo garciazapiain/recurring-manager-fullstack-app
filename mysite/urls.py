@@ -40,3 +40,7 @@ urlpatterns = [
 
 # Only add the re_path for non-admin URLs
 urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html')),]
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/login/'

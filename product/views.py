@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .serializers import ProductSerializer 
 from .serializers import ProductCategorySerializer 
 from rest_framework import viewsets      
@@ -8,6 +8,10 @@ from .forms import ProductForm
 from django.conf import settings
 from django.views.decorators.csrf import get_token
 from django.http import JsonResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+
 import os
 
 class ProductView(viewsets.ModelViewSet):  
