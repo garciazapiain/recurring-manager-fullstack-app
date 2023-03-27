@@ -37,3 +37,18 @@ def home(request):
 
 def csrf_token(request):
     return JsonResponse({'csrfToken': request.COOKIES['csrftoken']})
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username = username, password = password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+        template_path = os.path.join(settings.BASE_DIR, 'registration', 'register.html')
+    return render(request, template_path, {'form': form})

@@ -21,6 +21,7 @@ from product import views
 from product.views import add_product
 from product.views import csrf_token
 from django.urls import re_path
+from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()                   
 router.register(r'products', views.ProductView, 'product')  
@@ -30,6 +31,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('register/', views.register, name='register'),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
 ]
