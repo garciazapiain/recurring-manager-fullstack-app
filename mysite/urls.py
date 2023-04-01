@@ -31,9 +31,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/products/add/', add_product, name='add_product'), 
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('register/', views.register, name='register'),
+    path('login/', auth_views.LoginView.as_view(), template_name='login.html'),
+    path('logout/', auth_views.LogoutView.as_view(), template_name='logout.html'),
+    path('register/', views.register, template_name='register.html'),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
 ]
