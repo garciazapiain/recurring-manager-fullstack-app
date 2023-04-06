@@ -1,14 +1,9 @@
 function estimatedCurrentInventory(original_inventory, inventory_updated_date, use_days, standard_size) {
-    //refactor date formattted
     const unitsPerDay = (standard_size / use_days)
     const dateNow = new Date();
-    const dateSplit = inventory_updated_date.split("")
-    const dateYear = dateSplit.slice(0, 4).join("")
-    const dateDay = dateSplit.slice(8, 10).join("")
-    const dateMonth = dateSplit.slice(5, 7).join("")
-    const dateFormatted = new Date(`${dateMonth}/${dateDay}/${dateYear}`)
+    const dateFormatted = new Date(inventory_updated_date)
     // @ts-ignore
-    const diffTime = Math.abs(dateFormatted - dateNow);
+    const diffTime = Math.abs(dateNow.getTime() - dateFormatted.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     const twoDayBuffer = 2*(standard_size/use_days)
     const adjustedInventory = original_inventory - (diffDays * unitsPerDay) + twoDayBuffer

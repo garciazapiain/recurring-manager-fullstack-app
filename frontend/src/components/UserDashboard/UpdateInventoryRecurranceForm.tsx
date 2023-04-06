@@ -32,17 +32,17 @@ function UpdateInventoryRecurranceForm(props: any) {
   }
   function updateInventory() {
     productListFormModifications.map(obj => {
-      console.log('estimation is ', obj.title, ' ', estimatedCurrentInventory(obj.current_inventory, obj.inventory_updated_date, obj.use_days, obj.standard_size))
+      const inventory_updated_date = new Date()
       const newInventory = Math.ceil(estimatedCurrentInventory(obj.current_inventory, obj.inventory_updated_date, obj.use_days, obj.standard_size))
-      return editProduct(obj.id, obj.author, obj.category, obj.title, obj.added, obj.standard_size, obj.use_days, obj.unit, newInventory)
+      return editProduct(obj.id, obj.author, obj.category, obj.title, obj.added, obj.standard_size, obj.use_days, obj.unit, newInventory, inventory_updated_date)
     })
     props.toggleUpdateInventoryForm()
   }
-  function editProduct(id, author, category, title, added, standard_size, use_days, unit, current_inventory) {
+  function editProduct(id, author, category, title, added, standard_size, use_days, unit, current_inventory,inventory_updated_date ) {
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory })
+      body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory, inventory_updated_date: inventory_updated_date })
     };
     fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
       .then(response => response.json())
