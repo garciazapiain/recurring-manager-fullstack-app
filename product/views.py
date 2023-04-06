@@ -56,8 +56,3 @@ def register(request):
         form = UserCreationForm()
         template_path = os.path.join(settings.BASE_DIR, 'registration', 'register.html')
     return render(request, template_path, {'form': form})
-
-from django.contrib.auth.views import LoginView
-
-class MyLoginView(LoginView):
-    template_name = 'login.html'
