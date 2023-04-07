@@ -147,12 +147,11 @@ function ProductList(props: any) {
 
     function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        console.log(csrfToken)
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
+                'X-CSRFToken': csrfToken
             },
             body: JSON.stringify({
                 title: title,
