@@ -146,6 +146,8 @@ function ProductList(props: any) {
     }, [dataFilter, ProductRow])
 
     function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        console.log(csrfToken)
         const requestOptions = {
             method: 'POST',
             headers: {
