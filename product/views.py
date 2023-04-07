@@ -56,3 +56,12 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, template_path, {'form': form})
+
+from django.contrib.auth.views import LoginView
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    success_url = '/'
+
+    def get_success_url(self):
+        return self.success_url
