@@ -156,7 +156,7 @@ function ProductList(props: any) {
             body: JSON.stringify({
                 title: title,
                 category: category,
-                author: "1",
+                author: "{{ request.user.id }}",
                 unit: unit,
                 standard_size: standard_size,
                 use_days: use_days,
