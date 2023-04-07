@@ -22,7 +22,7 @@ from product.views import add_product
 from product.views import csrf_token
 from django.urls import re_path
 from django.contrib.auth import views as auth_views
-from .views import CustomLoginView
+from product.views import CustomLoginView
 
 router = routers.DefaultRouter()                   
 router.register(r'products', views.ProductView, 'product')  
