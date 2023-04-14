@@ -29,7 +29,7 @@ def add_product(request):
         form = ProductForm(request.POST)
         if form.is_valid():
             product = form.save(commit=False)  # don't save yet
-            product.author = request.user  # set the author to the current user
+            product.author_id = request.user  # set the author to the current user
             product.save()  # now save the product with the author set
             return HttpResponseRedirect('/products/')
     else:
