@@ -22,7 +22,9 @@ class ProductCategoryView(viewsets.ModelViewSet):
     serializer_class = ProductCategorySerializer   
     queryset = ProductCategory.objects.all() 
 
+@login_required
 def add_product(request):
+    breakpoint()
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():

@@ -161,7 +161,8 @@ function ProductList(props: any) {
                 use_days: use_days,
                 current_inventory: current_inventory,
                 inventory_updated_date: null
-            })
+            }),
+            credentials:"include"
         };
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
             .then(response => response.json())
