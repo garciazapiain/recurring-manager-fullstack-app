@@ -57,12 +57,13 @@ function ProductList(props: any) {
     }
 
     const editProduct = React.useCallback((id, author, category, title, added, standard_size, unit, use_days, current_inventory, inventory_updated_date?) => {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         setAddProductToUserForm(false)
         const requestOptions = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': 'eEu5OZC9wdOaoUHSJeKXcP4FctHLa3hG'
+                'X-CSRFToken': csrfToken
             },
             body: JSON.stringify({
                 title: title,

@@ -57,9 +57,13 @@ const UserDashboard = (props) => {
         alert('product deleted')
     }
     function editProduct(id, author, category, title, added, standard_size, use_days, unit, current_inventory, inventory_updated_date) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
             body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory, inventory_updated_date:inventory_updated_date })
         };
         fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
