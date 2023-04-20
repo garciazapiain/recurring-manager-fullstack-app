@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import path,include               
 from rest_framework import routers                 
 from product import views    
-from product.views import add_product
 from product.views import csrf_token
 from product.views import get_user
 from django.urls import re_path
@@ -31,7 +30,6 @@ router.register(r'productcategories', views.ProductCategoryView, 'product')
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('api/products/add/', add_product, name='add_product'), 
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
