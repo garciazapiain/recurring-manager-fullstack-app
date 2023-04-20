@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from rest_framework import permissions
 
 import os
 
