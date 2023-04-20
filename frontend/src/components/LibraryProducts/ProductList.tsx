@@ -167,7 +167,7 @@ function ProductList(props: any) {
                 use_days: use_days,
                 current_inventory: current_inventory,
                 inventory_updated_date: null,
-                author_id: author.id
+                author: author.id
             }),
             credentials:"include"
         };
