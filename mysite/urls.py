@@ -20,6 +20,7 @@ from rest_framework import routers
 from product import views    
 from product.views import add_product
 from product.views import csrf_token
+from product.views import get_user
 from django.urls import re_path
 from django.contrib.auth import views as auth_views
 from product.views import CustomLoginView
@@ -36,6 +37,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', views.register, name='register'),
     path('admin/', admin.site.urls),
+    path('api/auth/user/', get_user, name='get_user'),
     path('', views.home, name='home'),
 ]
 

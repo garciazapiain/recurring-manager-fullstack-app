@@ -69,3 +69,16 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return self.success_url
+
+from django.http import JsonResponse
+
+def get_user(request):
+    if request.user.is_authenticated:
+        user = {
+            'id': request.user.id,
+            'username': request.user.username,
+            'email': request.user.email
+        }
+        return JsonResponse(user)
+    else:
+        return JsonResponse({'error': 'User is not authenticated'})
