@@ -22,20 +22,20 @@ class ProductCategoryView(viewsets.ModelViewSet):
     serializer_class = ProductCategorySerializer   
     queryset = ProductCategory.objects.all() 
 
-@login_required
-def add_product(request):
-    breakpoint()
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            product = form.save(commit=False)  # don't save yet
-            product.author_id = request.user.id  # set the author to the current user
-            product.save()  # now save the product with the author set
-            return HttpResponseRedirect('/products/')
-    else:
-        form = ProductForm()
+# @login_required
+# def add_product(request):
+#     breakpoint()
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST)
+#         if form.is_valid():
+#             product = form.save(commit=False)  # don't save yet
+#             product.author_id = request.user.id  # set the author to the current user
+#             product.save()  # now save the product with the author set
+#             return HttpResponseRedirect('/products/')
+#     else:
+#         form = ProductForm()
 
-    return render(request, 'add_product.html', {'form': form})
+#     return render(request, 'add_product.html', {'form': form})
 
 from django.http import HttpResponse
 
