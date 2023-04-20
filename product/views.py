@@ -20,8 +20,8 @@ class ProductView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        author_id = self.request.user.id
-        return Product.objects.filter(author_id=author_id)
+        author = self.request.user.id
+        return Product.objects.filter(author=author)
 
 class ProductCategoryView(viewsets.ModelViewSet):  
     serializer_class = ProductCategorySerializer   
