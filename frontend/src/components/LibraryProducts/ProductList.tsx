@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 // @ts-ignore
 import Product from './Product.tsx'
 // @ts-ignore
@@ -11,6 +11,9 @@ import AddProductToUserForm from './AddProductToUserForm.tsx';
 import productObjectType from '.././LibraryProducts/ts/types'
 // @ts-ignore
 import AddOrRemove from '../Elements/AddOrRemove.tsx';
+// @ts-ignore
+import AuthContext from '../../AuthContext.js';
+
 
 function ProductList(props: any) {
     const [productModal] = useState(false)
@@ -19,6 +22,7 @@ function ProductList(props: any) {
     const [dataFilter, setDataFilter] = useState([])
     const [rows, setRows] = useState([])
     const [dataRows, setDataRows] = useState<Array<productObjectType>>([])
+    const user = useContext(AuthContext);
     let [productObjectToAddForUser, setProductObjectToAddForUser] = useState({})
     let [productTitleToAddForUser, setProductTitleToAddForUser] = useState<{} | productObjectType>({});
     let productDataSelection = props.productDataSelection.toLowerCase()
@@ -51,7 +55,8 @@ function ProductList(props: any) {
         const use_days = newProductData.use_days
         const standard_size = newProductData.standard_size
         const current_inventory = 0;
-        addNewProduct(title, category, unit, standard_size, use_days, current_inventory)
+        const author = user;
+        addNewProduct(title, category, unit, standard_size, use_days, current_inventory,author)
         setCreateProductForm(!createProductForm)
         getProducts()
     }
@@ -146,7 +151,7 @@ function ProductList(props: any) {
         setRows(dataFilter.map((row) => <ProductRow {...row} />));
     }, [dataFilter, ProductRow])
 
-    function addNewProduct(title, category, unit, standard_size, use_days, current_inventory) {
+    function addNewProduct(title, category, unit, standard_size, use_days, current_inventory,author) {
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const requestOptions = {
             method: 'POST',
@@ -161,7 +166,8 @@ function ProductList(props: any) {
                 standard_size: standard_size,
                 use_days: use_days,
                 current_inventory: current_inventory,
-                inventory_updated_date: null
+                inventory_updated_date: null,
+                author: author.id
             }),
             credentials:"include"
         };
