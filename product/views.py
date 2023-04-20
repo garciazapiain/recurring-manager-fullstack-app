@@ -15,8 +15,12 @@ from django.contrib.auth.decorators import login_required
 import os
 
 class ProductView(viewsets.ModelViewSet):  
-    serializer_class = ProductSerializer   
-    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        author_id = self.request.user.id
+        return Product.objects.filter(author_id=author_id)
 
 class ProductCategoryView(viewsets.ModelViewSet):  
     serializer_class = ProductCategorySerializer   
