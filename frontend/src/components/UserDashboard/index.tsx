@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // @ts-ignore
 import Button from '../Elements/Button.tsx'
 // @ts-ignore
@@ -10,8 +10,12 @@ import RecurranceView from './ReccuranceView.tsx';
 import estimatedCurrentInventory from '../utils/EstimatedCurrentInventory.tsx'
 // @ts-ignore
 import './style.css'
+// @ts-ignore
+import AuthContext from '../../AuthContext.js';
+
 
 const UserDashboard = (props) => {
+    const {user, path} = useContext(AuthContext);
     const [userProductsList, setUserProductsList] = useState([])
     const [allProductsRows, setAllProductsRows] = useState([])
     const [recurranceRows, setRecurranceRows] = useState([])
@@ -21,7 +25,17 @@ const UserDashboard = (props) => {
     const [editProductTriggered, setEditProductTriggered] = useState(undefined)
     
     async function getProducts() {
-        await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const requestOptions = {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+        };
+        const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+        await fetch(`${path}/api/products/`, requestOptions)
             .then(response => response.json())
             .then(response => {
                 const arrayCreated = []
@@ -64,9 +78,11 @@ const UserDashboard = (props) => {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken
             },
+            credentials: 'include',
             body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory, inventory_updated_date:inventory_updated_date })
         };
-        fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
+        const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+        fetch(`${path}/api/products/${id}/`, requestOptions)
             .then(response => response.json())
         getProducts()
     }

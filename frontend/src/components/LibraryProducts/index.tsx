@@ -16,7 +16,8 @@ const LibraryProducts = () => {
     }
     const [categoriesData, setCategoriesData] = React.useState([])
     async function getCategoriesData() {
-        await fetch(`https://recurring-manager-app.herokuapp.com/api/productcategories/`)
+        const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+        await fetch(`${path}/api/productcategories/`)
             .then(response => response.json())
             .then(response => {
                 setCategoriesData(response)

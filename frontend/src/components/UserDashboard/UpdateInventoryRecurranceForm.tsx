@@ -44,11 +44,13 @@ function UpdateInventoryRecurranceForm(props: any) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRFToken': csrfToken
+        'X-CSRFToken': 'jBwcODrmh4oTpD8nHbV9yeqDAWTiZGwP14H1rDlfiOKXLhLjhTcN7fI8fuHSYdVW'
       },
+      credentials: 'include',
       body: JSON.stringify({ title: title, category: category, author: author, id: id, added: added, unit: unit, standard_size: standard_size, use_days: use_days, current_inventory: current_inventory, inventory_updated_date: inventory_updated_date })
     };
-    fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
+    const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+    fetch(`${path}/api/products/${id}/`, requestOptions)
       .then(response => response.json())
   }
   const ProductListFormContent = React.useCallback(() => {

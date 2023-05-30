@@ -70,6 +70,7 @@ function ProductList(props: any) {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken
             },
+            credentials: 'include',
             body: JSON.stringify({
                 title: title,
                 category: category,
@@ -82,7 +83,8 @@ function ProductList(props: any) {
                 added: added
             })
         };
-        fetch(`https://recurring-manager-app.herokuapp.com/api/products/${id}/`, requestOptions)
+        const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+        fetch(`${path}/api/products/${id}/`, requestOptions)
             .then(response => response.json())
             .then(getProducts)
     }, [])
@@ -127,7 +129,11 @@ function ProductList(props: any) {
     ), [findCategoryName, productAdded, productRemove]);
 
     async function getProducts() {
-        await fetch(`https://recurring-manager-app.herokuapp.com/api/products/`)
+        const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+        const requestOptions = {
+            credentials: 'include'
+        }
+        await fetch(`${path}/api/products/`, requestOptions)
             .then(response => response.json())
             .then(response => {
                 setDataRows(response)
@@ -171,7 +177,8 @@ function ProductList(props: any) {
             }),
             credentials:"include"
         };
-        fetch(`https://recurring-manager-app.herokuapp.com/api/products/`, requestOptions)
+        const path = window.location.hostname === 'localhost' ? 'http://127.0.0.1:8000' : 'https://recurring-manager-app.herokuapp.com'
+        fetch(`${path}/api/products/`, requestOptions)
             .then(response => response.json())
             .then(getProducts)
     }

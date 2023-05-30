@@ -31,7 +31,13 @@ SECRET_KEY = 'django-insecure-x$53m^zm*)t4mskm301o$yezxz@#eoh-j)(qg=inpkulv153xw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','recurring-manager-app.herokuapp.com']
+SESSION_COOKIE_SECURE = True
+
+if DEBUG:
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+
+ALLOWED_HOSTS = ['127.0.0.1','recurring-manager-app.herokuapp.com', '39dfacfc1c72.ngrok.app']
 
 # Application definition
 
@@ -57,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -136,8 +142,16 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000','http://recurring-manager-app.herokuapp.com'
+    'http://localhost:3000','http://recurring-manager-app.herokuapp.com', 'http://127.0.0.1:8000'
 ]
+
+CSRF_TRUSTED_ORIGINS = ['https://39dfacfc1c72.ngrok.app', 'http://localhost:3000', 'http://127.0.0.1:8000']
+
+CORS_ALLOWED_ORIGINS = CORS_ORIGIN_WHITELIST
+
+CORS_ALLOW_CREDENTIALS = True
+
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
