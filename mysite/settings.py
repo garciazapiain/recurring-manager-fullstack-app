@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# import dj_database_url
+import dj_database_url
 
 # DATABASE_URL = os.getenv("DATABASE_URL")
 
