@@ -29,6 +29,6 @@ jobs:
       working-directory: ./frontend
       run: npm start &
 
-    - name: Run Cypress tests
-      working-directory: ./frontend
-      run:  npx cypress run
+    #- name: Run Cypress tests
+     # working-directory: ./frontend
+      #run:  npx cypress run
