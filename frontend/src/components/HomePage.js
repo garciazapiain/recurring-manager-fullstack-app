@@ -5,11 +5,10 @@ import ProductLibrary from "./ProductLibrary/index.jsx";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
-
   const [userData, setUserData] = useState({})
   useEffect(() => {
     // Fetch the data from the API endpoint
-    fetch("http://127.0.0.1:8000/api/auth/user/")
+    fetch(`${process.env.API_BASE_URL}/api/auth/user/`)
       .then((response) => response.json())
       .then((data) => {
         if (!data.username) {
