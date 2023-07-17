@@ -199,5 +199,5 @@ AUTHENTICATION_BACKENDS = [
     # Additional authentication backends if any
 ]
 
-API_BASE_URL = os.getenv('API_BASE_URL', 'http://127.0.0.1:8000/')
-API_BASE_URL = os.getenv('NODE_ENV', 'development')
+REACT_APP_API_BASE_URL = os.getenv('REACT_APP_API_BASE_URL', 'http://127.0.0.1:8000/')
+NODE_ENV = os.getenv('NODE_ENV', 'development')
