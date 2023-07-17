@@ -4,12 +4,12 @@ import UserDashboard from "./UserDashboard/index.jsx";
 import ProductLibrary from "./ProductLibrary/index.jsx";
 
 const HomePage = () => {
-  console.log(process.env)
+  console.log(process.env.REACT_APP_API_BASE_URL)
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({})
   useEffect(() => {
     // Fetch the data from the API endpoint
-    fetch(`${process.env.API_BASE_URL}/api/auth/user/`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/user/`)
       .then((response) => response.json())
       .then((data) => {
         if (!data.username) {

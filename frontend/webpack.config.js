@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./src/index.js",
@@ -34,12 +35,8 @@ module.exports = {
     minimize: true,
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        // This has effect on the react lib size
-        NODE_ENV: JSON.stringify("development"),
-        API_BASE_URL: JSON.stringify("http://127.0.0.1:8000/")
-      },
+    new Dotenv({
+      path: path.resolve(__dirname, "../.env"), // Adjust the path to match your actual file location
     }),
   ],
 };
