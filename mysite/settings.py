@@ -31,11 +31,11 @@ SECRET_KEY = 'django-insecure-x$53m^zm*)t4mskm301o$yezxz@#eoh-j)(qg=inpkulv153xw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
-if DEBUG:
-    CSRF_COOKIE_SECURE = False
-    SESSION_COOKIE_SECURE = False
+# if DEBUG:
+#     CSRF_COOKIE_SECURE = False
+#     SESSION_COOKIE_SECURE = False
 
 ALLOWED_HOSTS = ['127.0.0.1','recurring-manager-app.herokuapp.com', '39dfacfc1c72.ngrok.app']
 
@@ -55,15 +55,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-import dj_database_url
+# import dj_database_url
 
 # DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -149,9 +149,9 @@ CSRF_TRUSTED_ORIGINS = ['https://39dfacfc1c72.ngrok.app', 'http://localhost:3000
 
 CORS_ALLOWED_ORIGINS = CORS_ORIGIN_WHITELIST
 
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 
-SESSION_COOKIE_SAMESITE = 'None'
+# SESSION_COOKIE_SAMESITE = 'None'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -193,3 +193,8 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # Additional authentication backends if any
+]
