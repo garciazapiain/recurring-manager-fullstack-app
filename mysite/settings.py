@@ -90,12 +90,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-from decouple import config
+# from decouple import config
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
-}
+# DATABASES = {
+#     'default': dj_database_url.config(default=config('DATABASE_URL'))
+# }
 
 # DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -106,7 +106,7 @@ DATABASES = {
 #     }
 # }
 
-# DATABASES = {"default": dj_database_url.config()}
+DATABASES = {"default": dj_database_url.config()}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
