@@ -199,5 +199,5 @@ AUTHENTICATION_BACKENDS = [
     # Additional authentication backends if any
 ]
 
-REACT_APP_API_BASE_URL = os.getenv('REACT_APP_API_BASE_URL', 'http://127.0.0.1:8000/')
+REACT_APP_API_BASE_URL = os.getenv('REACT_APP_API_BASE_URL', 'https://recurring-manager-app.herokuapp.com/')
 NODE_ENV = os.getenv('NODE_ENV', 'development')
