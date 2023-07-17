@@ -24,10 +24,14 @@ jobs:
     - name: Install frontend dependencies
       working-directory: ./frontend
       run: npm install
+    
+    - name: Build frontend
+      working-directory: ./frontend
+      run: npm run build
 
     - name: Start server
       working-directory: ./frontend
-      run: npm run dev
+      run: npm start &
 
     #- name: Run Cypress tests
      # working-directory: ./frontend
