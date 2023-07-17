@@ -45,7 +45,7 @@ const BuyingList = (props) => {
     } else {
         console.log('CSRF token cookie not found');
     }
-    fetch(`http://127.0.0.1:8000/api/products/${id}/toggle-added/`, {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products/${id}/toggle-added/`, {
       method: 'PUT',
       withCredentials: true,
       headers: {

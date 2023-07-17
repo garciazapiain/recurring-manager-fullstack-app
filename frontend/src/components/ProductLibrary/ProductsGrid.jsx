@@ -11,7 +11,7 @@ const ProductsGrid = ({ products }) => {
         } else {
             console.log('CSRF token cookie not found');
         }
-        fetch(`http://127.0.0.1:8000/api/products/${productId}/add-to-user-product/`, {
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products/${productId}/add-to-user-product/`, {
             method: 'PUT',
             withCredentials: true,
             headers: {

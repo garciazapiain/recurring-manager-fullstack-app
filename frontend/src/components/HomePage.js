@@ -4,7 +4,6 @@ import UserDashboard from "./UserDashboard/index.jsx";
 import ProductLibrary from "./ProductLibrary/index.jsx";
 
 const HomePage = () => {
-  console.log('hey',process.env.REACT_APP_API_BASE_URL)
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({})
   useEffect(() => {

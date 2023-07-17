@@ -5,7 +5,7 @@ const ProductLibrary = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     // Fetch the data from the API endpoint
-    fetch("http://127.0.0.1:8000/api/products/")
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products/`)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);

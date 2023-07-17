@@ -32,7 +32,7 @@ const UpdateInventory = ({ onClose, products }) => {
         }
         productInventory.forEach((product) => {
             if (product.original_inventory != product.updated_inventory) {
-                fetch(`http://127.0.0.1:8000/api/userproducts/${product.id}/update-inventory/`, {
+                fetch(`${process.env.REACT_APP_API_BASE_URL}/${product.id}/update-inventory/`, {
                     method: 'PUT',
                     withCredentials: true,
                     headers: {
