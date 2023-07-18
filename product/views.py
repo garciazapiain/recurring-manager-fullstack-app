@@ -19,6 +19,7 @@ from rest_framework.response import Response
 from datetime import datetime
 from django.utils import timezone
 from django.db.models import Q
+from django.urls import reverse
 
 import os
 
@@ -99,9 +100,9 @@ class UserProductView(viewsets.ModelViewSet):
 
 from django.http import HttpResponse
 
-def home(request):
-    template_path = os.path.join(settings.BASE_DIR, 'frontend', 'build', 'index.html')
-    return render(request, template_path)
+# def home(request):
+#     template_path = os.path.join(settings.BASE_DIR, 'frontend', 'build', 'index.html')
+#     return render(request, template_path)
 
 def csrf_token(request):
     return JsonResponse({'csrfToken': request.COOKIES['csrftoken']})
@@ -116,7 +117,7 @@ def register(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username = username, password = password)
             login(request, user)
-            return redirect('home')
+            return redirect(reverse('frontend:index'))
     else:
         form = UserCreationForm()
     return render(request, template_path, {'form': form})

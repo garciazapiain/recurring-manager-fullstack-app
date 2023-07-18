@@ -30,7 +30,7 @@ router.register(r'productcategories', views.ProductCategoryView, 'product')
 router.register(r'userproducts', views.UserProductView, 'product')  
 
 urlpatterns = [
-    path("", include('frontend.urls')),
+    path('', include(('frontend.urls', 'frontend'), namespace='frontend')),
     path('api/', include(router.urls)),
     path('api/csrf_token/', csrf_token, name='csrf_token'),  
     path('login/', CustomLoginView.as_view(), name='login'),
