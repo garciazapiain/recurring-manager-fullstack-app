@@ -25,6 +25,10 @@ jobs:
       working-directory: ./frontend
       run: npm install
 
+    - name: Builf front end
+      working-directory: ./frontend
+      run: npm run dev
+
     - name: Start server
       working-directory: ./frontend
       run: npm start &
