@@ -25,9 +25,9 @@ jobs:
       working-directory: ./frontend
       run: npm install
 
-    - name: Build front end
-      working-directory: ./frontend
-      run: npm run dev
+    # - name: Build front end
+    #   working-directory: ./frontend
+    #   run: npm run dev
 
     - name: Start server
       working-directory: ./frontend
