@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect
-from .serializers import ProductSerializer 
-from .serializers import ProductCategorySerializer 
-from .serializers import UserProductSerializer 
+from .serializers import ProductSerializer, ProductCategorySerializer, UserProductSerializer
 from rest_framework import viewsets      
-from .models import Product                 
-from .models import ProductCategory    
-from .models import UserProduct    
+from .models import Product, ProductCategory, UserProduct             
 from .forms import ProductForm
 from django.conf import settings
 from django.views.decorators.csrf import get_token
@@ -20,6 +16,8 @@ from datetime import datetime
 from django.utils import timezone
 from django.db.models import Q
 from django.urls import reverse
+from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.views import LoginView
 
 import os
 
@@ -31,24 +29,7 @@ class ProductView(viewsets.ModelViewSet):
         user = self.request.user
         queryset = Product.objects.filter(Q(author=user) | Q(author=1))
         return queryset
-    
-    @action(detail=True, methods=['put'])
-    def update_inventory(self, request, pk=None):
-        product = self.get_object()
-        product.current_inventory = request.data.get('current_inventory')
-        product.inventory_updated_date = timezone.now()
-        product.save()
-        serializer = self.get_serializer(product)
-        return Response(serializer.data)
-
-    @action(detail=True, methods=['put'])
-    def toggle_added(self, request, pk=None):
-        product = self.get_object()
-        product.added = not product.added
-        product.save()
-        serializer = self.get_serializer(product)
-        return Response(serializer.data)
-    
+        
     @action(detail=True, methods=['put'])
     def add_to_user_product(self, request, pk=None):
         product = self.get_object()
@@ -98,15 +79,6 @@ class UserProductView(viewsets.ModelViewSet):
         serializer = self.get_serializer(product)
         return Response(serializer.data)
 
-from django.http import HttpResponse
-
-# def home(request):
-#     template_path = os.path.join(settings.BASE_DIR, 'frontend', 'build', 'index.html')
-#     return render(request, template_path)
-
-def csrf_token(request):
-    return JsonResponse({'csrfToken': request.COOKIES['csrftoken']})
-
 def register(request):
     template_path = os.path.join(settings.BASE_DIR, 'registration', 'register.html')
     if request.method == 'POST':
@@ -122,16 +94,12 @@ def register(request):
         form = UserCreationForm()
     return render(request, template_path, {'form': form})
 
-from django.contrib.auth.views import LoginView
-
 class CustomLoginView(LoginView):
     template_name = 'login.html'
     success_url = '/'
 
     def get_success_url(self):
         return self.success_url
-
-from django.http import JsonResponse
 
 def get_user(request):
     if request.user.is_authenticated:

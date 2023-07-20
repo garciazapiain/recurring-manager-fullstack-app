@@ -15,14 +15,11 @@ Including another URLconf
 """
 from django.views.generic import TemplateView
 from django.contrib import admin
-from django.urls import path,include               
+from django.urls import path,include, re_path               
 from rest_framework import routers                 
 from product import views    
-from product.views import csrf_token
-from product.views import get_user
-from django.urls import re_path
+from product.views import get_user, CustomLoginView, ProductView, UserProductView
 from django.contrib.auth import views as auth_views
-from product.views import CustomLoginView, ProductView, UserProductView
 
 router = routers.DefaultRouter()                   
 router.register(r'products', views.ProductView, 'product')  
@@ -32,16 +29,13 @@ router.register(r'userproducts', views.UserProductView, 'product')
 urlpatterns = [
     path('', include(('frontend.urls', 'frontend'), namespace='frontend')),
     path('api/', include(router.urls)),
-    path('api/csrf_token/', csrf_token, name='csrf_token'),  
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', views.register, name='register'),
     path('admin/', admin.site.urls),
     path('api/auth/user/', get_user, name='get_user'),
-    path('api/products/<int:pk>/update-inventory/', ProductView.as_view({'put': 'update_inventory'}), name='product-update-inventory'),
-    path('api/products/<int:pk>/toggle-added/', ProductView.as_view({'put': 'toggle_added'}), name='product-toggle-added'),
     path('api/products/<int:pk>/add-to-user-product/', ProductView.as_view({'put': 'add_to_user_product'}), name='add-to-user-product'),
-    path('api/userproducts/<int:pk>/update-inventory/', UserProductView.as_view({'put': 'update_inventory'}), name='product-update-inventory'),
+    path('api/userproducts/<int:pk>/update-inventory/', UserProductView.as_view({'put': 'update_inventory'}), name='userproduct-update-inventory'),
 ]
 
 # Only add the re_path for non-admin URLs
