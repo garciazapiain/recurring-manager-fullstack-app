@@ -12,8 +12,6 @@ const ProductLibrary = () => {
       });
   }, []);
 
-  console.log(products)
-
   return (
     <div>
       <h1>Explore Products</h1>

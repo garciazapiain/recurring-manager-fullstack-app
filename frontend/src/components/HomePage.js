@@ -8,7 +8,6 @@ const HomePage = () => {
   const [userData, setUserData] = useState({})
   useEffect(() => {
     // Fetch the data from the API endpoint
-    console.log('heyyou',process.env.REACT_APP_API_BASE_URL)
     fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/user/`)
       .then((response) => response.json())
       .then((data) => {

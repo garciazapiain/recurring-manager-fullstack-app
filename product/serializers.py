@@ -7,11 +7,18 @@ from datetime import datetime, timedelta, timezone
 class ProductSerializer(serializers.ModelSerializer):
     estimated_inventory = serializers.SerializerMethodField()
     estimated_remaining_days = serializers.SerializerMethodField()
+    product_added_user = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days')
-        read_only_fields = ('current_inventory', 'inventory_updated_date')
+        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days', 'product_added_user')
+        read_only_fields = ('current_inventory', 'inventory_updated_date', 'product_added_user')
+
+    def get_product_added_user(self, instance):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            return instance.userproduct_set.filter(author=user).exists()
+        return False
 
     def get_estimated_inventory(self, instance):
         last_inventory = int(instance.current_inventory)
@@ -47,7 +54,7 @@ class UserProductSerializer(serializers.ModelSerializer):
     estimated_remaining_days = serializers.SerializerMethodField()
     class Meta:
         model = UserProduct
-        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days')
+        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days', 'master_product')
         read_only_fields = ('current_inventory', 'inventory_updated_date')
         
     def get_estimated_inventory(self, instance):

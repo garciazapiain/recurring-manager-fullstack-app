@@ -35,34 +35,31 @@ const BuyingList = (props) => {
   };
 
   const removeProduct = (id) => {
-    console.log(id)
     let csrfToken
     const cookies = document.cookie.split('; ');
     const csrfCookie = cookies.find((cookie) => cookie.startsWith('csrftoken='));
     if (csrfCookie) {
-        csrfToken = csrfCookie.split('=')[1];
-        console.log(csrfToken);
+      csrfToken = csrfCookie.split('=')[1];
     } else {
-        console.log('CSRF token cookie not found');
+      console.log('CSRF token cookie not found');
     }
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products/${id}/toggle-added/`, {
-      method: 'PUT',
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/userproducts/${id}/`, {
+      method: 'DELETE',
       withCredentials: true,
       headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrfToken, // Replace 'csrftoken' with the name of your CSRF cookie
+        'X-CSRFToken': csrfToken,
       },
     })
-    .then(response => {
-      console.log(response);
-      return response.json();
-    })
-      .then(data => {
-        console.log(`Product ${id} inventory removed successfully:`, data);
-        window.location.reload();
+      .then((response) => {
+        if (response.status === 204) {
+          console.log(`UserProduct ${id} removed successfully`);
+          window.location.reload();
+        } else {
+          console.error(`Error removing UserProduct ${id}`);
+        }
       })
-      .catch(error => {
-        console.error(`Error updating product ${id} inventory:`, error);
+      .catch((error) => {
+        console.error(`Error removing UserProduct ${id}:`, error);
       });
   }
 
@@ -109,7 +106,7 @@ const BuyingList = (props) => {
                 <td>{product.estimated_inventory} {product.unit}</td>
                 <td>{product.estimated_remaining_days}</td>
                 <td>{product.added ? "true" : "false"}</td>
-                <td onClick={()=>removeProduct(product.id)}>remove</td>
+                <td onClick={() => removeProduct(product.id)}>remove</td>
               </tr>
             ))}
           </tbody>

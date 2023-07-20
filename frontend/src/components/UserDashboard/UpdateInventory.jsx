@@ -26,7 +26,6 @@ const UpdateInventory = ({ onClose, products }) => {
         const csrfCookie = cookies.find((cookie) => cookie.startsWith('csrftoken='));
         if (csrfCookie) {
             csrfToken = csrfCookie.split('=')[1];
-            console.log(csrfToken);
         } else {
             console.log('CSRF token cookie not found');
         }
