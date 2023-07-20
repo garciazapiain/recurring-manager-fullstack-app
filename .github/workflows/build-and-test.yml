@@ -25,13 +25,22 @@ jobs:
       working-directory: ./frontend
       run: npm install
 
-    # - name: Build front end
-    #   working-directory: ./frontend
-    #   run: npm run dev
-
     - name: Start server
       working-directory: ./frontend
       run: npm start &
+    
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8' # Replace this with your desired Python version
+
+    - name: Install Django and dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Django tests
+      run: python manage.py test
 
     #- name: Run Cypress tests
      # working-directory: ./frontend
