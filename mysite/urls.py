@@ -36,6 +36,7 @@ urlpatterns = [
     path('api/auth/user/', get_user, name='get_user'),
     path('api/products/<int:pk>/add-to-user-product/', ProductView.as_view({'put': 'add_to_user_product'}), name='add-to-user-product'),
     path('api/userproducts/<int:pk>/update-inventory/', UserProductView.as_view({'put': 'update_inventory'}), name='userproduct-update-inventory'),
+    path('api/userproducts/<int:pk>/update-details/', UserProductView.as_view({'put': 'update_details'}), name='userproduct-update-details'),
 ]
 
 # Only add the re_path for non-admin URLs

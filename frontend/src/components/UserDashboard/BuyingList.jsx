@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import UpdateInventory from "./UpdateInventory.jsx";
+import ProductDetails from "./ProductDetails.jsx";
 
 const BuyingList = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -26,11 +27,11 @@ const BuyingList = (props) => {
 
   const [isUpdateInventoryModalOpen, setIsUpdateInventoryModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
+  const handleOpenModalUpdateInventory = () => {
     setIsUpdateInventoryModalOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModalUpdateInventory = () => {
     setIsUpdateInventoryModalOpen(false);
   };
 
@@ -63,10 +64,24 @@ const BuyingList = (props) => {
       });
   }
 
+  const [isProductDetailsModalOpen, setIsProductDetailsModalOpen] = useState(false);
+  const [productOpenInDetails, setProductOpenInDetails] = useState(null)
+  const handleOpenModalProductDetails = (product) => {
+    setIsProductDetailsModalOpen(true)
+    setProductOpenInDetails(product)
+  };
+  const handleCloseModalProductDetails = () => {
+    setIsProductDetailsModalOpen(false)
+    setProductOpenInDetails(null)
+  };
+
   return (
     <div>
       {isUpdateInventoryModalOpen && (
-        <UpdateInventory products={filteredProducts} onClose={handleCloseModal} />
+        <UpdateInventory products={filteredProducts} onClose={handleCloseModalUpdateInventory} />
+      )}
+      {isProductDetailsModalOpen && (
+        <ProductDetails product={productOpenInDetails} onClose={handleCloseModalProductDetails} />
       )}
       <div>
         {viewProductsWithDaysThreshhold ?
@@ -100,7 +115,7 @@ const BuyingList = (props) => {
           </thead>
           <tbody>
             {filteredProducts.map((product) => (
-              <tr key={product.id}>
+              <tr onClick={()=>handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
                 <td>{product.current_inventory} {product.unit}</td>
                 <td>{product.estimated_inventory} {product.unit}</td>
@@ -112,7 +127,7 @@ const BuyingList = (props) => {
           </tbody>
         </table>
       </div>
-      <button onClick={handleOpenModal}>Update Inventory</button>
+      <button onClick={handleOpenModalUpdateInventory}>Update Inventory</button>
     </div>
   );
 };

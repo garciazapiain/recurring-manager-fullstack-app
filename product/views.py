@@ -79,6 +79,24 @@ class UserProductView(viewsets.ModelViewSet):
         serializer = self.get_serializer(product)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['put'])
+    def update_details(self, request, pk=None):
+        product = self.get_object()
+
+        # Update the product details based on the data in the request
+        product.title = request.data.get('title', product.title)
+        product.current_inventory = request.data.get('current_inventory', product.current_inventory)
+        product.standard_size = request.data.get('standard_size', product.standard_size)
+        product.unit = request.data.get('unit', product.unit)
+        product.use_days = request.data.get('use_days', product.use_days)
+
+        # Save the updated product
+        product.save()
+
+        # Serialize and return the updated product data
+        serializer = self.get_serializer(product)
+        return Response(serializer.data)
+
 def register(request):
     template_path = os.path.join(settings.BASE_DIR, 'registration', 'register.html')
     if request.method == 'POST':
