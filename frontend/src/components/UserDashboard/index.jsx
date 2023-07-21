@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import BuyingList from "./BuyingList.jsx";
+import sharedStyles from "../shared/styles.module.css";
 
 const UserDashboard = () => {
+  window.location.reload
   const [products, setProducts] = useState([]);
   useEffect(() => {
     // Fetch the data from the API endpoint
@@ -14,15 +16,10 @@ const UserDashboard = () => {
       });
   }, []);
 
-  const handleProductLibrary = () => {
-    window.location.href = "/product-library/"
-  }
-
   return (
     <div>
-      <h1>My Products</h1>
+      <h1 className={sharedStyles.pageHeadline}>My inventory</h1>
       <BuyingList products={products} />
-      <button onClick={handleProductLibrary}>Explore more products</button>
     </div>
   );
 };

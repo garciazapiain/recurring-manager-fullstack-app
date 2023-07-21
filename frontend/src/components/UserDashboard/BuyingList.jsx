@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
+import sharedStyles from "../shared/styles.module.css";
 import UpdateInventory from "./UpdateInventory.jsx";
 import ProductDetails from "./ProductDetails.jsx";
+import Slider from "./Slider.jsx"
 
 const BuyingList = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -35,35 +37,6 @@ const BuyingList = (props) => {
     setIsUpdateInventoryModalOpen(false);
   };
 
-  const removeProduct = (id) => {
-    let csrfToken
-    const cookies = document.cookie.split('; ');
-    const csrfCookie = cookies.find((cookie) => cookie.startsWith('csrftoken='));
-    if (csrfCookie) {
-      csrfToken = csrfCookie.split('=')[1];
-    } else {
-      console.log('CSRF token cookie not found');
-    }
-    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/userproducts/${id}/`, {
-      method: 'DELETE',
-      withCredentials: true,
-      headers: {
-        'X-CSRFToken': csrfToken,
-      },
-    })
-      .then((response) => {
-        if (response.status === 204) {
-          console.log(`UserProduct ${id} removed successfully`);
-          window.location.reload();
-        } else {
-          console.error(`Error removing UserProduct ${id}`);
-        }
-      })
-      .catch((error) => {
-        console.error(`Error removing UserProduct ${id}:`, error);
-      });
-  }
-
   const [isProductDetailsModalOpen, setIsProductDetailsModalOpen] = useState(false);
   const [productOpenInDetails, setProductOpenInDetails] = useState(null)
   const handleOpenModalProductDetails = (product) => {
@@ -74,6 +47,17 @@ const BuyingList = (props) => {
     setIsProductDetailsModalOpen(false)
     setProductOpenInDetails(null)
   };
+
+  const handleProductLibrary = () => {
+    window.location.href = "/product-library/"
+  }
+
+  // useEffect(()=>{
+  //   if(remainingDaysThreshold>99){
+  //     setRemainingDaysThreshold(10000)
+  //   }
+  // },[remainingDaysThreshold])
+
 
   return (
     <div>
@@ -86,13 +70,17 @@ const BuyingList = (props) => {
       <div>
         {viewProductsWithDaysThreshhold ?
           <>
-            <label>Remaining Days Threshold:</label>
-            <input
-              type="number"
-              value={remainingDaysThreshold}
-              onChange={handleThresholdChange}
-            />
-            <button onClick={() => setViewProductsWithDaysThreshhold(false)}>All my products</button>
+            <div className={styles.daysRemainingContainer}>
+              <input
+                type="number"
+                value={remainingDaysThreshold}
+                onChange={handleThresholdChange}
+                className={styles.daysRemainingVariable}
+              />
+              <p>days of stock for these products:</p>
+            </div>
+            <Slider remainingDaysThreshold={remainingDaysThreshold} setRemainingDaysThreshold={setRemainingDaysThreshold}/>
+            {/* <button onClick={() => setViewProductsWithDaysThreshhold(false)}>All my products</button> */}
           </>
           :
           <>
@@ -105,29 +93,28 @@ const BuyingList = (props) => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Last Inventory</th>
+              <th></th>
+              <th></th>
               <th>Estimated Inventory</th>
               <th>Remaining days</th>
-              <th>Added by user?</th>
-              <th>Remove</th>
             </tr>
           </thead>
           <tbody>
             {filteredProducts.map((product) => (
-              <tr onClick={()=>handleOpenModalProductDetails(product)} key={product.id}>
+              <tr className={styles.productRow} onClick={() => handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
-                <td>{product.current_inventory} {product.unit}</td>
+                <td> <img className={styles.productImage} src="https://www.gaston.cz/wcd/eshop/files/305/278/images/large/EVO%201l%20FJK.jpg" /></td>
                 <td>{product.estimated_inventory} {product.unit}</td>
                 <td>{product.estimated_remaining_days}</td>
-                <td>{product.added ? "true" : "false"}</td>
-                <td onClick={() => removeProduct(product.id)}>remove</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <button onClick={handleOpenModalUpdateInventory}>Update Inventory</button>
+      <div className={styles.actionButtonSectionUserDashboard}>
+        <button className={sharedStyles.primaryButton} onClick={handleOpenModalUpdateInventory}>Update Inventory</button>
+        <button className={sharedStyles.secondaryButton} onClick={handleProductLibrary}>Explore more products</button>
+      </div>
     </div>
   );
 };

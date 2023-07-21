@@ -55,6 +55,35 @@ const ProductDetails = ({ onClose, product }) => {
             });
     };
 
+    const removeProduct = (id) => {
+        let csrfToken
+        const cookies = document.cookie.split('; ');
+        const csrfCookie = cookies.find((cookie) => cookie.startsWith('csrftoken='));
+        if (csrfCookie) {
+          csrfToken = csrfCookie.split('=')[1];
+        } else {
+          console.log('CSRF token cookie not found');
+        }
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/api/userproducts/${id}/`, {
+          method: 'DELETE',
+          withCredentials: true,
+          headers: {
+            'X-CSRFToken': csrfToken,
+          },
+        })
+          .then((response) => {
+            if (response.status === 204) {
+              console.log(`UserProduct ${id} removed successfully`);
+              window.location.reload();
+            } else {
+              console.error(`Error removing UserProduct ${id}`);
+            }
+          })
+          .catch((error) => {
+            console.error(`Error removing UserProduct ${id}:`, error);
+          });
+      }
+
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
@@ -119,6 +148,7 @@ const ProductDetails = ({ onClose, product }) => {
                         <p>Unit: {product.unit}</p>
                         <p>Use Days: {product.use_days}</p>
                         <div className={styles.modalActions}>
+                            <button onClick={() => removeProduct(product.id)}>Remove</button>
                             <button onClick={handleEditModeToggle}>Edit</button>
                             <button onClick={onClose}>Cancel</button>
                         </div>

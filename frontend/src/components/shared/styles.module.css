@@ -1,0 +1,25 @@
+/* buttons */
+
+.primaryButton{
+    background-color: rgb(71, 71, 219);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.secondaryButton{
+    background-color: rgb(128, 128, 212);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.pageHeadline{
+    font-size: 1.5rem;
+}

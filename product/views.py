@@ -89,6 +89,7 @@ class UserProductView(viewsets.ModelViewSet):
         product.standard_size = request.data.get('standard_size', product.standard_size)
         product.unit = request.data.get('unit', product.unit)
         product.use_days = request.data.get('use_days', product.use_days)
+        product.inventory_updated_date = timezone.now()
 
         # Save the updated product
         product.save()
