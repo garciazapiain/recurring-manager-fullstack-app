@@ -10,17 +10,24 @@ class ProductCategory(models.Model):
         return self.name
 
 class Product(models.Model):
+    UNIT_CHOICES = [
+        ('ml', 'Milliliter'),
+        ('l', 'Liter'),
+        ('piece', 'Piece'),
+        ('kg', 'Kilogram'),
+        # Add more choices as needed
+    ]
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False)
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
     inventory_updated_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
     category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
     added=  models.BooleanField(default=False)
-    unit = models.CharField(max_length=10)
+    unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
     standard_size = models.IntegerField()
     use_days = models.IntegerField()
     current_inventory = models.IntegerField()
-    image = models.CharField(max_length=200,null=True)
+    image = models.CharField(max_length=1000,null=True)
 
     def publish(self):
         self.published_date = timezone.now()
