@@ -4,14 +4,23 @@ import sharedStyles from "../shared/styles.module.css";
 import UpdateInventory from "./UpdateInventory.jsx";
 import ProductDetails from "./ProductDetails.jsx";
 import Slider from "./Slider.jsx"
+import NoProductsModal from "./NoProductsModal.jsx";
 
 const BuyingList = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([])
   const [remainingDaysThreshold, setRemainingDaysThreshold] = useState(15);
   const [viewProductsWithDaysThreshhold, setViewProductsWithDaysThreshhold] = useState(true)
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      sessionStorage.setItem("noProductsModalClosedInSession", "false");
+    },3000)
+  },[])
+
   useEffect(() => {
     if (props.products.length) {
+      sessionStorage.setItem("noProductsModalClosedInSession", "true")
+      setIsNoProductsModalOpen(false)
       if (viewProductsWithDaysThreshhold) {
         setFilteredProducts(props.products.filter((product) => product.estimated_remaining_days <= remainingDaysThreshold));
       }
@@ -19,7 +28,10 @@ const BuyingList = (props) => {
         setFilteredProducts(props.products)
 
       }
-    };
+    }
+    else if(sessionStorage.getItem("noProductsModalClosedInSession")=="false" && props.products.length == 0) {
+      setIsNoProductsModalOpen(true)
+    }
   }, [props, remainingDaysThreshold, viewProductsWithDaysThreshhold]);
 
   const handleThresholdChange = (event) => {
@@ -47,7 +59,12 @@ const BuyingList = (props) => {
     setIsProductDetailsModalOpen(false)
     setProductOpenInDetails(null)
   };
+  const handleCloseModalNoProducts = () => {
+    setIsNoProductsModalOpen(false)
+    sessionStorage.setItem("noProductsModalClosedInSession", "true");
+  };
 
+  const [isNoProductsModalOpen, setIsNoProductsModalOpen] = useState(false)
   const handleProductLibraryRedirect = () => {
     window.location.href = "/product-library/"
   }
@@ -63,6 +80,9 @@ const BuyingList = (props) => {
 
   return (
     <div>
+      {isNoProductsModalOpen && (
+        <NoProductsModal onClose={handleCloseModalNoProducts} />
+      )}
       {isUpdateInventoryModalOpen && (
         <UpdateInventory products={filteredProducts} onClose={handleCloseModalUpdateInventory} />
       )}

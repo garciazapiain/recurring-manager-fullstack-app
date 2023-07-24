@@ -65,7 +65,7 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
                     </thead>
                     <tbody>
                         <tr className={sharedStyles.modalDetailsRow}>
-                            <td>{productToAdd.title}</td>
+                            <td>{productToAdd.title} in {productToAdd.unit}</td>
                             <td>
                                 <input
                                     type="number"

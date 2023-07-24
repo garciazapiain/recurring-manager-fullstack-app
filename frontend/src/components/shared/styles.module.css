@@ -46,6 +46,15 @@
     background-color: #DFDAFF;
 }
 
+.modalContentSmall {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    height: 20vh;
+    width: 75%;
+    background-color: #DFDAFF;
+}
+
 .modalContentHeader {
     display: flex;
     justify-content: space-between;

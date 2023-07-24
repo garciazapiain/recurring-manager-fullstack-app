@@ -9,7 +9,8 @@ const ProductLibrary = () => {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products/`)
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data);
+        const sortedData = data.sort((a, b) => (a. product_added_user ? 1 : b. product_added_user ? -1 : 0));
+        setProducts(sortedData);
       });
   }, []);
 
