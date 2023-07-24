@@ -20,6 +20,7 @@ class Product(models.Model):
     standard_size = models.IntegerField()
     use_days = models.IntegerField()
     current_inventory = models.IntegerField()
+    image = models.CharField(max_length=200,null=True)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -48,6 +49,7 @@ class UserProduct(models.Model):
     standard_size = models.IntegerField()
     use_days = models.IntegerField()
     current_inventory = models.IntegerField()
+    image = models.CharField(max_length=200, null=True)
 
     class Meta:
         verbose_name = 'User Product'

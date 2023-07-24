@@ -108,7 +108,7 @@ const BuyingList = (props) => {
             {filteredProducts.map((product) => (
               <tr className={styles.productRow} onClick={() => handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
-                <td> <img className={styles.productImage} src="https://www.gaston.cz/wcd/eshop/files/305/278/images/large/EVO%201l%20FJK.jpg" /></td>
+                <td> <img className={styles.productImage} src={product.image} /></td>
                 <td>{product.estimated_inventory} {product.unit}</td>
                 <td>{product.estimated_remaining_days}</td>
               </tr>

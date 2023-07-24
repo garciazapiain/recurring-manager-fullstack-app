@@ -11,7 +11,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days', 'product_added_user')
+        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days', 'product_added_user', 'image')
         read_only_fields = ('current_inventory', 'inventory_updated_date', 'product_added_user')
 
     def get_product_added_user(self, instance):
@@ -54,7 +54,7 @@ class UserProductSerializer(serializers.ModelSerializer):
     estimated_remaining_days = serializers.SerializerMethodField()
     class Meta:
         model = UserProduct
-        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days', 'master_product')
+        fields = ('id', 'title', 'category', 'author', 'unit', 'added', 'standard_size', 'use_days', 'current_inventory', 'inventory_updated_date', 'estimated_inventory', 'estimated_remaining_days', 'master_product', 'image')
         read_only_fields = ('current_inventory', 'inventory_updated_date')
         
     def get_estimated_inventory(self, instance):

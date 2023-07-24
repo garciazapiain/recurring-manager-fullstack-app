@@ -47,7 +47,8 @@ class ProductView(viewsets.ModelViewSet):
             unit=product.unit,
             standard_size=product.standard_size,
             use_days=product.use_days,
-            current_inventory=current_inventory
+            current_inventory=current_inventory,
+            image = product.image
         )
         
         # Save the new UserProduct instance
