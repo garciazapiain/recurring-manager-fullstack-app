@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./styles.module.css";
 
 const Slider = ({remainingDaysThreshold, setRemainingDaysThreshold}) => {
@@ -7,8 +7,11 @@ const Slider = ({remainingDaysThreshold, setRemainingDaysThreshold}) => {
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value)
     setRemainingDaysThreshold(event.target.value);
-    console.log('Slider Value:', event.target.value);
   };
+
+  useEffect(()=>{
+    setSliderValue(remainingDaysThreshold)
+  },[remainingDaysThreshold])
 
   return (
     <div className={styles.sliderContainer}>
@@ -20,7 +23,6 @@ const Slider = ({remainingDaysThreshold, setRemainingDaysThreshold}) => {
         onChange={handleSliderChange}
         className="slider"
       />
-      <p className={styles.sliderValue}>{sliderValue}</p>
     </div>
   );
 };

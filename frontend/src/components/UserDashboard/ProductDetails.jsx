@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
+import sharedStyles from "../shared/styles.module.css";
+import { GiCancel } from 'react-icons/gi';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 
 const ProductDetails = ({ onClose, product }) => {
     const [editMode, setEditMode] = useState(false);
@@ -60,97 +63,98 @@ const ProductDetails = ({ onClose, product }) => {
         const cookies = document.cookie.split('; ');
         const csrfCookie = cookies.find((cookie) => cookie.startsWith('csrftoken='));
         if (csrfCookie) {
-          csrfToken = csrfCookie.split('=')[1];
+            csrfToken = csrfCookie.split('=')[1];
         } else {
-          console.log('CSRF token cookie not found');
+            console.log('CSRF token cookie not found');
         }
         fetch(`${process.env.REACT_APP_API_BASE_URL}/api/userproducts/${id}/`, {
-          method: 'DELETE',
-          withCredentials: true,
-          headers: {
-            'X-CSRFToken': csrfToken,
-          },
+            method: 'DELETE',
+            withCredentials: true,
+            headers: {
+                'X-CSRFToken': csrfToken,
+            },
         })
-          .then((response) => {
-            if (response.status === 204) {
-              console.log(`UserProduct ${id} removed successfully`);
-              window.location.reload();
-            } else {
-              console.error(`Error removing UserProduct ${id}`);
-            }
-          })
-          .catch((error) => {
-            console.error(`Error removing UserProduct ${id}:`, error);
-          });
-      }
+            .then((response) => {
+                if (response.status === 204) {
+                    console.log(`UserProduct ${id} removed successfully`);
+                    window.location.reload();
+                } else {
+                    console.error(`Error removing UserProduct ${id}`);
+                }
+            })
+            .catch((error) => {
+                console.error(`Error removing UserProduct ${id}:`, error);
+            });
+    }
 
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
-                <h1>Product Details</h1>
+                <div className={styles.modalContentHeader}>
+                    <h1>Product Details</h1>
+                    <GiCancel size={30} onClick={onClose} />
+                </div>
                 {editMode ? (
                     <>
-                        <p>
-                            Title:{" "}
+                        <div className={styles.modalDetailsRow}>
+                            <p>Title:</p>
                             <input
                                 type="text"
                                 name="title"
                                 value={editedProduct.title}
                                 onChange={handleInputChange}
                             />
-                        </p>
-                        <p>
-                            Estimated Current Inventory:{" "}
+                        </div>
+                        <div className={styles.modalDetailsRow}>
+                            <p>Inventory:</p>
                             <input
                                 type="number"
                                 name="estimated_inventory"
                                 value={editedProduct.estimated_inventory}
                                 onChange={handleInputChange}
                             />
-                        </p>
-                        <p>
-                            Standard Size:{" "}
-                            <input
-                                type="number"
-                                name="standard_size"
-                                value={editedProduct.standard_size}
-                                onChange={handleInputChange}
-                            />
-                        </p>
-                        <p>
-                            Unit:{" "}
+                        </div>
+                        <div className={styles.modalDetailsRow}>
+                            <p>Unit:</p>
                             <input
                                 type="text"
                                 name="unit"
                                 value={editedProduct.unit}
                                 onChange={handleInputChange}
                             />
-                        </p>
-                        <p>
-                            Use Days:{" "}
+                        </div>
+                        <div className={styles.modalDetailsRow}>
+                            <p>Standard Size:</p>
+                            <input
+                                type="number"
+                                name="standard_size"
+                                value={editedProduct.standard_size}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                        <div className={styles.modalDetailsRow}>
+                            <p>Use Days:</p>
                             <input
                                 type="number"
                                 name="use_days"
                                 value={editedProduct.use_days}
                                 onChange={handleInputChange}
                             />
-                        </p>
+                        </div>
                         <div className={styles.modalActions}>
-                            <button onClick={handleSaveChanges}>Save</button>
-                            <button onClick={handleEditModeToggle}>Cancel</button>
+                            <button className={sharedStyles.primaryButton} onClick={handleSaveChanges}>Save</button>
                         </div>
                     </>
                 ) : (
                     <>
-                        <p>Title: {product.title}</p>
-                        <p>Estimated Current Inventory: {product.estimated_inventory}</p>
-                        <p>Standard Size: {product.standard_size}</p>
-                        <p>Unit: {product.unit}</p>
-                        <p>Use Days: {product.use_days}</p>
+                        <div className={styles.modalDetailsRow}><p>Title:</p> <p>{product.title}</p></div>
+                        <div className={styles.modalDetailsRow}><p>Inventory:</p> <p>{product.estimated_inventory}</p></div>
+                        <div className={styles.modalDetailsRow}><p>Unit:</p> <p>{product.unit}</p></div>
+                        <div className={styles.modalDetailsRow}><p>Standard Size:</p> <p>{product.standard_size}</p></div>
+                        <div className={styles.modalDetailsRow}><p>Use Days:</p> <p>{product.use_days}</p></div>
                         <div className={styles.modalActions}>
-                            <button onClick={() => removeProduct(product.id)}>Remove</button>
-                            <button onClick={handleEditModeToggle}>Edit</button>
-                            <button onClick={onClose}>Cancel</button>
+                            <AiFillEdit size={30} onClick={handleEditModeToggle}/>
+                            <AiFillDelete size={30} onClick={() => removeProduct(product.id)}/>
                         </div>
                     </>
                 )}

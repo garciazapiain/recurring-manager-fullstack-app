@@ -52,12 +52,16 @@ const BuyingList = (props) => {
     window.location.href = "/product-library/"
   }
 
-  // useEffect(()=>{
-  //   if(remainingDaysThreshold>99){
-  //     setRemainingDaysThreshold(10000)
-  //   }
-  // },[remainingDaysThreshold])
+  useEffect(()=>{
+    if(remainingDaysThreshold>99){
+      setViewProductsWithDaysThreshhold(false)
+    }
+    else{
+      setViewProductsWithDaysThreshhold(true)
+    }
+  },[remainingDaysThreshold])
 
+  console.log(remainingDaysThreshold, viewProductsWithDaysThreshhold)
 
   return (
     <div>
@@ -79,13 +83,14 @@ const BuyingList = (props) => {
               />
               <p>days of stock for these products:</p>
             </div>
-            <Slider remainingDaysThreshold={remainingDaysThreshold} setRemainingDaysThreshold={setRemainingDaysThreshold}/>
-            {/* <button onClick={() => setViewProductsWithDaysThreshhold(false)}>All my products</button> */}
+            <Slider remainingDaysThreshold={remainingDaysThreshold} setRemainingDaysThreshold={setRemainingDaysThreshold} />
           </>
           :
           <>
-            <label>All products</label>
-            <button onClick={() => setViewProductsWithDaysThreshhold(true)}>Set by days</button>
+            <div className={styles.daysRemainingContainer}>
+              <p>Stock of all products:</p>
+            </div>
+            <Slider remainingDaysThreshold={remainingDaysThreshold} setRemainingDaysThreshold={setRemainingDaysThreshold} />
           </>
         }
       </div>
