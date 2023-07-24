@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import styles from "./styles.module.css";
+import sharedStyles from "../shared/styles.module.css"
+import { GiCancel } from 'react-icons/gi';
 
 const UpdateInventory = ({ onClose, products }) => {
     const [productInventory, setProductInventory] = useState(
@@ -57,19 +58,22 @@ const UpdateInventory = ({ onClose, products }) => {
     };
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <h2>Update Inventory</h2>
-                <table className={styles.inventoryTable}>
+        <div className={sharedStyles.modalOverlay}>
+            <div className={sharedStyles.modalContent}>
+                <div className={sharedStyles.modalContentHeader}>
+                    <h2>Update Inventory</h2>
+                    <GiCancel onClick={onClose} />
+                </div>
+                <table>
                     <thead>
-                        <tr>
+                        <tr className={sharedStyles.modalContentTableHead}>
                             <th>Product</th>
                             <th>Inventory</th>
                         </tr>
                     </thead>
                     <tbody>
                         {productInventory.map((product) => (
-                            <tr key={product.id}>
+                            <tr className={sharedStyles.modalDetailsRow} key={product.id}>
                                 <td>{product.title}</td>
                                 <td>
                                     <input
@@ -84,9 +88,8 @@ const UpdateInventory = ({ onClose, products }) => {
                         ))}
                     </tbody>
                 </table>
-                <div className={styles.modalActions}>
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={onClose}>Cancel</button>
+                <div className={sharedStyles.modalActions}>
+                    <button className={sharedStyles.primaryButton} onClick={handleSave}>Save</button>
                 </div>
             </div>
         </div>

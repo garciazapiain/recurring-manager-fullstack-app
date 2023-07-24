@@ -48,7 +48,7 @@ const BuyingList = (props) => {
     setProductOpenInDetails(null)
   };
 
-  const handleProductLibrary = () => {
+  const handleProductLibraryRedirect = () => {
     window.location.href = "/product-library/"
   }
 
@@ -60,8 +60,6 @@ const BuyingList = (props) => {
       setViewProductsWithDaysThreshhold(true)
     }
   },[remainingDaysThreshold])
-
-  console.log(remainingDaysThreshold, viewProductsWithDaysThreshhold)
 
   return (
     <div>
@@ -118,7 +116,7 @@ const BuyingList = (props) => {
       </div>
       <div className={styles.actionButtonSectionUserDashboard}>
         <button className={sharedStyles.primaryButton} onClick={handleOpenModalUpdateInventory}>Update Inventory</button>
-        <button className={sharedStyles.secondaryButton} onClick={handleProductLibrary}>Explore more products</button>
+        <button className={sharedStyles.secondaryButton} onClick={handleProductLibraryRedirect}>Explore more products</button>
       </div>
     </div>
   );

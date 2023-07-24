@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid.jsx";
+import { IoIosArrowBack } from "react-icons/io"
 
 const ProductLibrary = () => {
   const [products, setProducts] = useState([]);
@@ -12,10 +13,15 @@ const ProductLibrary = () => {
       });
   }, []);
 
+  const handleUserDashboardRedirect = () => {
+    window.location.href = "/"
+  }
+
   return (
     <div>
+      <IoIosArrowBack size={50} onClick={handleUserDashboardRedirect} />
       <h1>Explore Products</h1>
-      <ProductsGrid products={products}/>
+      <ProductsGrid products={products} />
     </div>
   );
 };

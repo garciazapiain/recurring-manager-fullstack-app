@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import AddProductToUser from "./AddProductToUser.jsx";
+import styles from "./styles.module.css";
+import { GrAddCircle, GrCheckmark } from "react-icons/gr"
 
 const ProductsGrid = ({ products }) => {
     const [isAddProductToUserModalOpen, setAddProductToUserModalOpen] = useState(false);
@@ -16,19 +18,23 @@ const ProductsGrid = ({ products }) => {
     };
 
     return (
-        <div className="products-grid">
+        <div className={styles.productGrid}>
             {isAddProductToUserModalOpen && (
                 <AddProductToUser productToAdd={productToAdd} onClose={handleCloseModal} />
             )}
             {products.map((product) => (
-                <div key={product.id} className="product-item">
+                <div key={product.id} className={styles.productItem}>
+                    <div className={styles.productGridAddOrAdded}>
+                        {product.product_added_user ? (
+                            <GrCheckmark color="blue" size={20} />
+                        ) : (
+                            <GrAddCircle size={20} onClick={() => handleOpenModal(product)} />
+                        )}
+                    </div>
+                    <div className={styles.productGridImage}>
+                        <img src={product.image}></img>
+                    </div>
                     <h3>{product.title}</h3>
-                    <h3>author:{product.author}</h3>
-                    {product.product_added_user ? (
-                        <p>Added</p>
-                    ) : (
-                        <button onClick={() => handleOpenModal(product)}>Add</button>
-                    )}
                 </div>
             ))}
         </div>

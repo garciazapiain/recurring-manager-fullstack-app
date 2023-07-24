@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserDashboard from "./UserDashboard/index.jsx";
 import ProductLibrary from "./ProductLibrary/index.jsx";
+import ProfileHeader from "./ProfileHeader/index.jsx";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
@@ -20,14 +21,7 @@ const HomePage = () => {
         }
       });
   }, []);
-
-  const handleLogout = () => {
-    window.location.href = "/logout/";
-    // Perform logout logic or redirect to the appropriate logout URL
-    // You can use the 'history' object from React Router to navigate to the logout page
-    // Example: history.push('/logout/');
-  };
-
+  
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -39,8 +33,7 @@ const HomePage = () => {
           path="/"
           element={
             <div>
-              <p>Welcome {userData.username}</p>
-              <button onClick={handleLogout}>Logout</button>
+              <ProfileHeader userData={userData}/>
               <UserDashboard />
             </div>
           }
@@ -49,8 +42,7 @@ const HomePage = () => {
           path="/product-library"
           element={
             <div>
-              <p>Welcome {userData.username}</p>
-              <button onClick={handleLogout}>Logout</button>
+              <ProfileHeader userData={userData}/>
               <ProductLibrary />
             </div>
           }

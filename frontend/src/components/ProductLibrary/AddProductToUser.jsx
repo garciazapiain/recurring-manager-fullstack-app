@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
+import sharedStyles from "../shared/styles.module.css"
+import { GiCancel } from "react-icons/gi";
 
 const AddProductToUser = ({ onClose, productToAdd }) => {
     const [updatedInventory, setUpdatedInventory] = useState(0);
@@ -48,18 +50,21 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
     };
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <h2>Add Product To User</h2>
-                <table className={styles.inventoryTable}>
+        <div className={sharedStyles.modalOverlay}>
+            <div className={sharedStyles.modalContent}>
+                <div className={sharedStyles.modalContentHeader}>
+                    <h2>Add Product To User</h2>
+                    <GiCancel onClick={onClose} />
+                </div>
+                <table>
                     <thead>
-                        <tr>
+                        <tr className={sharedStyles.modalContentTableHead}>
                             <th>Product</th>
                             <th>Inventory</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr className={sharedStyles.modalDetailsRow}>
                             <td>{productToAdd.title}</td>
                             <td>
                                 <input
@@ -71,9 +76,8 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
                         </tr>
                     </tbody>
                 </table>
-                <div className={styles.modalActions}>
-                    <button onClick={handleAddProductToUser}>Add to User</button>
-                    <button onClick={onClose}>Cancel</button>
+                <div className={sharedStyles.modalActions}>
+                    <button className={sharedStyles.primaryButton} onClick={handleAddProductToUser}>Add to User</button>
                 </div>
             </div>
         </div>

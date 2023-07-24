@@ -1,44 +1,86 @@
-
 /* styles.module.css */
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.modalContent h2 {
+  margin-top: 0;
+}
+
+.modalContent label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.modalContent input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalActions button {
+  margin-left: 8px;
+}
+
+/* Grid container for products */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  /* Additional styles for the grid container */
+}
+
+/* Individual product item */
+.productItem {
+  padding: 20px;
+  border: 1px solid #ccc;
+  /* Additional styles for the product item */
+}
+
+.productGridImage {
+  width: 125px;
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.productGridImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .productsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-  
-  .modalContent {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .modalContent h2 {
-    margin-top: 0;
-  }
-  
-  .modalContent label {
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  .modalContent input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-  }
-  
-  .modalActions {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .modalActions button {
-    margin-left: 8px;
-  }
-  
+}
+
+.productGridAddOrAdded {
+  display: flex;
+  justify-content: end;
+  align-content: end;
+}

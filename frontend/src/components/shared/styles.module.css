@@ -1,6 +1,6 @@
 /* buttons */
 
-.primaryButton{
+.primaryButton {
     background-color: rgb(71, 71, 219);
     color: white;
     border: none;
@@ -10,7 +10,7 @@
     border-radius: 10px;
 }
 
-.secondaryButton{
+.secondaryButton {
     background-color: rgb(128, 128, 212);
     color: white;
     border: none;
@@ -20,6 +20,75 @@
     border-radius: 10px;
 }
 
-.pageHeadline{
+.pageHeadline {
     font-size: 1.5rem;
+}
+
+/* form for update inventory or add product to user */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    height: 40vh;
+    width: 75%;
+    background-color: #DFDAFF;
+}
+
+.modalContentHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalContent h1 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.modalContent label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.modalDetailsRow {
+    display: flex;
+    margin-bottom: 1rem;
+    height: 2rem;
+}
+
+.modalContent th {
+    width: 50%;
+    padding: 8px;
+    align-self: center;
+}
+
+.modalContentTableHead {
+    display: flex;
+    text-align: justify;
+}
+
+.modalDetailsRow td {
+    width: 50%;
+    padding: 8px;
+    align-self: center;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modalContent svg {
+    margin: 0 0.5rem;
 }
