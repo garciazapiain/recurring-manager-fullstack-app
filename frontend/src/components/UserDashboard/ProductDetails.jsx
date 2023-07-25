@@ -17,8 +17,6 @@ const ProductDetails = ({ onClose, product }) => {
         setEditedProduct({ ...editedProduct, [name]: value });
     };
 
-    console.log(editedProduct.title)
-
     const handleSaveChanges = () => {
         let csrfToken
         const cookies = document.cookie.split('; ');

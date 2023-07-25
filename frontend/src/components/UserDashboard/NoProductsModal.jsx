@@ -4,7 +4,6 @@ import { GiCancel } from 'react-icons/gi';
 
 const NoProductsModal = ({ onClose }) => {
     const handleProductLibraryRedirect = () => {
-        sessionStorage.setItem("noProductsModalClosedInSession", "true");
         window.location.href = "/product-library/"
     }
 

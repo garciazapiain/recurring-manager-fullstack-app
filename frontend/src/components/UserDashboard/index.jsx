@@ -3,8 +3,8 @@ import BuyingList from "./BuyingList.jsx";
 import sharedStyles from "../shared/styles.module.css";
 
 const UserDashboard = () => {
-  window.location.reload
   const [products, setProducts] = useState([]);
+  const [lowestRemainingDay, setLowestRemainingDay] = useState(null);
   useEffect(() => {
     // Fetch the data from the API endpoint
     fetch(`${process.env.REACT_APP_API_BASE_URL}/api/userproducts/`)
@@ -13,13 +13,24 @@ const UserDashboard = () => {
         // Filter the products based on the 'added' property
         const filteredProducts = data.filter((product) => product.added);
         setProducts(filteredProducts);
+        let lowestDays = 100
+        for (const product of filteredProducts) {
+          if (product.estimated_remaining_days < lowestDays) {
+            lowestDays = product.estimated_remaining_days;
+          }
+        }
+        setLowestRemainingDay(lowestDays);
       });
   }, []);
 
   return (
     <div>
       <h1 className={sharedStyles.pageHeadline}>My inventory</h1>
-      <BuyingList products={products} />
+      {lowestRemainingDay == null ? (
+        <></>
+      ) : (
+        <BuyingList products={products} lowestRemainingDay={lowestRemainingDay} />
+      )}
     </div>
   );
 };

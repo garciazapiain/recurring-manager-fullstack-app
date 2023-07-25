@@ -8,31 +8,23 @@ import NoProductsModal from "./NoProductsModal.jsx";
 
 const BuyingList = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([])
-  const [remainingDaysThreshold, setRemainingDaysThreshold] = useState(15);
-  const [viewProductsWithDaysThreshhold, setViewProductsWithDaysThreshhold] = useState(true)
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      sessionStorage.setItem("noProductsModalClosedInSession", "false");
-    },3000)
-  },[])
+  const [remainingDaysThreshold, setRemainingDaysThreshold] = useState(props.lowestRemainingDay);
+  const [viewProductsWithDaysThreshold, setViewProductsWithDaysThreshold] = useState(true)
 
   useEffect(() => {
     if (props.products.length) {
-      sessionStorage.setItem("noProductsModalClosedInSession", "true")
       setIsNoProductsModalOpen(false)
-      if (viewProductsWithDaysThreshhold) {
-        setFilteredProducts(props.products.filter((product) => product.estimated_remaining_days <= remainingDaysThreshold));
+      if (viewProductsWithDaysThreshold) {
+        setFilteredProducts(props.products.filter((product) => product.estimated_remaining_days >= remainingDaysThreshold));
       }
       else {
         setFilteredProducts(props.products)
-
       }
     }
-    else if(sessionStorage.getItem("noProductsModalClosedInSession")=="false" && props.products.length == 0) {
+    else if(props.products.length == 0) {
       setIsNoProductsModalOpen(true)
     }
-  }, [props, remainingDaysThreshold, viewProductsWithDaysThreshhold]);
+  }, [props, remainingDaysThreshold, viewProductsWithDaysThreshold]);
 
   const handleThresholdChange = (event) => {
     const value = parseInt(event.target.value);
@@ -61,7 +53,6 @@ const BuyingList = (props) => {
   };
   const handleCloseModalNoProducts = () => {
     setIsNoProductsModalOpen(false)
-    sessionStorage.setItem("noProductsModalClosedInSession", "true");
   };
 
   const [isNoProductsModalOpen, setIsNoProductsModalOpen] = useState(false)
@@ -71,10 +62,10 @@ const BuyingList = (props) => {
 
   useEffect(()=>{
     if(remainingDaysThreshold>99){
-      setViewProductsWithDaysThreshhold(false)
+      setViewProductsWithDaysThreshold(false)
     }
     else{
-      setViewProductsWithDaysThreshhold(true)
+      setViewProductsWithDaysThreshold(true)
     }
   },[remainingDaysThreshold])
 
@@ -90,7 +81,7 @@ const BuyingList = (props) => {
         <ProductDetails product={productOpenInDetails} onClose={handleCloseModalProductDetails} />
       )}
       <div>
-        {viewProductsWithDaysThreshhold ?
+        {viewProductsWithDaysThreshold ?
           <>
             <div className={styles.daysRemainingContainer}>
               <input
