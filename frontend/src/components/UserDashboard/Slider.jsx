@@ -21,7 +21,7 @@ const Slider = ({remainingDaysThreshold, setRemainingDaysThreshold}) => {
         max={100}
         value={sliderValue}
         onChange={handleSliderChange}
-        className="slider"
+        className={styles.slider}
       />
     </div>
   );

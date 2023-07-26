@@ -15,7 +15,7 @@ const BuyingList = (props) => {
     if (props.products.length) {
       setIsNoProductsModalOpen(false)
       if (viewProductsWithDaysThreshold) {
-        setFilteredProducts(props.products.filter((product) => product.estimated_remaining_days >= remainingDaysThreshold));
+        setFilteredProducts(props.products.filter((product) => product.estimated_remaining_days <= remainingDaysThreshold));
       }
       else {
         setFilteredProducts(props.products)
@@ -90,7 +90,7 @@ const BuyingList = (props) => {
                 onChange={handleThresholdChange}
                 className={styles.daysRemainingVariable}
               />
-              <p>days of stock for these products:</p>
+              <p>days of stock remaining for these products:</p>
             </div>
             <Slider remainingDaysThreshold={remainingDaysThreshold} setRemainingDaysThreshold={setRemainingDaysThreshold} />
           </>
@@ -117,7 +117,7 @@ const BuyingList = (props) => {
             {filteredProducts.map((product) => (
               <tr className={styles.productRow} onClick={() => handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
-                <td> <img className={styles.productImage} src={product.image} /></td>
+                <td><div className={styles.productGridContainer}><img className={styles.productImage} src={product.image} /></div></td>
                 <td>{product.estimated_inventory} {product.unit}</td>
                 <td>{product.estimated_remaining_days}</td>
               </tr>
