@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "./styles.module.css";
 import sharedStyles from "../shared/styles.module.css";
 import { GiCancel } from 'react-icons/gi';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
@@ -86,15 +85,15 @@ const ProductDetails = ({ onClose, product }) => {
     }
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
-                <div className={styles.modalContentHeader}>
+        <div className={sharedStyles.modalOverlay}>
+            <div className={sharedStyles.modalContent}>
+                <div className={sharedStyles.modalContentHeader}>
                     <h1>Product Details</h1>
                     <GiCancel size={30} onClick={onClose} />
                 </div>
                 {editMode ? (
                     <>
-                        <div className={styles.modalDetailsRow}>
+                        <div className={sharedStyles.modalDetailsRow}>
                             <p>Title:</p>
                             <input
                                 type="text"
@@ -103,7 +102,7 @@ const ProductDetails = ({ onClose, product }) => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className={styles.modalDetailsRow}>
+                        <div className={sharedStyles.modalDetailsRow}>
                             <p>Inventory:</p>
                             <input
                                 type="number"
@@ -112,7 +111,7 @@ const ProductDetails = ({ onClose, product }) => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className={styles.modalDetailsRow}>
+                        <div className={sharedStyles.modalDetailsRow}>
                             <p>Unit:</p>
                             <input
                                 type="text"
@@ -121,7 +120,7 @@ const ProductDetails = ({ onClose, product }) => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className={styles.modalDetailsRow}>
+                        <div className={sharedStyles.modalDetailsRow}>
                             <p>Standard Size:</p>
                             <input
                                 type="number"
@@ -130,7 +129,7 @@ const ProductDetails = ({ onClose, product }) => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className={styles.modalDetailsRow}>
+                        <div className={sharedStyles.modalDetailsRow}>
                             <p>Use Days:</p>
                             <input
                                 type="number"
@@ -139,18 +138,18 @@ const ProductDetails = ({ onClose, product }) => {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className={styles.modalActions}>
+                        <div className={sharedStyles.modalActions}>
                             <button className={sharedStyles.primaryButton} onClick={handleSaveChanges}>Save</button>
                         </div>
                     </>
                 ) : (
                     <>
-                        <div className={styles.modalDetailsRow}><p>Title:</p> <p>{product.title}</p></div>
-                        <div className={styles.modalDetailsRow}><p>Inventory:</p> <p>{product.estimated_inventory}</p></div>
-                        <div className={styles.modalDetailsRow}><p>Unit:</p> <p>{product.unit}</p></div>
-                        <div className={styles.modalDetailsRow}><p>Standard Size:</p> <p>{product.standard_size}</p></div>
-                        <div className={styles.modalDetailsRow}><p>Use Days:</p> <p>{product.use_days}</p></div>
-                        <div className={styles.modalActions}>
+                        <div className={sharedStyles.modalDetailsRow}><p>Title:</p> <p>{product.title}</p></div>
+                        <div className={sharedStyles.modalDetailsRow}><p>Inventory:</p> <p>{product.estimated_inventory}</p></div>
+                        <div className={sharedStyles.modalDetailsRow}><p>Unit:</p> <p>{product.unit}</p></div>
+                        <div className={sharedStyles.modalDetailsRow}><p>Standard Size:</p> <p>{product.standard_size}</p></div>
+                        <div className={sharedStyles.modalDetailsRow}><p>Use Days:</p> <p>{product.use_days}</p></div>
+                        <div className={sharedStyles.modalActions}>
                             <AiFillEdit size={30} onClick={handleEditModeToggle}/>
                             <AiFillDelete size={30} onClick={() => removeProduct(product.id)}/>
                         </div>

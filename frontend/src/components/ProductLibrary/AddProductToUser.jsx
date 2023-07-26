@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "./styles.module.css";
 import sharedStyles from "../shared/styles.module.css"
 import { GiCancel } from "react-icons/gi";
 

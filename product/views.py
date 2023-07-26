@@ -41,7 +41,7 @@ class ProductView(viewsets.ModelViewSet):
             master_product=product,
             title=product.title,
             created_date=product.created_date,
-            inventory_updated_date=product.inventory_updated_date,
+            inventory_updated_date=timezone.now(),
             category=product.category,
             added=True,
             unit=product.unit,

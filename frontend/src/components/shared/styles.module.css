@@ -41,8 +41,8 @@
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    height: 40vh;
-    width: 75%;
+    height: 50vh;
+    width: 60%;
     background-color: #DFDAFF;
 }
 
@@ -51,7 +51,7 @@
     padding: 20px;
     border-radius: 8px;
     height: 20vh;
-    width: 75%;
+    width: 60%;
     background-color: #DFDAFF;
 }
 
@@ -60,9 +60,21 @@
     padding: 20px;
     border-radius: 8px;
     height: 50vh;
-    width: 75%;
+    width: 60%;
     background-color: #DFDAFF;
 }
+
+@media only screen and (min-width: 767px) {
+    .modalContent{
+        width: 25%;
+    }
+    .modalContentBig{
+        width: 25%;
+    }
+    .modalContentSmall{
+        width: 25%;
+    }
+  }
 
 .modalContentHeader {
     display: flex;
@@ -74,9 +86,21 @@
     font-size: 1.5rem;
 }
 
+.modalContent p {
+    margin-right: 1rem;
+    align-self: center;
+    width: 5rem;
+}
+
+.modalContent input {
+    width: 5rem;
+}
+
 .modalContent label {
+    margin-right: 1rem;
     display: block;
     margin-bottom: 8px;
+    align-self: center;
 }
 
 .modalDetailsRow {
