@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid.jsx";
 import { IoIosArrowBack } from "react-icons/io"
+import sharedStyles from "../shared/styles.module.css";
 
 const ProductLibrary = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const ProductLibrary = () => {
   return (
     <div>
       <IoIosArrowBack size={50} onClick={handleUserDashboardRedirect} />
-      <h1>Explore Products</h1>
+      <h1 className={sharedStyles.pageHeadline}>Explore Products</h1>
       <ProductsGrid products={products} />
     </div>
   );

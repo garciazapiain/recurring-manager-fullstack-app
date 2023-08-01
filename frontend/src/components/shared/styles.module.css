@@ -60,7 +60,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    height: 50vh;
+    height: 60vh;
     width: 60%;
     background-color: #DFDAFF;
 }
@@ -98,6 +98,13 @@
 }
 
 .modalContent label {
+    margin-right: 1rem;
+    display: block;
+    margin-bottom: 8px;
+    align-self: center;
+}
+
+.modalContentBig label {
     margin-right: 1rem;
     display: block;
     margin-bottom: 8px;

@@ -127,7 +127,7 @@ const BuyingList = (props) => {
       </div>
       <div className={styles.actionButtonSectionUserDashboard}>
         <button className={sharedStyles.primaryButton} onClick={handleOpenModalUpdateInventory}>Update Inventory</button>
-        <button className={sharedStyles.secondaryButton} onClick={handleProductLibraryRedirect}>Explore more products</button>
+        <button className={sharedStyles.primaryButton} onClick={handleProductLibraryRedirect}>Explore more products</button>
       </div>
     </div>
   );
