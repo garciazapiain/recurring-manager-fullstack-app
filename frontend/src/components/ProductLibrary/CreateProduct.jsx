@@ -51,7 +51,6 @@ const CreateProduct = ({ onClose }) => {
         unit: "",
         standard_size: "",
         use_days: "",
-        current_inventory: 0,
         image: null,
     });
 

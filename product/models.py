@@ -20,13 +20,11 @@ class Product(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False)
     title = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
-    inventory_updated_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
     category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
-    added=  models.BooleanField(default=False)
     unit = models.CharField(max_length=10, choices=UNIT_CHOICES)
+    added=  models.BooleanField(default=False)
     standard_size = models.IntegerField()
     use_days = models.IntegerField()
-    current_inventory = models.IntegerField()
     image = models.CharField(max_length=1000,null=True)
 
     def publish(self):
@@ -56,7 +54,7 @@ class UserProduct(models.Model):
     standard_size = models.IntegerField()
     use_days = models.IntegerField()
     current_inventory = models.IntegerField()
-    image = models.CharField(max_length=200, null=True)
+    image = models.CharField(max_length=1000, null=True)
 
     class Meta:
         verbose_name = 'User Product'

@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .serializers import ProductSerializer, ProductCategorySerializer, UserProductSerializer
 from rest_framework import viewsets      
 from .models import Product, ProductCategory, UserProduct             
-from .forms import ProductForm
 from django.conf import settings
 from django.views.decorators.csrf import get_token
 from django.http import JsonResponse
