@@ -15,6 +15,12 @@ class Product(models.Model):
         ('l', 'Liter'),
         ('piece', 'Piece'),
         ('kg', 'Kilogram'),
+        ('bottle', 'Bottle'),
+        ('Pack', 'pack'),
+        ('Tube', 'tube'),
+        ('Stick', 'stick'),
+        ('Jar', 'jar'),
+        ('Box', 'box'),
         # Add more choices as needed
     ]
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False)

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import sharedStyles from "../shared/styles.module.css";
 import { GiCancel } from "react-icons/gi";
+import {UNIT_CHOICES} from "../shared/utils.jsx";
 
 const CreateProduct = ({ onClose }) => {
     const [categories, setCategories] = useState([]);
@@ -23,14 +24,6 @@ const CreateProduct = ({ onClose }) => {
                 }
             });
     }, []);
-
-    const UNIT_CHOICES = [
-        { value: "ml", label: "Milliliter" },
-        { value: "l", label: "Liter" },
-        { value: "piece", label: "Piece" },
-        { value: "kg", label: "Kilogram" },
-        // Add more choices as needed
-    ];
 
     useEffect(() => {
         // Fetch categories from API endpoint

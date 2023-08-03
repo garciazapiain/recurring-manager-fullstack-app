@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import sharedStyles from "../shared/styles.module.css";
 import { GiCancel } from 'react-icons/gi';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import {UNIT_CHOICES} from "../shared/utils.jsx";
 
 const ProductDetails = ({ onClose, product }) => {
     const [editMode, setEditMode] = useState(false);
@@ -113,12 +114,19 @@ const ProductDetails = ({ onClose, product }) => {
                         </div>
                         <div className={sharedStyles.modalDetailsRow}>
                             <p>Unit:</p>
-                            <input
-                                type="text"
+                            <select
                                 name="unit"
                                 value={editedProduct.unit}
                                 onChange={handleInputChange}
-                            />
+                                required // Add required attribute for validation
+                            >
+                                <option value="">Select a unit</option>
+                                {UNIT_CHOICES.map((choice) => (
+                                    <option key={choice.value} value={choice.value}>
+                                        {choice.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className={sharedStyles.modalDetailsRow}>
                             <p>Standard Size:</p>
@@ -150,8 +158,8 @@ const ProductDetails = ({ onClose, product }) => {
                         <div className={sharedStyles.modalDetailsRow}><p>Standard Size:</p> <p>{product.standard_size}</p></div>
                         <div className={sharedStyles.modalDetailsRow}><p>Use Days:</p> <p>{product.use_days}</p></div>
                         <div className={sharedStyles.modalActions}>
-                            <AiFillEdit size={30} onClick={handleEditModeToggle}/>
-                            <AiFillDelete size={30} onClick={() => removeProduct(product.id)}/>
+                            <AiFillEdit size={30} onClick={handleEditModeToggle} />
+                            <AiFillDelete size={30} onClick={() => removeProduct(product.id)} />
                         </div>
                     </>
                 )}
