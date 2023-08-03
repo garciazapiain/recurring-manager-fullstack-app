@@ -52,7 +52,7 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
         <div className={sharedStyles.modalOverlay}>
             <div className={sharedStyles.modalContent}>
                 <div className={sharedStyles.modalContentHeader}>
-                    <h2>Add Product To User</h2>
+                    <h2>Add product</h2>
                     <GiCancel onClick={onClose} />
                 </div>
                 <table>
@@ -76,7 +76,7 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
                     </tbody>
                 </table>
                 <div className={sharedStyles.modalActions}>
-                    <button className={sharedStyles.primaryButton} onClick={handleAddProductToUser}>Add to User</button>
+                    <button className={sharedStyles.primaryButton} onClick={handleAddProductToUser}>Add</button>
                 </div>
             </div>
         </div>
