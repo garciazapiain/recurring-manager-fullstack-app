@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles.module.css";
 import sharedStyles from "../shared/styles.module.css";
 import { GiCancel } from "react-icons/gi";
 
@@ -191,7 +190,7 @@ const CreateProduct = ({ onClose }) => {
                             required // Add required attribute for validation
                         />
                     </div>
-                    <div className={sharedStyles.modalDetailsRow}>
+                    {/* <div className={sharedStyles.modalDetailsRow}>
                         <label>Image URL</label>
                         <input
                             type="text"
@@ -199,7 +198,7 @@ const CreateProduct = ({ onClose }) => {
                             value={formData.image}
                             onChange={handleInputChange}
                         />
-                    </div>
+                    </div> */}
                     <div className={sharedStyles.modalActions}>
                         <button className={sharedStyles.primaryButton} type="submit">
                             Create Product

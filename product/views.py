@@ -85,11 +85,16 @@ class UserProductView(viewsets.ModelViewSet):
 
         # Update the product details based on the data in the request
         product.title = request.data.get('title', product.title)
-        product.current_inventory = request.data.get('current_inventory', product.current_inventory)
         product.standard_size = request.data.get('standard_size', product.standard_size)
         product.unit = request.data.get('unit', product.unit)
         product.use_days = request.data.get('use_days', product.use_days)
-        product.inventory_updated_date = timezone.now()
+
+        # Check if the current_inventory value has changed
+        new_current_inventory = request.data.get('current_inventory', product.current_inventory)
+        if new_current_inventory != product.current_inventory:
+            product.current_inventory = new_current_inventory
+            # Update the inventory_updated_date only if current_inventory is changed
+            product.inventory_updated_date = timezone.now()
 
         # Save the updated product
         product.save()
