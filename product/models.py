@@ -15,6 +15,7 @@ class Product(models.Model):
         ('l', 'Liter'),
         ('piece', 'Piece'),
         ('kg', 'Kilogram'),
+        ('gr', 'Grams'),
         ('bottle', 'Bottle'),
         ('Pack', 'pack'),
         ('Tube', 'tube'),

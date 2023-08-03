@@ -3,6 +3,7 @@ export const UNIT_CHOICES = [
     { value: 'l', label: 'Liter' },
     { value: 'piece', label: 'Piece' },
     { value: 'kg', label: 'Kilogram' },
+    { value: 'gr', label: 'Grams' },
     { value: 'bottle', label: 'Bottle' },
     { value: 'Pack', label: 'Pack' },
     { value: 'Tube', label: 'Tube' },
