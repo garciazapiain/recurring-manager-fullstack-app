@@ -66,7 +66,7 @@ class UserProductSerializer(serializers.ModelSerializer):
             days_passed = (today - last_updated_date).days
             if days_passed < 0:
                 days_passed = 0
-            estimated_inventory = max(last_inventory - (days_passed // use_days) * standard_size, 0)
+            estimated_inventory = max(last_inventory - (days_passed / use_days) * standard_size, 0)
         else:
             estimated_inventory = 0  # Set a default value or handle it based on your requirements
 

@@ -118,7 +118,7 @@ const BuyingList = (props) => {
               <tr className={styles.productRow} onClick={() => handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
                 <td><div className={styles.productGridContainer}><img className={styles.productImage} src={product.image} /></div></td>
-                <td>{product.estimated_inventory} {product.unit}</td>
+                <td>{Math.round(product.estimated_inventory)} {product.unit}</td>
                 <td>{product.estimated_remaining_days}</td>
               </tr>
             ))}
