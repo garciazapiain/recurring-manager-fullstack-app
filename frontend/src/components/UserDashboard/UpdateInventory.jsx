@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import sharedStyles from "../shared/styles.module.css"
 import { GiCancel } from 'react-icons/gi';
+import AddInventory from "../shared/ToggleInventory/AddInventory.jsx";
+import SubtractInventory from "../shared/ToggleInventory/SubtractInventory.jsx";
 
 const UpdateInventory = ({ onClose, products }) => {
     const [productInventory, setProductInventory] = useState(
@@ -14,12 +16,21 @@ const UpdateInventory = ({ onClose, products }) => {
     );
 
     const handleInputChange = (productId, value) => {
+        const updatedValue = Math.max(0, value);
         setProductInventory((prevState) =>
             prevState.map((product) =>
-                product.id === productId ? { ...product, updated_inventory: value } : product
+                product.id === productId ? { ...product, updated_inventory: updatedValue } : product
             )
         );
     };
+
+    const handleInventoryToggle = (productId, operation) => {
+        setProductInventory((prevState) =>
+            prevState.map((product) =>
+                product.id === productId ? { ...product, updated_inventory: product.updated_inventory + (operation === "add" ? 1 : -1) } : product
+            )
+        );
+    }
 
     const handleSave = () => {
         // Iterate over productInventory and make API calls for each product ID
@@ -65,7 +76,7 @@ const UpdateInventory = ({ onClose, products }) => {
                     <h2>Update Inventory</h2>
                     <GiCancel onClick={onClose} />
                 </div>
-                <table>
+                <table className={sharedStyles.modalContentTable}>
                     <thead>
                         <tr className={sharedStyles.modalContentTableHead}>
                             <th>Product</th>
@@ -78,13 +89,17 @@ const UpdateInventory = ({ onClose, products }) => {
                             <tr className={sharedStyles.modalDetailsRow} key={product.id}>
                                 <td>{product.title}</td>
                                 <td>
-                                    <input
-                                        type="number"
-                                        value={Math.round(product.updated_inventory)}
-                                        onChange={(e) =>
-                                            handleInputChange(product.id, parseInt(e.target.value))
-                                        }
-                                    />
+                                    <div className={sharedStyles.inventoryContainer}>
+                                        <SubtractInventory inventory={product.updated_inventory} handleInventoryToggle={() => handleInventoryToggle(product.id, "subtract")} />
+                                        <input
+                                            type="number"
+                                            value={Math.round(product.updated_inventory)}
+                                            onChange={(e) =>
+                                                handleInputChange(product.id, parseInt(e.target.value))
+                                            }
+                                        />
+                                        <AddInventory handleInventoryToggle={() => handleInventoryToggle(product.id, "add")} />
+                                    </div>
                                 </td>
                                 <td>{product.unit}</td>
                             </tr>

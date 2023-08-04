@@ -69,13 +69,13 @@
 
 @media only screen and (min-width: 767px) {
     .modalContent{
-        width: 25%;
+        width: 45%;
     }
     .modalContentBig{
-        width: 25%;
+        width: 45%;
     }
     .modalContentSmall{
-        width: 25%;
+        width: 45%;
     }
   }
 
@@ -130,6 +130,10 @@
     text-align: justify;
 }
 
+.modalContentTable {
+    width: 100%;
+}
+
 .modalDetailsRow td {
     width: 50%;
     padding: 8px;
@@ -143,4 +147,13 @@
 
 .modalContent svg {
     margin: 0 0.5rem;
+}
+
+.inventoryContainer{
+    display: flex;
+}
+
+.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
 }

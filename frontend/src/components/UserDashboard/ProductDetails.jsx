@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import sharedStyles from "../shared/styles.module.css";
 import { GiCancel } from 'react-icons/gi';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import {UNIT_CHOICES} from "../shared/utils.jsx";
+import { UNIT_CHOICES } from "../shared/utils.jsx";
+import AddInventory from "../shared/ToggleInventory/AddInventory.jsx"
+import SubtractInventory from "../shared/ToggleInventory/SubtractInventory.jsx"
 
 const ProductDetails = ({ onClose, product }) => {
     const [editMode, setEditMode] = useState(false);
@@ -15,6 +17,18 @@ const ProductDetails = ({ onClose, product }) => {
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setEditedProduct({ ...editedProduct, [name]: value });
+    };
+
+    const handleInventoryToggle = (operation) => {
+        setEditedProduct((prevProduct) => {
+            let updatedInventory = prevProduct.estimated_inventory;
+            if (operation === "add") {
+                updatedInventory += 1; // Increase inventory by 1
+            } else if (operation === "subtract") {
+                updatedInventory = Math.max(0, updatedInventory - 1); // Decrease inventory by 1, but not below 0
+            }
+            return { ...prevProduct, estimated_inventory: updatedInventory };
+        });
     };
 
     const handleSaveChanges = () => {
@@ -105,12 +119,16 @@ const ProductDetails = ({ onClose, product }) => {
                         </div>
                         <div className={sharedStyles.modalDetailsRow}>
                             <p>Inventory:</p>
-                            <input
-                                type="number"
-                                name="estimated_inventory"
-                                value={Math.round(editedProduct.estimated_inventory)}
-                                onChange={handleInputChange}
-                            />
+                            <div className={sharedStyles.inventoryContainer}>
+                                <SubtractInventory inventory={editedProduct.estimated_inventory} handleInventoryToggle={() => handleInventoryToggle("subtract")} />
+                                <input
+                                    type="number"
+                                    name="estimated_inventory"
+                                    value={Math.round(editedProduct.estimated_inventory)}
+                                    onChange={handleInputChange}
+                                />
+                                <AddInventory handleInventoryToggle={() => handleInventoryToggle("add")} />
+                            </div>
                         </div>
                         <div className={sharedStyles.modalDetailsRow}>
                             <p>Unit:</p>
