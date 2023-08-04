@@ -4,10 +4,9 @@ import sharedStyles from "../../shared/styles.module.css"
 import React from "react";
 
 const SubtractInventory = ({ handleInventoryToggle, inventory }) => {
-
     return (
-        <div className={inventory == 0 ? sharedStyles.disabled: null}>
-            <GrSubtractCircle onClick={inventory !== 0 ? handleInventoryToggle : undefined} />
+        <div className={inventory < 1 ? sharedStyles.disabled: null}>
+            <GrSubtractCircle onClick={inventory > 0 ? handleInventoryToggle : undefined} />
         </div>
     );
 };
