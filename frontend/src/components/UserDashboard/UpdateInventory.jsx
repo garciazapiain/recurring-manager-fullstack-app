@@ -9,6 +9,7 @@ const UpdateInventory = ({ onClose, products }) => {
             title: product.title,
             original_inventory: product.estimated_inventory,
             updated_inventory: product.estimated_inventory,
+            unit: product.unit
         }))
     );
 
@@ -69,6 +70,7 @@ const UpdateInventory = ({ onClose, products }) => {
                         <tr className={sharedStyles.modalContentTableHead}>
                             <th>Product</th>
                             <th>Inventory</th>
+                            <th>Unit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,12 +80,13 @@ const UpdateInventory = ({ onClose, products }) => {
                                 <td>
                                     <input
                                         type="number"
-                                        value={product.updated_inventory}
+                                        value={Math.round(product.updated_inventory)}
                                         onChange={(e) =>
                                             handleInputChange(product.id, parseInt(e.target.value))
                                         }
                                     />
                                 </td>
+                                <td>{product.unit}</td>
                             </tr>
                         ))}
                     </tbody>

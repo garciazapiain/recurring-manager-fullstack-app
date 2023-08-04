@@ -17,11 +17,11 @@ class Product(models.Model):
         ('kg', 'Kilogram'),
         ('gr', 'Grams'),
         ('bottle', 'Bottle'),
-        ('Pack', 'pack'),
-        ('Tube', 'tube'),
-        ('Stick', 'stick'),
-        ('Jar', 'jar'),
-        ('Box', 'box'),
+        ('Pack', 'Pack'),
+        ('Tube', 'Tube'),
+        ('Stick', 'Stick'),
+        ('Jar', 'Jar'),
+        ('Box', 'Box'),
         # Add more choices as needed
     ]
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False)

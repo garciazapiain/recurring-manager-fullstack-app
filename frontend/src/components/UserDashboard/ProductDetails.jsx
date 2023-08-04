@@ -108,7 +108,7 @@ const ProductDetails = ({ onClose, product }) => {
                             <input
                                 type="number"
                                 name="estimated_inventory"
-                                value={editedProduct.estimated_inventory}
+                                value={Math.round(editedProduct.estimated_inventory)}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -153,7 +153,7 @@ const ProductDetails = ({ onClose, product }) => {
                 ) : (
                     <>
                         <div className={sharedStyles.modalDetailsRow}><p>Title:</p> <p>{product.title}</p></div>
-                        <div className={sharedStyles.modalDetailsRow}><p>Inventory:</p> <p>{product.estimated_inventory}</p></div>
+                        <div className={sharedStyles.modalDetailsRow}><p>Inventory:</p> <p>{Math.round(product.estimated_inventory)}</p></div>
                         <div className={sharedStyles.modalDetailsRow}><p>Unit:</p> <p>{product.unit}</p></div>
                         <div className={sharedStyles.modalDetailsRow}><p>Standard Size:</p> <p>{product.standard_size}</p></div>
                         <div className={sharedStyles.modalDetailsRow}><p>Use Days:</p> <p>{product.use_days}</p></div>

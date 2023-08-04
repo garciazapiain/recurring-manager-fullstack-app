@@ -5,6 +5,7 @@ import UpdateInventory from "./UpdateInventory.jsx";
 import ProductDetails from "./ProductDetails.jsx";
 import Slider from "./Slider.jsx"
 import NoProductsModal from "./NoProductsModal.jsx";
+import { UNIT_CHOICES } from "../shared/utils.jsx";
 
 const BuyingList = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -21,7 +22,7 @@ const BuyingList = (props) => {
         setFilteredProducts(props.products)
       }
     }
-    else if(props.products.length == 0) {
+    else if (props.products.length == 0) {
       setIsNoProductsModalOpen(true)
     }
   }, [props, remainingDaysThreshold, viewProductsWithDaysThreshold]);
@@ -60,14 +61,24 @@ const BuyingList = (props) => {
     window.location.href = "/product-library/"
   }
 
-  useEffect(()=>{
-    if(remainingDaysThreshold>99){
+  useEffect(() => {
+    if (remainingDaysThreshold > 99) {
       setViewProductsWithDaysThreshold(false)
     }
-    else{
+    else {
       setViewProductsWithDaysThreshold(true)
     }
-  },[remainingDaysThreshold])
+  }, [remainingDaysThreshold])
+
+  function formatUnitLabel(unitLabel, estimatedInventory) {
+    const unitChoice = UNIT_CHOICES.find((choice) => choice.value === unitLabel);
+    if (unitChoice && estimatedInventory >= 2) {
+      return unitChoice.valueMultiple;
+    } else {
+      // Default to the original unit label if not found in UNIT_CHOICES
+      return unitLabel;
+    }
+  }
 
   return (
     <div>
@@ -118,7 +129,7 @@ const BuyingList = (props) => {
               <tr className={styles.productRow} onClick={() => handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
                 <td><div className={styles.productGridContainer}><img className={styles.productImage} src={product.image} /></div></td>
-                <td>{Math.round(product.estimated_inventory)} {product.unit}</td>
+                <td>{Math.round(product.estimated_inventory)} {formatUnitLabel(product.unit,product.estimated_inventory)}</td>
                 <td>{product.estimated_remaining_days}</td>
               </tr>
             ))}
