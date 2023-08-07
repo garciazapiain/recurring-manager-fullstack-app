@@ -6,11 +6,14 @@ import ProductDetails from "./ProductDetails.jsx";
 import Slider from "./Slider.jsx"
 import NoProductsModal from "./NoProductsModal.jsx";
 import { UNIT_CHOICES } from "../shared/utils.jsx";
+import { useAtom } from 'jotai';
+import { darkModeAtom } from '../shared/DarkMode/darkModeAtom.js'; // Import the darkModeAtom
 
 const BuyingList = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([])
   const [remainingDaysThreshold, setRemainingDaysThreshold] = useState(props.lowestRemainingDay);
   const [viewProductsWithDaysThreshold, setViewProductsWithDaysThreshold] = useState(true)
+  const [darkModeOn] = useAtom(darkModeAtom); // Access the state of darkModeAtom
 
   useEffect(() => {
     if (props.products.length) {

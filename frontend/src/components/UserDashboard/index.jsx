@@ -28,7 +28,7 @@ const UserDashboard = () => {
 
   return (
     <div>
-      <h1 style={{"--text-color": darkModeOn ? "blue" : "black"}} className={sharedStyles.pageHeadline}>My inventory</h1>
+      <h1 className={sharedStyles.pageHeadline}>My inventory</h1>
       {lowestRemainingDay == null ? (
         <></>
       ) : (

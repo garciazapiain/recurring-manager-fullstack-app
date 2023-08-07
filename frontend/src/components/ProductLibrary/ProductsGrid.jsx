@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddProductToUser from "./AddProductToUser.jsx";
 import styles from "./styles.module.css";
 import sharedStyles from "../shared/styles.module.css";
-import { GrAddCircle, GrCheckmark } from "react-icons/gr"
+import { IoIosAddCircle, IoIosCheckmarkCircle } from "react-icons/io"
 import CreateProduct from "./CreateProduct.jsx";
 
 const ProductsGrid = ({ products }) => {
@@ -37,9 +37,9 @@ const ProductsGrid = ({ products }) => {
                     <div key={product.id} className={styles.productItem}>
                         <div className={styles.productGridAddOrAdded}>
                             {product.product_added_user ? (
-                                <GrCheckmark color="blue" size={20} />
+                                <IoIosCheckmarkCircle color="rgb(71, 71, 219)" size={20} />
                             ) : (
-                                <GrAddCircle size={20} onClick={() => handleOpenModal(product)} />
+                                <IoIosAddCircle size={20} onClick={() => handleOpenModal(product)} />
                             )}
                         </div>
                         <div className={styles.productGridImage}>

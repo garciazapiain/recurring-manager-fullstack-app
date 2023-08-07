@@ -17,7 +17,6 @@
 }
 
 .table th {
-  background-color: whitesmoke;
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -102,7 +101,7 @@
 }
 
 .productRow:hover {
-  background-color: whitesmoke;
+  opacity: 30%;
 }
 
 .productImage {
@@ -125,7 +124,7 @@
 .daysRemainingVariable{
   font-size: 2.2rem;
   border:none;
-  width: 2.5rem;
+  width: 3.5rem;
 }
 
 .sliderContainer {
