@@ -140,3 +140,7 @@
   scale: 2;
   z-index: 1;
 }
+
+.modalDetailsTitleWithInfobox {
+  display: flex;
+}

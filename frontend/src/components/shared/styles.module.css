@@ -90,9 +90,8 @@
 }
 
 .modalContent p {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     align-self: center;
-    width: 5rem;
 }
 
 .modalContent input {

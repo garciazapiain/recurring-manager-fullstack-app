@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import styles from './styles.module.css'
 import sharedStyles from "../shared/styles.module.css";
 import { GiCancel } from 'react-icons/gi';
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { AiFillEdit, AiFillDelete, AiFillInfoCircle } from 'react-icons/ai';
 import { UNIT_CHOICES } from "../shared/utils.jsx";
 import AddInventory from "../shared/ToggleInventory/AddInventory.jsx"
 import SubtractInventory from "../shared/ToggleInventory/SubtractInventory.jsx"
+import { Tooltip } from "react-tooltip";
 
 const ProductDetails = ({ onClose, product }) => {
     const [editMode, setEditMode] = useState(false);
@@ -147,7 +149,11 @@ const ProductDetails = ({ onClose, product }) => {
                             </select>
                         </div>
                         <div className={sharedStyles.modalDetailsRow}>
-                            <p>Standard Size:</p>
+                            <div className={styles.modalDetailsTitleWithInfobox} data-tooltip-content="Most common size of product you used, based on the unit." data-tooltip-place="top" data-tooltip-id="standardSize">
+                                <p>Standard Size:</p>
+                                <AiFillInfoCircle size={10} />
+                                <Tooltip id="standardSize" />
+                            </div>
                             <input
                                 type="number"
                                 name="standard_size"
@@ -156,7 +162,11 @@ const ProductDetails = ({ onClose, product }) => {
                             />
                         </div>
                         <div className={sharedStyles.modalDetailsRow}>
-                            <p>Use Days:</p>
+                            <div className={styles.modalDetailsTitleWithInfobox} data-tooltip-content="On average, how much does the product last considering standard size." data-tooltip-place="top" data-tooltip-id="useDays">
+                                <p>Use Days:</p>
+                                <AiFillInfoCircle size={10} />
+                                <Tooltip id="useDays" />
+                            </div>
                             <input
                                 type="number"
                                 name="use_days"
