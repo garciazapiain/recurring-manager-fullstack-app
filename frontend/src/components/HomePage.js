@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserDashboard from "./UserDashboard/index.jsx";
 import ProductLibrary from "./ProductLibrary/index.jsx";
 import ProfileHeader from "./ProfileHeader/index.jsx";
+import LandingPage from "./LandingPage/index.jsx";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,8 @@ const HomePage = () => {
         if (!data.username) {
           // User is not logged in, redirect to the login page
           window.location.href = "/login/";
+          // setUserData(null)
+          // setLoading(false);
         } else {
           setUserData(data);
           setLoading(false);
@@ -32,10 +35,12 @@ const HomePage = () => {
         <Route
           path="/"
           element={
-            <div>
+            // userData ?
+            <>
               <ProfileHeader userData={userData}/>
               <UserDashboard />
-            </div>
+            </>
+            // : <LandingPage/> */}
           }
         />
         <Route
