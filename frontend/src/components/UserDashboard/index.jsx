@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BuyingList from "./BuyingList.jsx";
 import sharedStyles from "../shared/styles.module.css";
+import { useAtom } from 'jotai';
+import { darkModeAtom } from '../shared/DarkMode/darkModeAtom.js'; // Import the darkModeAtom
 
 const UserDashboard = () => {
+  const [darkModeOn] = useAtom(darkModeAtom); // Access the state of darkModeAtom
   const [products, setProducts] = useState([]);
   const [lowestRemainingDay, setLowestRemainingDay] = useState(null);
   useEffect(() => {
@@ -25,7 +28,7 @@ const UserDashboard = () => {
 
   return (
     <div>
-      <h1 className={sharedStyles.pageHeadline}>My inventory</h1>
+      <h1 style={{"--text-color": darkModeOn ? "blue" : "black"}} className={sharedStyles.pageHeadline}>My inventory</h1>
       {lowestRemainingDay == null ? (
         <></>
       ) : (
