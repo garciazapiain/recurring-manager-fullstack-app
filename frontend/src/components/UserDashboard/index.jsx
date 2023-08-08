@@ -27,7 +27,7 @@ const UserDashboard = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{"padding":"1rem"}}>
       <h1 className={sharedStyles.pageHeadline}>My inventory</h1>
       {lowestRemainingDay == null ? (
         <></>

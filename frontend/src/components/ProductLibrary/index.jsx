@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid.jsx";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosSearch } from "react-icons/io";
 import sharedStyles from "../shared/styles.module.css";
+import styles from "./styles.module.css";
 import CategoryFiltering from "./CategoryFiltering.jsx";
 
 const ProductLibrary = () => {
@@ -52,17 +53,20 @@ const ProductLibrary = () => {
   }, [searchQuery, filteredByCategories]);
 
   return (
-    <div>
+    <div style={{ "padding": "1rem" }}>
       <IoIosArrowBack size={50} onClick={handleUserDashboardRedirect} />
       <h1 className={sharedStyles.pageHeadline}>Explore Products</h1>
 
       {/* Search input */}
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={handleSearchInputChange}
-        placeholder="Search products..."
-      />
+      <div className={styles.searchProductsContainer}>
+        <IoIosSearch size={40}/>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+          placeholder="Search products..."
+        />
+      </div>
 
       <CategoryFiltering filteredByCategories={filteredByCategories} setFilteredByCategories={setFilteredByCategories} />
 

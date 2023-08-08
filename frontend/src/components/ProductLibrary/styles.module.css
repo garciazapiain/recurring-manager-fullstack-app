@@ -44,9 +44,20 @@
 /* Grid container for products */
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   /* Additional styles for the grid container */
+
+  /* Media query for large screens (min-width: 768px) */
+  @media (min-width: 768px) {
+    /* Maximum of 5 columns on large screens */
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+  }
+
+  /* Media query for small screens (max-width: 767px) */
+  @media (max-width: 767px) {
+    /* Maximum of 2 columns on small screens */
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
 }
 
 /* Individual product item */
@@ -83,4 +94,24 @@
   display: flex;
   justify-content: end;
   align-content: end;
+}
+
+.searchProductsContainer{
+  display: flex;
+  margin-left: 1rem;
+  font-size: 1rem;
+}
+
+.searchProductsContainer > input{
+  width: 15rem;
+  height: 2rem;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.categoryFilterContainer{
+  display: flex;
+  margin: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }
