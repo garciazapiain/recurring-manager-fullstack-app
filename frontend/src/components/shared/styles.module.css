@@ -1,17 +1,37 @@
 /* buttons */
 
-.background{
-    width: 100%;
+:root {
+    --bg-color: white;
+    --color: black;
+  }
+
+html, body {
     height: 100%;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color)
 }
 
-.background h1, h3, svg, p, table, input, thead, tr, th {
+.background {
+    width: 100%;
+    height: 100%;
+}
+
+.background h1,
+h3,
+svg,
+p,
+table,
+input,
+thead,
+tr,
+th {
     color: var(--color);
     background-color: var(--bg-color);
 }
 
-.background, .modalContent, .modalContentSmall, .modalContentBig {
+.background,
+.modalContent,
+.modalContentSmall,
+.modalContentBig {
     color: var(--color);
     background-color: var(--bg-color);
     border: 1px solid var(--color);
@@ -80,16 +100,18 @@
 }
 
 @media only screen and (min-width: 767px) {
-    .modalContent{
+    .modalContent {
         width: 45%;
     }
-    .modalContentBig{
+
+    .modalContentBig {
         width: 45%;
     }
-    .modalContentSmall{
+
+    .modalContentSmall {
         width: 45%;
     }
-  }
+}
 
 .modalContentHeader {
     display: flex;
@@ -160,11 +182,11 @@
     margin: 0 0.5rem;
 }
 
-.inventoryContainer{
+.inventoryContainer {
     display: flex;
 }
 
-.disabled{
+.disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }

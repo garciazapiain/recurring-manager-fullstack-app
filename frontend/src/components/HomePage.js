@@ -29,6 +29,13 @@ const HomePage = () => {
         }
       });
   }, []);
+
+  useEffect(() => {
+    // Update the CSS variables for background and color based on darkModeOn
+    const root = document.querySelector(":root");
+    root.style.setProperty("--bg-color", darkModeOn ? "black" : "white");
+    root.style.setProperty("--color", darkModeOn ? "white" : "black");
+  }, [darkModeOn]);
   
   if (loading) {
     return <p>Loading...</p>;
