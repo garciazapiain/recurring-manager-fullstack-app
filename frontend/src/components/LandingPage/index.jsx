@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import sharedStyles from "../shared/styles.module.css"
+import drawing from "./drawing.png"
 
 const LandingPage = () => {
     const handleLoginRedirect = () => {
@@ -15,9 +15,9 @@ const LandingPage = () => {
             <div className={styles.landingPageCentralContainer}>
                 <div className={styles.landingPageCentralContainerContent}>
                     <div>
-                        <h1>Never run out!</h1>
-                        <p>Recurring manager is your ultimate solution for managing recurring products effortlessly. Say goodbye to running out of your favorite items, as this app keeps you well-stocked at all times.</p>
-                        <button onClick={handleRegisterRedirect} className={styles.button}>Start now</button>
+                        <h1 style={{color:"black", backgroundColor:"transparent", fontSize:"3rem"}}>Never run out!</h1>
+                        <p style={{color:"black", backgroundColor:"transparent"}}>Recurring manager is your ultimate solution for managing recurring products effortlessly. Say goodbye to running out of your favorite items, as this app keeps you well-stocked at all times.</p>
+                        <button style={{marginLeft:"0"}} onClick={handleRegisterRedirect} className={styles.button}>Start now</button>
                         <button onClick={handleLoginRedirect} className={styles.button}>Login</button>
                         {/* <ul>
                         <li>
@@ -33,7 +33,7 @@ const LandingPage = () => {
                     </div>
                 </div>
                 <div className={styles.landingPageCentralContainerImage}>
-                    <p>Drawing here</p>
+                    <img alt="drawing of recurring manager application" src={drawing}></img>
                 </div>
             </div>
         </div>

@@ -36,7 +36,7 @@ const CategoryFiltering = ({ filteredByCategories, setFilteredByCategories }) =>
 
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", margin:"1rem" }}>
         <p>Filter by Categories:</p>
         {showCategories ? <IoIosArrowDown size={30} onClick={() => setShowCategories(false)} /> : <IoIosArrowForward size={30} onClick={() => setShowCategories(true)} />}
       </div>

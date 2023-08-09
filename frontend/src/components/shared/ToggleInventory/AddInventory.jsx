@@ -1,11 +1,11 @@
-import { GrAddCircle } from 'react-icons/gr';
+import { IoIosAddCircle } from "react-icons/io"
 
 import React from "react";
 
 const AddInventory = ({handleInventoryToggle}) => {
     
   return (
-    <GrAddCircle onClick={handleInventoryToggle}/>
+    <IoIosAddCircle onClick={handleInventoryToggle}/>
   );
 };
 

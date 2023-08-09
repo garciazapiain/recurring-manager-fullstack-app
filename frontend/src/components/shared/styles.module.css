@@ -15,17 +15,20 @@ html, body {
     height: 100%;
 }
 
-.background h1,
+.background input {
+    background-color: var(--bg-color);
+    color: var(--color);
+}
+
+.background > h1,
 h3,
 svg,
 p,
 table,
-input,
 thead,
 tr,
 th {
     color: var(--color);
-    background-color: var(--bg-color);
 }
 
 .background,

@@ -20,9 +20,8 @@ const HomePage = () => {
       .then((data) => {
         if (!data.username) {
           // User is not logged in, redirect to the login page
-          window.location.href = "/login/";
-          // setUserData(null)
-          // setLoading(false);
+          setUserData(null)
+          setLoading(false);
         } else {
           setUserData(data);
           setLoading(false);
@@ -47,12 +46,12 @@ const HomePage = () => {
         <Route
           path="/"
           element={
-            // userData ?
+            userData ?
             <div style={{"--bg-color": darkModeOn ? "black" : "white", "--color": darkModeOn ? "white" : "black"}} className={sharedStyles.background}>
               <ProfileHeader userData={userData}/>
               <UserDashboard />
             </div>
-            // : <LandingPage/> */}
+            : <LandingPage/> 
           }
         />
         <Route

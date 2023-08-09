@@ -1,4 +1,4 @@
-import { GrSubtractCircle } from 'react-icons/gr';
+import { IoIosRemoveCircle } from 'react-icons/io';
 import sharedStyles from "../../shared/styles.module.css"
 
 import React from "react";
@@ -6,7 +6,7 @@ import React from "react";
 const SubtractInventory = ({ handleInventoryToggle, inventory }) => {
     return (
         <div className={inventory < 1 ? sharedStyles.disabled: null}>
-            <GrSubtractCircle onClick={inventory > 0 ? handleInventoryToggle : undefined} />
+            <IoIosRemoveCircle onClick={inventory > 0 ? handleInventoryToggle : undefined} />
         </div>
     );
 };

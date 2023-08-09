@@ -6,40 +6,69 @@
     align-items: center;
 }
 
-body{
+body {
     margin: 0 auto;
+    font-family: 'Overpass', sans-serif;
 }
 
-.landingPageCentralContainer{
+.landingPageCentralContainer {
     display: flex;
     width: 100%;
     height: 60vh;
 }
 
-.landingPageCentralContainerContent{
+@media only screen and (max-width: 1000px) {
+    .landingPageCentralContainer {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .landingPageCentralContainerContent, .landingPageCentralContainerImage {
+        width: 100%;
+        margin: 0;
+        padding: 0.5rem;
+    }
+    .landingPageCentralContainerImage > img {
+        width: 40%;
+    }
+}
+
+@media only screen and (min-width: 1001px) {
+    .landingPageCentralContainerContent, .landingPageCentralContainerImage {
+        width: 50%;
+        margin: 1rem;
+        padding: 0 2rem;
+    }
+    .landingPageCentralContainerImage > img {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .landingPageCentralContainerImage > img {
+        display: none;
+    }
+}
+
+.landingPageCentralContainerContent {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
     height: 60vh;
-    padding: 0 5rem;
 }
 
-.landingPageCentralContainerContent h1, p{
-    margin-left: 1rem;
-}
-
-.landingPageCentralContainerContent h1{
+.landingPageCentralContainerContent > h1 {
     font-size: 4rem;
+    font-weight: 200;
 }
 
-.landingPageCentralContainerContent p{
+.landingPageCentralContainerContent p {
     font-size: 1.5rem;
 }
 
-.landingPageCentralContainerImage{
-    width: 50%;
-    background-color: antiquewhite;
+.landingPageCentralContainerImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
