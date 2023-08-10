@@ -49,8 +49,14 @@ body {
 }
 
 @media only screen and (max-width: 400px) {
-    .landingPageCentralContainerImage>img {
+    .landingPageCentralContainerImage {
         display: none;
+    }
+    .landingPageCentralContainerImage > img {
+        display: none;
+    }
+    .landingPageCentralContainer{
+        height: 70vh;
     }
 }
 
@@ -109,6 +115,15 @@ body {
     width: 8rem;
 }
 
+@media only screen and (max-width: 370px) {
+    .logo>img {
+        width: 5rem;
+    }
+    a {
+        font-size: 0.8rem;
+    }
+}
+
 .navLinks {
     display: flex;
     gap: 20px;
@@ -120,13 +135,10 @@ a {
     text-decoration: none;
     color: white;
     margin: 0 1rem;
-    font-size: 1.2rem;
 }
 
 .aboutSectionContainer {
-    height: 80vh;
-    margin: 1rem;
-    padding: 0 2rem;
+    margin: 1rem 3rem 1rem 1rem;
 }
 
 .stepsContainer {
@@ -143,11 +155,33 @@ a {
     .step {
         margin-bottom: 1rem;
     }
+    .aboutSectionContainer{
+        height: 325vh;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 787px) {
+    .aboutSectionContainer{
+        height: 270vh;
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .aboutSectionContainer{
+        height: 210vh;
+        padding: 0;
+    }
 }
 
 @media only screen and (min-width: 1001px) {
     .step {
         margin: 0 1rem;
+    }
+    .aboutSectionContainer {
+        height: 80vh;
+        padding: 0 2rem;
     }
 }
 
