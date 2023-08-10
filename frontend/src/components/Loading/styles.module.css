@@ -1,0 +1,36 @@
+.loadingContainer{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    .loadingContainer > img {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 1001px) {
+    .loadingContainer > img {
+        width: 30%;
+    }
+}
+
+.loadingContainer > img {
+    opacity: 1;
+    animation: opacityTransition 3s ease-in-out infinite alternate; /* Use an animation with alternate mode */
+  }
+  
+  @keyframes opacityTransition {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

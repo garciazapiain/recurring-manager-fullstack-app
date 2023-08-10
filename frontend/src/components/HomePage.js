@@ -7,6 +7,7 @@ import LandingPage from "./LandingPage/index.jsx";
 import { useAtom } from 'jotai';
 import { darkModeAtom } from '../components/shared/DarkMode/darkModeAtom.js'; // Import the darkModeAtom
 import sharedStyles from "../components/shared/styles.module.css";
+import LoadingPage from "./Loading/LoadingPage.jsx";
 
 
 const HomePage = () => {
@@ -37,7 +38,7 @@ const HomePage = () => {
   }, [darkModeOn]);
   
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingPage darkModeOn={darkModeOn}/>
   }
 
   return (
