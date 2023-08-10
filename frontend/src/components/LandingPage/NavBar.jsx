@@ -8,7 +8,7 @@ function NavBar() {
     }
 
     return (
-        <div className="App">
+        <div>
             <nav className={styles.navbar}>
                 <a href="#top" className={styles.logo}><img src={logo}></img></a>
                 <div className="navLinks">
