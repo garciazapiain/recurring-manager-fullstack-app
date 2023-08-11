@@ -14,7 +14,7 @@ const LandingPage = () => {
 
     return (
         <div className={styles.landingPageContainer}>
-            <NavBar id="top" />
+            <NavBar noLinks={false} id="top" />
             <div style={{padding:"0.5rem"}} id="home" className={styles.landingPageCentralContainer}>
                 <div className={styles.landingPageCentralContainerContent}>
                     <div style={{height:"100%"}}>

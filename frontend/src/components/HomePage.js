@@ -8,6 +8,7 @@ import { useAtom } from 'jotai';
 import { darkModeAtom } from '../components/shared/DarkMode/darkModeAtom.js'; // Import the darkModeAtom
 import sharedStyles from "../components/shared/styles.module.css";
 import LoadingPage from "./Loading/LoadingPage.jsx";
+import Login from "./Login/index.jsx";
 
 
 const HomePage = () => {
@@ -36,9 +37,8 @@ const HomePage = () => {
     root.style.setProperty("--bg-color", darkModeOn ? "black" : "white");
     root.style.setProperty("--color", darkModeOn ? "white" : "black");
   }, [darkModeOn]);
-  
   if (loading) {
-    return <LoadingPage darkModeOn={darkModeOn}/>
+    return <LoadingPage darkModeOn={darkModeOn} />
   }
 
   return (
@@ -48,18 +48,26 @@ const HomePage = () => {
           path="/"
           element={
             userData ?
-            <div style={{"--bg-color": darkModeOn ? "black" : "white", "--color": darkModeOn ? "white" : "black"}} className={sharedStyles.background}>
-              <ProfileHeader userData={userData}/>
-              <UserDashboard />
+              <div style={{ "--bg-color": darkModeOn ? "black" : "white", "--color": darkModeOn ? "white" : "black" }} className={sharedStyles.background}>
+                <ProfileHeader userData={userData} />
+                <UserDashboard />
+              </div>
+              : <LandingPage />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <div>
+              <Login />
             </div>
-            : <LandingPage/> 
           }
         />
         <Route
           path="/product-library"
           element={
-            <div style={{"--bg-color": darkModeOn ? "black" : "white", "--color": darkModeOn ? "white" : "black"}} className={sharedStyles.background}>
-              <ProfileHeader userData={userData}/>
+            <div style={{ "--bg-color": darkModeOn ? "black" : "white", "--color": darkModeOn ? "white" : "black" }} className={sharedStyles.background}>
+              <ProfileHeader userData={userData} />
               <ProductLibrary />
             </div>
           }
