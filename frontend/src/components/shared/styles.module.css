@@ -84,14 +84,14 @@ th {
 .modalContent {
     padding: 20px;
     border-radius: 8px;
-    height: 50vh;
+    height: fit-content;
     width: 60%;
 }
 
 .modalContentSmall {
     padding: 20px;
     border-radius: 8px;
-    height: 20vh;
+    height: fit-content;
     width: 60%;
 }
 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import sharedStyles from "../shared/styles.module.css"
-import { GiCancel } from 'react-icons/gi';
 
 const NoProductsModal = ({ onClose }) => {
     const handleProductLibraryRedirect = () => {
@@ -12,7 +11,6 @@ const NoProductsModal = ({ onClose }) => {
             <div className={sharedStyles.modalContentSmall}>
                 <div className={sharedStyles.modalContentHeader}>
                     <h3>You have no products saved</h3>
-                    <GiCancel size={30} onClick={onClose} />
                 </div>
                 <div className={sharedStyles.modalActions}>
                     <button onClick={handleProductLibraryRedirect} className={sharedStyles.primaryButton}>Explore products</button>
