@@ -11,7 +11,7 @@ const NoProductsModal = ({ onClose }) => {
         <div className={sharedStyles.modalOverlay}>
             <div className={sharedStyles.modalContentSmall}>
                 <div className={sharedStyles.modalContentHeader}>
-                    <h1>You have no products saved</h1>
+                    <h3>You have no products saved</h3>
                     <GiCancel size={30} onClick={onClose} />
                 </div>
                 <div className={sharedStyles.modalActions}>

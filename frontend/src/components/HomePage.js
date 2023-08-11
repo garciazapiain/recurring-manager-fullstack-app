@@ -9,6 +9,7 @@ import { darkModeAtom } from '../components/shared/DarkMode/darkModeAtom.js'; //
 import sharedStyles from "../components/shared/styles.module.css";
 import LoadingPage from "./Loading/LoadingPage.jsx";
 import Login from "./Login/index.jsx";
+import Register from "./Register/index.jsx";
 
 
 const HomePage = () => {
@@ -60,6 +61,14 @@ const HomePage = () => {
           element={
             <div>
               <Login />
+            </div>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <div>
+              <Register />
             </div>
           }
         />
