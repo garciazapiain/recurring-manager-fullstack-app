@@ -35,17 +35,19 @@ const ProductsGrid = ({ products }) => {
                 )}
                 {products.map((product) => (
                     <div key={product.id} className={styles.productItem}>
-                        <div className={styles.productGridAddOrAdded}>
-                            {product.product_added_user ? (
-                                <IoIosCheckmarkCircle color="rgb(71, 71, 219)" size={20} />
-                            ) : (
-                                <IoIosAddCircle size={20} onClick={() => handleOpenModal(product)} />
-                            )}
-                        </div>
                         <div className={styles.productGridImage}>
                             <img src={product.image}></img>
                         </div>
-                        <h3>{product.title}</h3>
+                        <div style={{display:"flex", alignContent:"center", justifyContent:"space-between"}}>
+                            <h3>{product.title}</h3>
+                            <div className={styles.productGridAddOrAdded}>
+                                {product.product_added_user ? (
+                                    <IoIosCheckmarkCircle color="rgb(71, 71, 219)" size={20} />
+                                ) : (
+                                    <IoIosAddCircle size={20} onClick={() => handleOpenModal(product)} />
+                                )}
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
