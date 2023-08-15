@@ -118,7 +118,10 @@
 }
 
 .daysRemainingContainer > p {
+  display: flex;
+  align-items: flex-end;
   font-size: 1.25rem;
+  margin-left: 1rem;
 }
 
 .daysRemainingVariable{
