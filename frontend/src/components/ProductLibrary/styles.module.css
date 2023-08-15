@@ -32,15 +32,6 @@
   margin-bottom: 16px;
 }
 
-.modalActions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.modalActions button {
-  margin-left: 8px;
-}
-
 /* Grid container for products */
 .productGrid {
   display: grid;

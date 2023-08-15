@@ -5,8 +5,8 @@ import React from "react";
 
 const SubtractInventory = ({ handleInventoryToggle, inventory }) => {
     return (
-        <div className={inventory < 1 ? sharedStyles.disabled: null}>
-            <IoIosRemoveCircle onClick={inventory > 0 ? handleInventoryToggle : undefined} />
+        <div style={{display:"flex", alignItems:"center"}} className={inventory < 1 ? sharedStyles.disabled: null}>
+            <IoIosRemoveCircle size={30} onClick={inventory > 0 ? handleInventoryToggle : undefined} />
         </div>
     );
 };

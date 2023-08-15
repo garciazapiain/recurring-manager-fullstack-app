@@ -110,17 +110,19 @@ const ProductDetails = ({ onClose, product }) => {
                 </div>
                 {editMode ? (
                     <>
-                        <div className={sharedStyles.modalDetailsRow}>
-                            <p>Title:</p>
+                    <div className={styles.productDetailsRowContainer}>
+                        <div className={sharedStyles.productDetailsRow}>
+                            <p className={styles.productDetailsRowDetailHeading}>Title:</p>
                             <input
                                 type="text"
                                 name="title"
                                 value={editedProduct.title}
                                 onChange={handleInputChange}
+                                className={styles.productDetailsRowDetailInfoEditMode}
                             />
                         </div>
-                        <div className={sharedStyles.modalDetailsRow}>
-                            <p>Inventory:</p>
+                        <div className={sharedStyles.productDetailsRow}>
+                            <p className={styles.productDetailsRowDetailHeading}>Inventory:</p>
                             <div className={sharedStyles.inventoryContainer}>
                                 <SubtractInventory inventory={editedProduct.estimated_inventory} handleInventoryToggle={() => handleInventoryToggle("subtract")} />
                                 <input
@@ -128,17 +130,19 @@ const ProductDetails = ({ onClose, product }) => {
                                     name="estimated_inventory"
                                     value={Math.round(editedProduct.estimated_inventory)}
                                     onChange={handleInputChange}
+                                    className={styles.productDetailsRowDetailInfoEditMode}
                                 />
                                 <AddInventory handleInventoryToggle={() => handleInventoryToggle("add")} />
                             </div>
                         </div>
-                        <div className={sharedStyles.modalDetailsRow}>
-                            <p>Unit:</p>
+                        <div className={sharedStyles.productDetailsRow}>
+                            <p className={styles.productDetailsRowDetailHeading}>Unit:</p>
                             <select
                                 name="unit"
                                 value={editedProduct.unit}
                                 onChange={handleInputChange}
                                 required // Add required attribute for validation
+                                className={styles.productDetailsRowDetailInfoEditMode}
                             >
                                 <option value="">Select a unit</option>
                                 {UNIT_CHOICES.map((choice) => (
@@ -148,9 +152,9 @@ const ProductDetails = ({ onClose, product }) => {
                                 ))}
                             </select>
                         </div>
-                        <div className={sharedStyles.modalDetailsRow}>
+                        <div className={sharedStyles.productDetailsRow}>
                             <div className={styles.modalDetailsTitleWithInfobox} data-tooltip-content="Most common size of product you used, based on the unit." data-tooltip-place="top" data-tooltip-id="standardSize">
-                                <p>Standard Size:</p>
+                                <p className={styles.productDetailsRowDetailHeading}>Standard Size:</p>
                                 <AiFillInfoCircle size={10} />
                                 <Tooltip id="standardSize" />
                             </div>
@@ -159,11 +163,12 @@ const ProductDetails = ({ onClose, product }) => {
                                 name="standard_size"
                                 value={editedProduct.standard_size}
                                 onChange={handleInputChange}
+                                className={styles.productDetailsRowDetailInfoEditMode}
                             />
                         </div>
-                        <div className={sharedStyles.modalDetailsRow}>
+                        <div className={sharedStyles.productDetailsRow}>
                             <div className={styles.modalDetailsTitleWithInfobox} data-tooltip-content="On average, how much does the product last considering standard size." data-tooltip-place="top" data-tooltip-id="useDays">
-                                <p>Use Days:</p>
+                                <p className={styles.productDetailsRowDetailHeading}>Use Days:</p>
                                 <AiFillInfoCircle size={10} />
                                 <Tooltip id="useDays" />
                             </div>
@@ -172,7 +177,9 @@ const ProductDetails = ({ onClose, product }) => {
                                 name="use_days"
                                 value={editedProduct.use_days}
                                 onChange={handleInputChange}
+                                className={styles.productDetailsRowDetailInfoEditMode}
                             />
+                        </div>
                         </div>
                         <div className={sharedStyles.modalActions}>
                             <button className={sharedStyles.primaryButton} onClick={handleSaveChanges}>Save</button>
@@ -180,12 +187,14 @@ const ProductDetails = ({ onClose, product }) => {
                     </>
                 ) : (
                     <>
-                        <div className={sharedStyles.modalDetailsRow}><p>Title:</p> <p>{product.title}</p></div>
-                        <div className={sharedStyles.modalDetailsRow}><p>Inventory:</p> <p>{Math.round(product.estimated_inventory)}</p></div>
-                        <div className={sharedStyles.modalDetailsRow}><p>Unit:</p> <p>{product.unit}</p></div>
-                        <div className={sharedStyles.modalDetailsRow}><p>Standard Size:</p> <p>{product.standard_size}</p></div>
-                        <div className={sharedStyles.modalDetailsRow}><p>Use Days:</p> <p>{product.use_days}</p></div>
-                        <div className={sharedStyles.modalActions}>
+                        <div className={styles.productDetailsRowContainer}>
+                            <div className={styles.productDetailsRow}><p className={styles.productDetailsRowDetailHeading}>Title:</p> <p className={styles.productDetailsRowDetailInfo}>{product.title}</p></div>
+                            <div className={styles.productDetailsRow}><p className={styles.productDetailsRowDetailHeading}>Inventory:</p> <p className={styles.productDetailsRowDetailInfo}>{Math.round(product.estimated_inventory)}</p></div>
+                            <div className={styles.productDetailsRow}><p className={styles.productDetailsRowDetailHeading}>Unit:</p> <p className={styles.productDetailsRowDetailInfo}>{product.unit}</p></div>
+                            <div className={styles.productDetailsRow}><p className={styles.productDetailsRowDetailHeading}>Standard Size:</p> <p className={styles.productDetailsRowDetailInfo}>{product.standard_size}</p></div>
+                            <div className={styles.productDetailsRow}><p className={styles.productDetailsRowDetailHeading}>Use Days:</p> <p className={styles.productDetailsRowDetailInfo}>{product.use_days}</p></div>
+                        </div>
+                        <div className={styles.modalActions}>
                             <AiFillEdit size={30} onClick={handleEditModeToggle} />
                             <AiFillDelete size={30} onClick={() => removeProduct(product.id)} />
                         </div>

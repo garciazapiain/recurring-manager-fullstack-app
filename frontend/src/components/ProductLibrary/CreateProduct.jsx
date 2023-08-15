@@ -118,7 +118,7 @@ const CreateProduct = ({ onClose }) => {
             <div className={sharedStyles.modalContentBig}>
                 <div className={sharedStyles.modalContentHeader}>
                     <h2>Create New Product</h2>
-                    <GiCancel onClick={onClose} />
+                    <GiCancel size={30} onClick={onClose} />
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className={sharedStyles.modalDetailsRow}>

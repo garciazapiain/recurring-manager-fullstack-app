@@ -73,15 +73,15 @@ const UpdateInventory = ({ onClose, products }) => {
         <div className={sharedStyles.modalOverlay}>
             <div className={sharedStyles.modalContent}>
                 <div className={sharedStyles.modalContentHeader}>
-                    <h2>Update Inventory</h2>
-                    <GiCancel onClick={onClose} />
+                    <h1>Update Inventory</h1>
+                    <GiCancel size={30} onClick={onClose} />
                 </div>
                 <table className={sharedStyles.modalContentTable}>
                     <thead>
                         <tr className={sharedStyles.modalContentTableHead}>
                             <th>Product</th>
                             <th>Inventory</th>
-                            <th>Unit</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

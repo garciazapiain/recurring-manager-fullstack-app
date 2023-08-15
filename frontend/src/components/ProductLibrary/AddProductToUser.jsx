@@ -65,18 +65,19 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
             <div className={sharedStyles.modalContent}>
                 <div className={sharedStyles.modalContentHeader}>
                     <h2>Add product</h2>
-                    <GiCancel onClick={onClose} />
+                    <GiCancel size={30} onClick={onClose} />
                 </div>
                 <table className={sharedStyles.modalContentTable}>
                     <thead>
                         <tr className={sharedStyles.modalContentTableHead}>
                             <th>Product</th>
                             <th>Inventory</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className={sharedStyles.modalDetailsRow}>
-                            <td>{productToAdd.title} in {productToAdd.unit}</td>
+                            <td>{productToAdd.title}</td>
                             <td>
                                 <div className={sharedStyles.inventoryContainer}>
                                     <SubtractInventory inventory={updatedInventory} handleInventoryToggle={() => handleInventoryToggle("subtract")} />
@@ -88,6 +89,7 @@ const AddProductToUser = ({ onClose, productToAdd }) => {
                                     <AddInventory handleInventoryToggle={() => handleInventoryToggle("add")} />
                                 </div>
                             </td>
+                            <td>{productToAdd.unit}</td>
                         </tr>
                     </tbody>
                 </table>
