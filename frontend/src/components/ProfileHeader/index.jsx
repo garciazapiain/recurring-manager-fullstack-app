@@ -15,9 +15,9 @@ const ProfileHeader = ({ userData }) => {
         <div className={styles.profileHeader}>
             <p>Welcome {userData.username}</p>
             <div style={{ display: "flex" }}>
-                <div style={{ marginRight: "1rem" }}>
+                {/* <div style={{ marginRight: "1rem" }}>
                     <DarkModeToggle />
-                </div>
+                </div> */}
                 <BiLogOutCircle size={30} onClick={handleLogout} />
             </div>
         </div>
