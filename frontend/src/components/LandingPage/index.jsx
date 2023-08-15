@@ -28,8 +28,8 @@ const LandingPage = () => {
             <div style={{padding:"0.5rem"}} id="about">
                 <About />
             </div>
-            <div style={{width:"100%", display:"flex", height:"8vh", justifyContent:"flex-end", alignItems:"flex-end", backgroundColor:"whitesmoke"}}>
-                <p style={{color:"rgb(30, 32, 33)", marginRight:"1rem"}}>Recurring manager 2023</p>
+            <div style={{width:"100%", display:"flex", height:"8vh", justifyContent:"flex-end", backgroundColor:"whitesmoke"}}>
+                <p style={{color:"rgb(30, 32, 33)", margin:"0 1rem 0 0", display:"flex", alignItems:"center"}}>Recurring manager 2023</p>
             </div>
         </div>
     );
