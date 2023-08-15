@@ -187,6 +187,10 @@ th {
     display: flex;
 }
 
+.inventoryContainer > input {
+    width: 2.5rem;
+}
+
 .disabled {
     opacity: 0.5;
     cursor: not-allowed;
