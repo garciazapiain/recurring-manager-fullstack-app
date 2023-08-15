@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import drawing from "./drawing.png"
+import drawing from "./drawing.svg"
 import NavBar from "./NavBar.jsx";
 import About from "./About.jsx";
 
