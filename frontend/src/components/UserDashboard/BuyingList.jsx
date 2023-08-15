@@ -98,7 +98,7 @@ const BuyingList = (props) => {
         {viewProductsWithDaysThreshold ?
           <>
             <div className={styles.daysRemainingContainer}>
-              <div>
+              <div className={styles.daysRemainingInputContainer}>
                 <input
                   type="number"
                   value={remainingDaysThreshold}
