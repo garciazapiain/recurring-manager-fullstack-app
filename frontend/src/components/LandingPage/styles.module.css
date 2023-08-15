@@ -151,6 +151,7 @@ a {
 
 .aboutSectionContainer {
     height: fit-content;
+    margin-bottom: 5rem;
 }
 
 .stepsContainer {
@@ -171,6 +172,13 @@ a {
         margin-bottom: 1rem;
         max-width: none;
         height: 100%;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .stepsContainer {
+        display: flex;
+        flex-direction: column;
     }
 }
 
