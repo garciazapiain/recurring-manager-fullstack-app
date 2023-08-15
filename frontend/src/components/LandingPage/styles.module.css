@@ -1,8 +1,12 @@
 .landingPageContainer {
     width: auto;
     height: 100%;
-    background: linear-gradient(135deg, whitesmoke, rgb(71, 71, 219));
+    background: linear-gradient(135deg, rgb(30, 32, 33), rgb(30, 30, 153));
     align-items: center;
+}
+
+.landingPageContainer > h1, p {
+    color: white;
 }
 
 body {

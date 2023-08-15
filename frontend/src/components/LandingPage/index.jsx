@@ -17,8 +17,8 @@ const LandingPage = () => {
             <NavBar noLinks={false} id="top" />
             <div style={{ padding: "0.5rem" }} id="home" className={styles.landingPageCentralContainer}>
                 <div className={styles.landingPageCentralContainerContent}>
-                    <h1 style={{ color: "black", backgroundColor: "transparent", fontSize: "3rem" }}>Never run out!</h1>
-                    <p style={{ color: "black", backgroundColor: "transparent", lineHeight: "2.5rem" }}>Recurring manager is your ultimate solution for managing recurring products effortlessly. Say goodbye to running out of your favorite items, as this app keeps you well-stocked at all times.</p>
+                    <h1 style={{ color: "white", backgroundColor: "transparent", fontSize: "3rem" }}>Never run out!</h1>
+                    <p style={{ color: "white", backgroundColor: "transparent", lineHeight: "2.5rem" }}>Recurring manager is your ultimate solution for managing recurring products effortlessly. Say goodbye to running out of your favorite items, as this app keeps you well-stocked at all times.</p>
                     <button style={{ marginLeft: "0" }} onClick={handleRegisterRedirect} className={styles.button}>Start now</button>
                 </div>
                 <div className={styles.landingPageCentralContainerImage}>
