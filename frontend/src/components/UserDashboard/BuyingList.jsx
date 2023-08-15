@@ -98,12 +98,14 @@ const BuyingList = (props) => {
         {viewProductsWithDaysThreshold ?
           <>
             <div className={styles.daysRemainingContainer}>
-              <input
-                type="number"
-                value={remainingDaysThreshold}
-                onChange={handleThresholdChange}
-                className={styles.daysRemainingVariable}
-              />
+              <div>
+                <input
+                  type="number"
+                  value={remainingDaysThreshold}
+                  onChange={handleThresholdChange}
+                  className={styles.daysRemainingVariable}
+                />
+              </div>
               <p>days of stock remaining for these products:</p>
             </div>
             <Slider remainingDaysThreshold={remainingDaysThreshold} setRemainingDaysThreshold={setRemainingDaysThreshold} />
@@ -132,7 +134,7 @@ const BuyingList = (props) => {
               <tr className={styles.productRow} onClick={() => handleOpenModalProductDetails(product)} key={product.id}>
                 <td>{product.title}</td>
                 <td><div className={styles.productGridContainer}><img className={styles.productImage} src={product.image} /></div></td>
-                <td>{Math.round(product.estimated_inventory)} {formatUnitLabel(product.unit,product.estimated_inventory)}</td>
+                <td>{Math.round(product.estimated_inventory)} {formatUnitLabel(product.unit, product.estimated_inventory)}</td>
                 <td>{product.estimated_remaining_days}</td>
               </tr>
             ))}
